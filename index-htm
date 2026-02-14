@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kidora - Contes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Kidora</h1>
+    <p>Selecciona un conte per començar</p>
+  </header>
+
+  <main class="menu-contes">
+    <div class="conte-card" onclick="obrirConte('conte1')">
+      <h2>Conte 1</h2>
+    </div>
+    <div class="conte-card" onclick="obrirConte('conte2')">
+      <h2>Conte 2</h2>
+    </div>
+    <div class="conte-card" onclick="obrirConte('conte3')">
+      <h2>Conte 3</h2>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
