@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kidora Children's Story Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #4caf50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        nav {
+            margin: 1em 0;
+        }
+        nav a {
+            margin: 0 15px;
+            color: #4caf50;
+            text-decoration: none;
+        }
+        .story-selection, .story-display, .activities {
+            padding: 20px;
+            background: white;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Kidora!</h1>
+        <nav>
+            <a href="#story-selection">Story Selection</a>
+            <a href="#story-display">Story Display</a>
+            <a href="#activities">Activities</a>
+        </nav>
+    </header>
+    <section class="story-selection" id="story-selection">
+        <h2>Select a Story</h2>
+        <select id="story-dropdown">
+            <option value="">--Select a Story--</option>
+            <option value="story1">The Adventures of Timmy</option>
+            <option value="story2">Ella and the Magic Forest</option>
+            <option value="story3">A Day at the Zoo</option>
+        </select>
+        <button onclick="loadStory()">Load Story</button>
+    </section>
+    <section class="story-display" id="story-display" style="display:none;">
+        <h2>Story Display</h2>
+        <div id="story-content">
+            <p>Select a story to view.</p>
+        </div>
+    </section>
+    <section class="activities" id="activities" style="display:none;">
+        <h2>Activities</h2>
+        <p>Fun activities related to the stories will be listed here!</p>
+        <ul>
+            <li>Coloring Pages</li>
+            <li>Puzzles</li>
+            <li>Story Quizzes</li>
+        </ul>
+    </section>
+    <script>
+        function loadStory() {
+            const storyDropdown = document.getElementById('story-dropdown');
+            const storyDisplay = document.getElementById('story-display');
+            const storyContent = document.getElementById('story-content');
+
+            switch (storyDropdown.value) {
+                case 'story1':
+                    storyContent.innerHTML = '<h3>The Adventures of Timmy</h3><p>Once upon a time...</p>';
+                    break;
+                case 'story2':
+                    storyContent.innerHTML = '<h3>Ella and the Magic Forest</h3><p>In a magical forest...</p>';
+                    break;
+                case 'story3':
+                    storyContent.innerHTML = '<h3>A Day at the Zoo</h3><p>At the zoo, there were...</p>';
+                    break;
+                default:
+                    storyContent.innerHTML = '<p>Select a story to view.</p>';
+            }
+
+            storyDisplay.style.display = 'block';
+            document.getElementById('activities').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
