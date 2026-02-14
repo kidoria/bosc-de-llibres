@@ -41,56 +41,6 @@ main {
 .conte-card:hover {
   transform: scale(1.05);
 }
-
-/* Pàgina del conte */
-.imatges-conte img {
-  width: 100%;
-  max-width: 600px;
-  display: block;
-  margin: 0 auto 1rem auto;
-  border-radius: 10px;
-}
-
-.controls {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.controls button {
-  background-color: #FF6B6B;
-  color: #FFFFFF;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.controls button:hover {
-  background-color: #FFB347;
-}
-
-.text-conte {
-  text-align: center;
-  font-size: 1.2rem;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 2rem;
-}
-
-footer button {
-  background-color: #4BC6B9;
-  color: #FFFFFF;
-  border: none;
-  padding: 0.7rem 1.5rem;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
 body {
   background: linear-gradient(to bottom, #1a0033, #330066);
   font-family: 'Georgia', serif;
@@ -167,3 +117,54 @@ body {
 footer button:hover {
   background-color: #6A4BC6;
 }
+
+
+/* Pàgina del conte */
+.imatges-conte img {
+  width: 100%;
+  max-width: 600px;
+  display: block;
+  margin: 0 auto 1rem auto;
+  border-radius: 10px;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.controls button {
+  background-color: #FF6B6B;
+  color: #FFFFFF;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.controls button:hover {
+  background-color: #FFB347;
+}
+
+.text-conte {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem;
+}
+
+footer button {
+  background-color: #4BC6B9;
+  color: #FFFFFF;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
