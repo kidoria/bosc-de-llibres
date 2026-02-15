@@ -58,12 +58,28 @@ main {
   color: gray;
   font-size: 14px;
   margin-top: 0;
+   display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;          /* MISMO ANCHO */
+  height: 50px;          /* MISMA ALTURA */
+  padding: 0 20px;
+  border-radius: 30px;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .item:hover .descripcion {
   max-height: 100px;         /* Ajusta según la altura del texto */
   opacity: 1;
   margin-top: 8px;
+  background-color: #388E3C;
+  transform: translateY(-3px); /* efecto sin mover el layout */
 }
 
 /* ======================= */
