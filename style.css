@@ -36,7 +36,7 @@ main {
   margin-top: 5px;
   color: gray;
 }
-.item:hover .conte-card {
+.item:hover + .conte-card {
   display: block; /* aparece al pasar el cursor */
 }
 
