@@ -36,6 +36,7 @@ main {
 
 .conte-card:hover {
   transform: scale(1.05);
+  color: FF0000;
 }
 
 
