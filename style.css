@@ -72,6 +72,26 @@ main {
   text-align: center;
   font-size: 1.2rem;
 }
+{
+    font-family: Arial, sans-serif;
+  }
+
+  .boton {
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+  }
+
+  #resumen {
+    position: fixed;
+    top: 50px;
+    right: 50px;
+    width: 250px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    background-color: #f4f4f4;
+    display: none; /* Oculto por defecto */
+  }
 
 /* Footer */
 footer {
