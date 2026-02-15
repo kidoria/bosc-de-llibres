@@ -34,12 +34,6 @@ main {
   transition: transform 0.2s;
 }
 
-.conte-card:hover {
-  transform: scale(1.05);
-  color: FF0000;
-}
-
-
 /* Pàgina del conte */
 .imatges-conte img {
   width: 100%;
