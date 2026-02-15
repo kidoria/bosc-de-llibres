@@ -62,7 +62,7 @@ main {
   justify-content: center;
   align-items: center;
   width: 200px;          /* MISMO ANCHO */
-  height: 50px;          /* MISMA ALTURA */
+  height: 200px;          /* MISMA ALTURA */
   padding: 0 20px;
   border-radius: 30px;
   background-color: #4CAF50;
