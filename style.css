@@ -32,6 +32,9 @@ main {
   border-radius: 12px;
   cursor: pointer;
   transition: transform 0.2s;
+  display: none; 
+  margin-top: 5px;
+  color: gray;
 }
 .item:hover .conte-card {
   display: block; /* aparece al pasar el cursor */
