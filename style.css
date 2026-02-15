@@ -1,4 +1,6 @@
-/* Tipografia i estils generals */
+/* ======================= */
+/* Tipografía y estilos generales */
+/* ======================= */
 body {
   font-family: 'Poppins', sans-serif;
   margin: 0;
@@ -17,30 +19,54 @@ main {
   padding: 2rem;
 }
 
+/* ======================= */
 /* Menú de contes */
+/* ======================= */
 .menu-contes {
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 2rem;
   flex-wrap: wrap;
+  margin-top: 2rem;
 }
 
-.conte-card {
+.item {
+  text-align: center;
+}
+
+.item button {
   background-color: #FFB347;
   color: #FFFFFF;
   padding: 2rem;
   border-radius: 12px;
+  border: none;
   cursor: pointer;
-  transition: transform 0.2s;
-  display: none; 
-  margin-top: 5px;
-  color: gray;
-}
-.item:hover + .conte-card {
-  display: block; /* aparece al pasar el cursor */
+  font-size: 16px;
+  transition: transform 0.2s, background-color 0.2s;
 }
 
-/* Pàgina del conte */
+.item button:hover {
+  transform: scale(1.05);
+  background-color: #FFA64D;
+}
+
+.descripcion {
+  display: none;
+  margin-top: 8px;
+  color: gray;
+  font-size: 14px;
+  transition: opacity 0.3s;
+  opacity: 0;
+}
+
+.item:hover .descripcion {
+  display: block;
+  opacity: 1;
+}
+
+/* ======================= */
+/* Páginas de conte */
+/* ======================= */
 .imatges-conte img {
   width: 100%;
   max-width: 600px;
@@ -63,6 +89,7 @@ main {
   padding: 0.5rem 1rem;
   border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 .controls button:hover {
@@ -72,40 +99,30 @@ main {
 .text-conte {
   text-align: center;
   font-size: 1.2rem;
+  margin-top: 1rem;
 }
-{
-    font-family: Arial, sans-serif;
-  }
 
-  .boton {
-    padding: 10px 20px;
-    margin: 10px;
-    cursor: pointer;
-  }
-
-  #resumen {
-    position: fixed;
-    top: 50px;
-    right: 50px;
-    width: 250px;
-    padding: 15px;
-    border: 1px solid #ccc;
-    background-color: #f4f4f4;
-    display: none; /* Oculto por defecto */
-  }
-
+/* ======================= */
 /* Footer */
+/* ======================= */
 footer {
   text-align: center;
   padding: 2rem;
+  background-color: #4BC6B9;
+  color: #FFFFFF;
 }
 
 footer button {
-  background-color: #4BC6B9;
-  color: #FFFFFF;
+  background-color: #FFFFFF;
+  color: #4BC6B9;
   border: none;
   padding: 0.7rem 1.5rem;
   border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
 }
 
+footer button:hover {
+  background-color: #4BC6B9;
+  color: #FFFFFF;
+}
