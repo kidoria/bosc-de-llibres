@@ -33,6 +33,9 @@ main {
   cursor: pointer;
   transition: transform 0.2s;
 }
+.item:hover .conte-card {
+  display: block; /* aparece al pasar el cursor */
+}
 
 /* Pàgina del conte */
 .imatges-conte img {
