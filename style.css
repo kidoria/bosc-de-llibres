@@ -51,17 +51,19 @@ main {
 }
 
 .descripcion {
-  display: none;
-  margin-top: 8px;
+  max-height: 0;             /* Oculto por defecto */
+  opacity: 0;
+  overflow: hidden;
+  transition: opacity 0.3s, max-height 0.3s, margin-top 0.3s;
   color: gray;
   font-size: 14px;
-  transition: opacity 0.3s;
-  opacity: 0;
+  margin-top: 0;
 }
 
 .item:hover .descripcion {
-  display: block;
+  max-height: 100px;         /* Ajusta según la altura del texto */
   opacity: 1;
+  margin-top: 8px;
 }
 
 /* ======================= */
@@ -120,6 +122,11 @@ footer button {
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.2s, color 0.2s;
+}
+
+footer button:hover {
+  background-color: #4BC6B9;
+  color: #FFFFFF;
 }
 
 footer button:hover {
