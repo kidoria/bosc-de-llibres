@@ -3,52 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bosc de històries</title>
+  <title>Kidoria - Bosc de històries</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
   <header>
     <h1>Kidoria</h1>
     <p>Selecciona un conte per començar</p>
   </header>
 
-  <div class="menu-contes">
-
-  <div class="item">
-    <button>Botón 1</button>
-    <div class="conte-card">
-      Texto del botón 1
-    </div>
-  </div>
-
-  <div class="item">
-    <button>Botón 2</button>
-    <div class="conte-card">
-      Texto del botón 2
-    </div>
-  </div>
-    
   <main class="menu-contes">
-   <button class="conte-card" onclick="window.location.href='conte1.html'"title="Un conte sobre un arbre màgic que parla i explica històries">>
-L'arbre que contava històries
-   </button>
-  </div>
- <button class="conte-card" onclick="window.location.href='conte2.html'"title="Un conte sobre un arbre màgic que parla i explica històries">>
-El dron que volia tocar el cel
-   </button>
-  </div>
+
+    <div class="item">
+      <button onclick="window.location.href='conte1.html'">
+        L'arbre que contava històries
+      </button>
+      <div class="descripcion">
+        Un conte sobre un arbre màgic que parla i explica històries.
+      </div>
     </div>
-    <button class="conte-card" onclick="window.location.href='conte3.html'">
- Missió: Salvar l'oceà digital
-</button>
+
+    <div class="item">
+      <button onclick="window.location.href='conte2.html'">
+        Missió: Salvar l'oceà digital
+      </button>
+      <div class="descripcion">
+        Una aventura digital per salvar l'oceà.
+      </div>
     </div>
-     <button class="conte-card" onclick="window.location.href='conte4.html'">
- Hackejant el futur
-</button>
-  </div>
+
+    <div class="item">
+      <button onclick="window.location.href='conte3.html'">
+        Hackejant el futur
+      </button>
+      <div class="descripcion">
+        Una missió tecnològica plena de reptes.
+      </div>
+    </div>
+
   </main>
 
-  <script src="script.js"></script>
 </body>
 </html>
