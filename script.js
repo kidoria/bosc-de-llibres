@@ -3,6 +3,19 @@ function obrirConte(conte) {
   localStorage.setItem('conteSeleccionat', conte);
   window.location.href = 'conte.html';
 }
+const botones = document.querySelectorAll(".boton");
+const resumen = document.getElementById("resumen");
+
+botones.forEach(boton => {
+  boton.addEventListener("mouseenter", () => {
+    resumen.textContent = boton.dataset.resumen;
+    resumen.style.display = "block";
+  });
+
+  boton.addEventListener("mouseleave", () => {
+    resumen.style.display = "none";
+  });
+});
 
 // Música diferent per a cada conte
 let musica = new Audio();
