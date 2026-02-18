@@ -20,7 +20,7 @@ main {
 }
 .imatges-logo img {
   width: 100%;
-  max-width: 10000px;
+  max-width: 60px;
   display: block;
   margin: 0 auto 0rem auto;
   border-radius: 0px;
@@ -38,7 +38,7 @@ main {
 }
 
 .item {
-  text-align: center;
+  text-align: left;
 }
 
 .item button {
