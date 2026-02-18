@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dron Kidòria - Esquiva els núvols</title>
+<style>
+  body {
+    margin: 0; padding: 0; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to bottom, #87ceeb, #f0f8ff);
+    overflow: hidden;
+  }
+  #score {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 900;
+    font-size: 28px;
+    color: #3f51b5; /* blau violeta inspirat en el logotip */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    user-select: none;
+  }
+  canvas {
+    display: block;
+    margin: 50px auto;
+    background: #a3d5ff; /* blau cel clar */
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    border: 3px solid #4a148c; /* morat fosc */
+  }
+</style>
+</head>
+<body>
+
+<div id="score">Puntuació: 0</div>
+<canvas id="gameCanvas" width="800" height="450"></canvas>
+
+<script>
+  const canvas = document.getElementById('gameCanvas');
+  const ctx = canvas.getContext('2d');
+
+  // Imatges
+  const droneImg = new Image();
+  droneImg.src = 'https://i.imgur.com/8bGhlpo.png';
+
+  const cloudImg = new Image();
+  cloudImg.src = 'https://i.imgur.com/VG3fpQ6.png';
+
+  // Dron
+  const drone = {
+    x: 100,
+    y: 200,
+    width: 70,
+    height: 50,
+    dy: 0,
+    gravity: 0.5,
+    lift: -10,
+    imgLoaded: false
+  };
+
+  droneImg.onload = () => {
+    drone.imgLoaded = true;
+  };
+
+  // Núvols
+  let clouds = [];
+  let cloudFrequency = 1400; // ms
+  let lastCloudTime = Date.now();
+
+  let score = 0;
+  let gameOver = false;
+
+  // Crear núvol
+  function createCloud() {
+    const height = 50 + Math.random() * 40;
+    const y = Math.random() * (canvas.height - height);
+    clouds.push({
+      x: canvas.width,
+      y: y,
+      width: 100,
+      height: height,
+      speed: 3 + Math.random() * 2,
+      imgLoaded: false
+    });
+  }
+
+  cloudImg.onload = () => {
+    // cap acció específica ara, només comprovem la càrrega
+  };
+
+  // Dibuixar dron
+  function drawDrone() {
+    if(drone.imgLoaded) {
+      ctx.drawImage(droneImg, drone.x, drone.y, drone.width, drone.height);
+    } else {
+      ctx.fillStyle = 'red';
+      ctx.fillRect(drone.x, drone.y, drone.width, drone.height);
+    }
+  }
+
+  // Dibuixar núvols
+  function drawClouds() {
+    clouds.forEach(cloud => {
+      if(cloudImg.complete) {
+        ctx.drawImage(cloudImg, cloud.x, cloud.y, cloud.width, cloud.height);
+      } else {
+        ctx.fillStyle = 'white';
+        ctx.beginPath();
+        ctx.ellipse(cloud.x + cloud.width/2, cloud.y + cloud.height/2, cloud.width/2, cloud.height/2, 0, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    });
+  }
+
+  // Mou els núvols
+  function moveClouds() {
+    clouds.forEach(cloud => {
+      cloud.x -= cloud.speed;
+    });
+    clouds = clouds.filter(cloud => cloud.x + cloud.width > 0);
+  }
+
+  // Comprovar col·lisions
+  function checkCollision() {
+    for(let cloud of clouds) {
+      if(drone.x < cloud.x + cloud.width &&
+         drone.x + drone.width > cloud.x &&
+         drone.y < cloud.y + cloud.height &&
+         drone.y + drone.height > cloud.y) {
+        gameOver = true;
+      }
+    }
+  }
+
+  // Actualitzar puntuació
+  function updateScore() {
+    score++;
+    document.getElementById('score').innerText = "Puntuació: " + score;
+  }
+
+  // Bucle principal
+  function update() {
+    if(gameOver) {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '48px "Segoe UI", Tahoma, Geneva, Verdana, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('Game Over', canvas.width/2, canvas.height/2 - 20);
+      ctx.font = '28px "Segoe UI", Tahoma, Geneva, Verdana, sans-serif';
+      ctx.fillText('Puntuació final: ' + score, canvas.width/2, canvas.height/2 + 30);
+      return;
+    }
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Física del dron
+    drone.dy += drone.gravity;
+    drone.y += drone.dy;
+    if(drone.y + drone.height > canvas.height) {
+      drone.y = canvas.height - drone.height;
+      drone.dy = 0;
+    }
+    if(drone.y < 0) {
+      drone.y = 0;
+      drone.dy = 0;
+    }
+
+    drawDrone();
+
+    // Generar núvols
+    if(Date.now() - lastCloudTime > cloudFrequency) {
+      createCloud();
+      lastCloudTime = Date.now();
+    }
+
+    moveClouds();
+    drawClouds();
+
+    checkCollision();
+    updateScore();
+
+    requestAnimationFrame(update);
+  }
+
+  // Controls
+  document.addEventListener('keydown', (e) => {
+    if(e.code === 'ArrowUp' || e.code === 'Space') {
+      drone.dy = drone.lift;
+    }
+  });
+
+  // Comença el joc quan les imatges estan carregades (pels temps de càrrega)
+  function waitImagesLoaded() {
+    if(drone.imgLoaded && cloudImg.complete) {
+      update();
+    } else {
+      setTimeout(waitImagesLoaded, 100);
+    }
+  }
+  waitImagesLoaded();
+</script>
+
+</body>
+</html>
