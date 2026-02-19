@@ -9,11 +9,16 @@
 
 <style>
   body {
-    margin: 0; padding: 0; 
-    font-family: 'Poppins', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
     background: linear-gradient(to bottom, #87ceeb, #f0f8ff);
     overflow: hidden;
+  }
+
+  header {
     text-align: center;
+    padding: 20px;
   }
 
   #score {
@@ -24,13 +29,38 @@
     font-weight: 900;
     font-size: 28px;
     color: #3f51b5;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-    user-select: none;
+  }
+
+  #highScore {
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 700;
+    font-size: 20px;
+    color: #ff9800;
+  }
+
+  #newRecord {
+    position: absolute;
+    top: 95px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+    font-size: 18px;
+    color: #4caf50;
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
   canvas {
     display: block;
-    margin: 50px auto;
+    margin: 120px auto;
     background: #a3d5ff;
     border-radius: 15px;
     box-shadow: 0 8px 15px rgba(0,0,0,0.2);
@@ -67,8 +97,10 @@
 </header>
 
 <div id="score">Puntuació: 0</div>
-<canvas id="gameCanvas" width="800" height="450"></canvas>
+<div id="highScore">⭐ Rècord: 0</div>
+<div id="newRecord">🏆 Nou rècord!</div>
 
+<canvas id="gameCanvas" width="800" height="450"></canvas>
 <button id="btnReiniciar" onclick="reiniciarJoc()">Reiniciar joc</button>
 
 <script>
@@ -103,6 +135,9 @@
   let score = 0;
   let gameOver = false;
 
+  let highScore = localStorage.getItem("highScore") || 0;
+  document.getElementById("highScore").innerText = "⭐ Rècord: " + highScore;
+
   function createCloud() {
     const height = 50 + Math.random() * 40;
     const y = Math.random() * (canvas.height - height);
@@ -130,9 +165,7 @@
   }
 
   function moveClouds() {
-    clouds.forEach(cloud => {
-      cloud.x -= cloud.speed;
-    });
+    clouds.forEach(cloud => cloud.x -= cloud.speed);
     clouds = clouds.filter(cloud => cloud.x + cloud.width > 0);
   }
 
@@ -150,6 +183,13 @@
   function updateScore() {
     score++;
     document.getElementById('score').innerText = "Puntuació: " + score;
+
+    if(score > highScore) {
+      highScore = score;
+      localStorage.setItem("highScore", highScore);
+      document.getElementById("highScore").innerText = "⭐ Rècord: " + highScore;
+      document.getElementById("newRecord").style.display = "block";
+    }
   }
 
   function update() {
