@@ -111,7 +111,11 @@ body {
 
 .controls {
   padding: 20px;
-  background-color: #eee;
+  background-color: #4caf50;
+  display: flex;
+  justify-content: center;  /* Centra horitzontalment */
+  gap: 15px;                /* Espai entre botons */
+  flex-wrap: wrap;          /* Baixin en mòbil */
 }
 
 .controls button {
