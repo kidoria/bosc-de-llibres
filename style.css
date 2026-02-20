@@ -84,40 +84,78 @@ main {
 /* ======================= */
 /* Páginas de conte */
 /* ======================= */
-.imatges-conte img {
-  float: right;
-  width: 40%;
-  max-width: 600px;
-  display: block;
-  margin: 0 auto 1rem auto;
-  border-radius: 10px;
-}
-
-.controls {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.controls button {
-  background-color: #FF6B6B;
-  color: #FFFFFF;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.controls button:hover {
-  background-color: #FFB347;
-}
-
+/* Contenidor principal del conte */
 .text-conte {
-  text-align: center;
-  font-size: 1.2rem;
-  margin-top: 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: 'Georgia', serif;
+  line-height: 1.8;
+  font-size: 18px;
+  color: #333;
+}
+
+/* Cada bloc text + imatge */
+.text-conte {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+/* Separar paràgrafs */
+.text-conte p {
+  margin-bottom: 20px;
+}
+
+/* Contenidor de cada imatge */
+.imatges-conte {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Imatges proporcionades amb el text */
+.imatges-conte img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+}
+
+/* Petit efecte visual */
+.imatges-conte img:hover {
+  transform: scale(1.03);
+}
+
+/* Alternar imatge i text */
+.text-conte > p,
+.text-conte > .imatges-conte {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+/* Alternança automàtica */
+.text-conte > p:nth-of-type(odd) {
+  flex-direction: row;
+}
+
+.text-conte > p:nth-of-type(even) {
+  flex-direction: row-reverse;
+}
+
+/* Responsive per mòbil */
+@media (max-width: 768px) {
+  .text-conte > p {
+    flex-direction: column !important;
+    text-align: left;
+  }
+
+  .imatges-conte img {
+    max-width: 100%;
+  }
 }
 
 /* ======================= */
