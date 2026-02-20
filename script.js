@@ -65,13 +65,13 @@ switch(conteSeleccionat) {
 musica.loop = true;
 musica.play();
 
-const musicaBtn = document.getElementById('musica-btn');
+const musicaBtn = document.getElementById('narracio-btn');
 musicaBtn?.addEventListener('click', () => {
   if (musica.paused) {
-    musica.play();
-    musicaBtn.textContent = 'Narració';
+    narr.play();
+    narracio-btn.textContent = '🎤 Narració';
   } else {
-    musica.pause();
-    musicaBtn.textContent = '🔇 Silenciar';
+    narr.pause();
+    narracio-btn.textContent = '🔇 Silenciar';
   }
 });
