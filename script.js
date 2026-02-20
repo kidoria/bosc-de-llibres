@@ -11,7 +11,7 @@ const conteSeleccionat = localStorage.getItem('conteSeleccionat') || 'conte1';
 
 switch(conteSeleccionat) {
   case 'conte1':
-    musica.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+    musica.src = 'arbre.mp3';
     break;
   case 'conte2':
     musica.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3';
