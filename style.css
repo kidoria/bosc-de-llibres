@@ -111,31 +111,54 @@ body {
 
 .controls {
   padding: 20px;
-  background-color: #4caf50;
+  background-color: #eee;
   display: flex;
-  justify-content: center;  /* Centra horitzontalment */
-  gap: 15px;                /* Espai entre botons */
-  flex-wrap: wrap;          /* Baixin en mòbil */
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
 }
 
+/* Estil base */
 .controls button {
-  color: white;
-  background: (--vermell);
+  padding: 10px 22px;
+  border-radius: 30px;
   border: none;
-  padding: 8px 16px;
-  margin-right: 10px;
-  border-radius: 25px;
+  font-size: 15px;
   cursor: pointer;
-  font-size: 14px;
+  font-weight: 500;
+  color: white;
   transition: all 0.3s ease;
 }
 
-.controls button:hover {
-  background: var(--taronja);
-  color: white;
-  transform: translateY(-2px);
+/* Música - Groc */
+.btn-musica {
+  background: var(--groc);
 }
 
+.btn-musica:hover {
+  background: #e0ad1f;
+  transform: translateY(-3px);
+}
+
+/* Tradur - Turquesa */
+.btn-traduir {
+  background: var(--turquesa);
+}
+
+.btn-traduir:hover {
+  background: #3aa79d;
+  transform: translateY(-3px);
+}
+
+/* Narració - Lila */
+.btn-narracio {
+  background: var(--lila);
+}
+
+.btn-narracio:hover {
+  background: #7b379a;
+  transform: translateY(-3px);
+}
 /* ===== CONTINGUT ===== */
 
 main {
@@ -148,7 +171,7 @@ main {
 .bloc {
   display: flex;
   align-items: center;
-  gap: 60px;
+  gap: 30px;
   margin-bottom: 80px;
 }
 
@@ -200,16 +223,6 @@ main {
   );
 }
 
-/* ===== FOOTER ===== */
-
-footer {
-  text-align: center;
-  padding: 20px;
-  background: linear-gradient(90deg, var(--groc), var(--turquesa), var(--lila));
-  color: white;
-  font-weight: bold;
-  margin-top: 60px;
-}
 
 /* ===== RESPONSIVE ===== */
 
