@@ -107,7 +107,7 @@ main {
 
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Poppins', sans-serif;
   background-color: #ffffff;
   color: #333;
   line-height: 1.8;
@@ -117,7 +117,7 @@ body {
 
 .controls {
   padding: 20px;
-  background-color: #eee;
+  background-color: #f7c325;
   display: flex;
   justify-content: center;
   gap: 15px;
@@ -138,7 +138,7 @@ body {
 
 /* Música - Groc */
 .btn-musica {
-  background: var(--groc);
+  background: var(#ef4e4e);
 }
 
 .btn-musica:hover {
@@ -148,7 +148,7 @@ body {
 
 /* Tradur - Turquesa */
 .btn-traduir {
-  background: var(--turquesa);
+  background: var(#ef4e4e);
 }
 
 .btn-traduir:hover {
@@ -158,7 +158,7 @@ body {
 
 /* Narració - Lila */
 .btn-narracio {
-  background: var(--lila);
+  background: var(#ef4e4e);
 }
 
 .btn-narracio:hover {
