@@ -1,95 +1,6 @@
-/* ======================= */
-/* Tipografía y estilos generales */
-/* ======================= */
-body {
-  font-family: 'Poppins', sans-serif;
-  margin: 10;
-  background-color: #FFFFFF;
-  color: #333;
-}
-
-header {
-  text-align: center;
-  padding: 2rem;
-  background-color: #4BC6B9;
-  color: #FFFFFF;
-}
-
-main {
-  padding: 2rem;
-}
-
-/* ======================= */
-/* Menú de contes */
-/* ======================= */
-.menu-contes {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-  margin-top: 2rem;
-}
-
-.item {
-  text-align: center;
-}
-
-.item button {
-  background-color: #FFB347;
-  color: #FFFFFF;
-  padding: 2rem;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  transition: transform 0.2s, background-color 0.2s;
-}
-
-.item button:hover {
-  transform: scale(1.05);
-  background-color: #FFA64D;
-}
-
-.descripcion {
-  max-height: 0;             /* Oculto por defecto */
-  opacity: 0;
-  overflow: hidden;
-  transition: opacity 0.3s, max-height 0.3s, margin-top 0.3s;
-  color: gray;
-  font-size: 14px;
-  margin-top: 0;
-   display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 20px;
-  border-radius: 30px;
-  background-color: #4CAF50;
-  color: white;
-  font-size: 16px;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  width: 200px;          /* MISMO ANCHO */
-}
-
-.item:hover .descripcion {
-  max-height: 100px;         /* Ajusta según la altura del texto */
-  opacity: 1;
-  margin-top: 8px;
-  background-color: #388E3C;
-  transform: translateY(-3px); /* efecto sin mover el layout */
-}
-
-/* ======================= */
-/* Páginas de conte */
-/* ======================= */
-
-main {
-  max-width: 1100px;   /* Amplada màxima */
-  margin: 10 auto;      /* Centra el contingut */
-  padding: 60px 40px;  /* Espai interior esquerra/dreta */
-}
+/* =========================
+   VARIABLES DE COLORS
+========================= */
 :root {
   --groc: #f7c325;
   --taronja: #f57c2c;
@@ -98,111 +9,160 @@ main {
   --verd: #4caf50;
   --lila: #8e44ad;
   --gris-suau: #f5f5f5;
+  --negro-text: #222;
 }
 
-/* Reset */
+/* =========================
+   RESET GENERAL
+========================= */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 10;
-  font-family: 'Poppins', sans-serif;
-  background-color: #ffffff;
-  color: #333;
-  line-height: 1.8;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.7;
+  color: var(--negro-text);
+  background: #fff;
+  scroll-behavior: smooth;
 }
 
-/* ===== BOTONS ===== */
+/* =========================
+   HEADER
+========================= */
+header {
+  text-align: center;
+  padding: 40px 20px 60px 20px;
+  background: var(--turquesa);
+  color: white;
+}
 
+header img.logo {
+  max-width: 180px;
+  margin-bottom: 10px;
+}
+
+header h1 {
+  font-size: 36px;
+  font-weight: 600;
+}
+
+/* =========================
+   NAV / BOTONS
+========================= */
 .controls {
   padding: 20px;
-  background-color: linear-gradient(90deg, var(--groc), var(--turquesa), var(--lila));
+  background-color: #eee;
   display: flex;
   justify-content: center;
   gap: 15px;
   flex-wrap: wrap;
 }
 
-/* Estil base */
 .controls button {
   padding: 10px 22px;
   border-radius: 30px;
-  border: none;
-  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
-  font-weight: 500;
-  color: white;
+  font-size: 15px;
+  border: none;
   transition: all 0.3s ease;
+  color: white;
 }
 
-/* Música - Groc */
 .btn-musica {
-  background: #ef4e4e;
+  background: var(--groc);
 }
-
 .btn-musica:hover {
   background: #e0ad1f;
   transform: translateY(-3px);
 }
 
-/* Tradur - Turquesa */
 .btn-traduir {
-  background: var(#ef4e4e);
+  background: var(--turquesa);
 }
-
 .btn-traduir:hover {
   background: #3aa79d;
   transform: translateY(-3px);
 }
 
-/* Narració - Lila */
 .btn-narracio {
-  background: var(#ef4e4e);
+  background: var(--lila);
 }
-
 .btn-narracio:hover {
   background: #7b379a;
   transform: translateY(-3px);
 }
-/* ===== CONTINGUT ===== */
 
+/* =========================
+   MAIN CONTENT
+========================= */
 main {
   max-width: 1100px;
   margin: auto;
-  padding: 40px 20px;
+  padding: 60px 50px;
 }
 
-/* Bloc text + imatge */
+/* BLOCS TEXT + IMATGE */
 .bloc {
   display: flex;
   align-items: center;
   gap: 30px;
   margin-bottom: 80px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 1s ease forwards;
 }
 
-/* Alternar */
 .bloc:nth-child(even) {
   flex-direction: row-reverse;
 }
 
+.bloc:nth-child(1) { animation-delay: 0.2s; }
+.bloc:nth-child(2) { animation-delay: 0.4s; }
+.bloc:nth-child(3) { animation-delay: 0.6s; }
+
 .bloc p {
   flex: 1;
   font-size: 18px;
+  margin: 0;
 }
 
-/* Imatge */
+/* DECORACIONS TEXT */
+.bloc p::before {
+  content: "🌿";
+  margin-right: 8px;
+  opacity: 0.4;
+}
+
+/* IMATGES */
 .imatges-conte {
   flex: 1;
   text-align: center;
+  position: relative;
+}
+
+.imatges-conte::before {
+  content: "";
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
+  background: radial-gradient(circle, rgba(247,195,37,0.12), transparent 70%);
+  border-radius: 50%;
+  z-index: 0;
 }
 
 .imatges-conte img {
   width: 100%;
   max-width: 450px;
-  height: auto;
   border-radius: 18px;
   box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+  position: relative;
+  z-index: 1;
   transition: transform 0.3s ease;
 }
 
@@ -210,16 +170,17 @@ main {
   transform: scale(1.05);
 }
 
-/* ===== FRASE FINAL ===== */
-
+/* =========================
+   FRASE FINAL AMB ANIMACIÓ
+========================= */
 .frase-final {
-  margin: 60px auto 20px auto;
+  margin: 60px auto 40px auto;
   text-align: center;
   font-size: 26px;
   font-weight: 700;
   color: var(--lila);
   max-width: 800px;
-  padding: 20px 30px;
+  padding: 25px 35px;
   border-radius: 20px;
   background: linear-gradient(
     90deg,
@@ -227,17 +188,56 @@ main {
     rgba(77,182,172,0.15),
     rgba(142,68,173,0.15)
   );
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+
+  /* Animacions */
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fraseEntrada 1.2s ease forwards, flotacio 4s ease-in-out infinite 1.2s;
 }
 
+/* =========================
+   FOOTER
+========================= */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(90deg, var(--groc), var(--turquesa), var(--lila));
+  color: white;
+  font-weight: bold;
+  margin-top: 60px;
+}
 
-/* ===== RESPONSIVE ===== */
+/* =========================
+   ANIMACIONS
+========================= */
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
 
+@keyframes fraseEntrada {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes flotacio {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
 @media (max-width: 768px) {
   .bloc {
-    flex-direction: column !important;
+    flex-direction: column;
   }
 
-  h1 {
+  main {
+    padding: 40px 20px;
+  }
+
+  header h1 {
     font-size: 28px;
   }
 
@@ -245,39 +245,3 @@ main {
     font-size: 20px;
   }
 }
-/* ======================= */
-/* Footer */
-/* ======================= */
-footer {
-  text-align: center;
-  padding: 2rem;
-  background-color: #4BC6B9;
-  color: #FFFFFF;
-}
-
-footer button {
-  background-color: #FFFFFF;
-  color: #4BC6B9;
-  border: none;
-  padding: 0.7rem 1.5rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
-}
-
-footer button:hover {
-  background-color: #4BC6B9;
-  color: #FFFFFF;
-}
-
-footer button:hover {
-  background-color: #4BC6B9;
-  color: #FFFFFF;
-}
-
-.imatges-logo img {
-  width: 100%;
-  max-width: 100px;
-  display: block;
-  margin: 0 auto 0rem auto;
-  border-radius: 0px;
