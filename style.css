@@ -87,7 +87,7 @@ main {
 
 main {
   max-width: 1100px;   /* Amplada màxima */
-  margin: 0 auto;      /* Centra el contingut */
+  margin: 10 auto;      /* Centra el contingut */
   padding: 60px 40px;  /* Espai interior esquerra/dreta */
 }
 :root {
@@ -106,7 +106,7 @@ main {
 }
 
 body {
-  margin: 0;
+  margin: 10;
   font-family: 'Poppins', sans-serif;
   background-color: #ffffff;
   color: #333;
