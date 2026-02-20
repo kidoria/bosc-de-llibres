@@ -46,10 +46,32 @@ tradueixBtn?.addEventListener('click', () => {
   }
 });
 
-// Narració de veu
-const narracioBtn = document.getElementById('narracio-btn');
-narracioBtn?.addEventListener('click', () => {
-  const textConte = document.getElementById('text-conte').textContent;
-  const utterance = new SpeechSynthesisUtterance(textConte);
-  speechSynthesis.speak(utterance);
+// Narració
+let narr = new Audio();
+const conteSeleccionat = localStorage.getItem('conteSeleccionat') || 'conte1';
+
+switch(conteSeleccionat) {
+  case 'conte1':
+    narr.src = 'arbre.mp3';
+    break;
+  case 'conte2':
+    narr.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3';
+    break;
+  case 'conte3':
+    narr.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3';
+    break;
+}
+
+musica.loop = true;
+musica.play();
+
+const musicaBtn = document.getElementById('musica-btn');
+musicaBtn?.addEventListener('click', () => {
+  if (musica.paused) {
+    musica.play();
+    musicaBtn.textContent = 'Narració';
+  } else {
+    musica.pause();
+    musicaBtn.textContent = '🔇 Silenciar';
+  }
 });
