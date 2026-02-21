@@ -1,149 +1,234 @@
-/* =========================
-   VARIABLES DE COLORS
-========================= */
+/* ======================= */
+/* Tipografía y estilos generales */
+/* ======================= */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background-color: #FFFFFF;
+  color: #333;
+}
+
+header {
+  text-align: center;
+  padding: 2rem;
+  background-color: #4BC6B9;
+  color: #FFFFFF;
+}
+
+main {
+  padding: 2rem;
+}
+
+/* ======================= */
+/* Menú de contes */
+/* ======================= */
+.menu-contes {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.item {
+  text-align: center;
+}
+
+.item button {
+  background-color: #FFB347;
+  color: #FFFFFF;
+  padding: 2rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.item button:hover {
+  transform: scale(1.05);
+  background-color: #FFA64D;
+}
+
+.descripcion {
+  max-height: 0;             /* Oculto por defecto */
+  opacity: 0;
+  overflow: hidden;
+  transition: opacity 0.3s, max-height 0.3s, margin-top 0.3s;
+  color: gray;
+  font-size: 14px;
+  margin-top: 0;
+   display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  border-radius: 30px;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 200px;          /* MISMO ANCHO */
+}
+
+.item:hover .descripcion {
+  max-height: 100px;         /* Ajusta según la altura del texto */
+  opacity: 1;
+  margin-top: 8px;
+  background-color: #388E3C;
+  transform: translateY(-3px); /* efecto sin mover el layout */
+}
+
+/* ======================= */
+/* Páginas de conte */
+/* ======================= */
+/* Contenidor principal del conte */
 :root {
   --groc: #f7c325;
   --taronja: #f57c2c;
   --vermell: #ef4e4e;
+  --turquesa: #1bb3a7;
   --turquesa: #4db6ac;
   --verd: #4caf50;
   --lila: #8e44ad;
   --gris-suau: #f5f5f5;
-  --negro-text: #222;
 }
 
-/* =========================
-   RESET GENERAL
-========================= */
+/* Reset suau */
+/* Reset */
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
-  line-height: 1.7;
-  color: var(--negro-text);
-  background: #fff;
-  scroll-behavior: smooth;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #ffffff;
+  color: #333;
+  line-height: 1.8;
+  overflow-x: hidden;
 }
 
-/* =========================
-   HEADER
-========================= */
-header {
-  text-align: center;
-  padding: 40px 20px 60px 20px;
-  background: var(--turquesa);
-  color: white;
+/* Decoració subtil de fons */
+body::before {
+  content: "";
+  position: fixed;
+  top: -100px;
+  right: -100px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(27,179,167,0.08) 0%, transparent 70%);
+  z-index: -1;
 }
+/* ===== BOTONS ===== */
 
-header img.logo {
-  max-width: 180px;
-  margin-bottom: 10px;
-}
-
-header h1 {
-  font-size: 36px;
-  font-weight: 600;
-}
-
-/* =========================
-   NAV / BOTONS
-========================= */
+body::after {
+  content: "";
+  position: fixed;
+  bottom: -120px;
+  left: -120px;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(142,68,173,0.08) 0%, transparent 70%);
+  z-index: -1;
 .controls {
   padding: 20px;
   background-color: #eee;
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
 }
 
 .controls button {
-  padding: 10px 22px;
-  border-radius: 30px;
-  font-weight: 600;
-  cursor: pointer;
-  font-size: 15px;
-  border: none;
-  transition: all 0.3s ease;
   color: white;
+  background: (--vermell);
+  border: none;
+  padding: 8px 16px;
+  margin-right: 10px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
 }
 
-.btn-musica {
-  background: var(--groc);
-}
-.btn-musica:hover {
-  background: #e0ad1f;
-  transform: translateY(-3px);
-}
-
-.btn-traduir {
-  background: var(--turquesa);
-}
-.btn-traduir:hover {
-  background: #3aa79d;
-  transform: translateY(-3px);
-}
-
-.btn-narracio {
-  background: var(--lila);
-}
-.btn-narracio:hover {
-  background: #7b379a;
-  transform: translateY(-3px);
+/* Ratlleta decorativa sota el títol */
+h1::after {
+  content: "";
+  display: block;
+  height: 4px;
+  width: 60%;
+  margin: 8px auto 0;
+  background: linear-gradient(90deg, var(--groc), var(--taronja), var(--lila));
+  border-radius: 10px;
+.controls button:hover {
+  background: var(--taronja);
+  color: white;
+  transform: translateY(-2px);
 }
 
-/* =========================
-   MAIN CONTENT
-========================= */
+/* Contingut principal */
+/* ===== CONTINGUT ===== */
+
 main {
   max-width: 1100px;
   margin: auto;
-  padding: 60px 50px;
+  padding: 40px 20px;
 }
 
-/* BLOCS TEXT + IMATGE */
+/* Blocs alternats */
+/* Bloc text + imatge */
 .bloc {
   display: flex;
   align-items: center;
-  gap: 30px;
-  margin-bottom: 80px;
+  justify-content: space-between;
+  gap: 50px;
+  margin-bottom: 90px;
+
+  /* Animació inicial */
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(40px);
   animation: fadeUp 1s ease forwards;
+  gap: 60px;
+  margin-bottom: 80px;
 }
 
+/* Retard progressiu */
+.bloc:nth-child(1) { animation-delay: 0.2s; }
+.bloc:nth-child(2) { animation-delay: 0.4s; }
+.bloc:nth-child(3) { animation-delay: 0.6s; }
+.bloc:nth-child(4) { animation-delay: 0.8s; }
+
+/* Alternar imatge/text */
+/* Alternar */
 .bloc:nth-child(even) {
   flex-direction: row-reverse;
 }
 
-.bloc:nth-child(1) { animation-delay: 0.2s; }
-.bloc:nth-child(2) { animation-delay: 0.4s; }
-.bloc:nth-child(3) { animation-delay: 0.6s; }
-
+/* Text */
 .bloc p {
   flex: 1;
   font-size: 18px;
-  margin: 0;
+  position: relative;
 }
 
-/* DECORACIONS TEXT */
+/* Petit detall decoratiu al costat del text */
 .bloc p::before {
   content: "🌿";
-  margin-right: 8px;
+  position: absolute;
+  left: -30px;
+  top: -5px;
+  font-size: 18px;
   opacity: 0.4;
 }
 
-/* IMATGES */
+/* Imatges */
+/* Imatge */
 .imatges-conte {
   flex: 1;
   text-align: center;
   position: relative;
 }
 
+/* Halo de color subtil darrere imatge */
 .imatges-conte::before {
   content: "";
   position: absolute;
@@ -151,36 +236,48 @@ main {
   height: 80%;
   top: 10%;
   left: 10%;
-  background: radial-gradient(circle, rgba(247,195,37,0.12), transparent 70%);
+  background: radial-gradient(circle, rgba(247,195,37,0.15), transparent 70%);
   border-radius: 50%;
   z-index: 0;
 }
 
 .imatges-conte img {
   width: 100%;
+  max-width: 420px;
   max-width: 450px;
-  border-radius: 18px;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
   position: relative;
   z-index: 1;
+  border-radius: 18px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
   transition: transform 0.3s ease;
 }
 
 .imatges-conte img:hover {
   transform: scale(1.05);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.2);
 }
 
-/* =========================
-   FRASE FINAL AMB ANIMACIÓ
-========================= */
+/* Frase final */
+/* ===== FRASE FINAL ===== */
+
 .frase-final {
-  margin: 60px auto 40px auto;
+  margin: 60px auto 20px auto;
   text-align: center;
+  font-size: 22px;
+  font-weight: bold;
   font-size: 26px;
   font-weight: 700;
   color: var(--lila);
+  margin-top: 40px;
+  animation: fadeUp 1s ease forwards;
+  animation-delay: 1s;
+  opacity: 0;
   max-width: 800px;
-  padding: 25px 35px;
+  padding: 20px 30px;
   border-radius: 20px;
   background: linear-gradient(
     90deg,
@@ -188,17 +285,16 @@ main {
     rgba(77,182,172,0.15),
     rgba(142,68,173,0.15)
   );
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-
-  /* Animacions */
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fraseEntrada 1.2s ease forwards, flotacio 4s ease-in-out infinite 1.2s;
 }
 
-/* =========================
-   FOOTER
-========================= */
+/* ===== FOOTER ===== */
+
+/* Animació */
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 footer {
   text-align: center;
   padding: 20px;
@@ -208,40 +304,60 @@ footer {
   margin-top: 60px;
 }
 
-/* =========================
-   ANIMACIONS
-========================= */
-@keyframes fadeUp {
-  to { opacity: 1; transform: translateY(0); }
-}
+/* Responsive */
+/* ===== RESPONSIVE ===== */
 
-@keyframes fraseEntrada {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes flotacio {
-  0%   { transform: translateY(0); }
-  50%  { transform: translateY(-6px); }
-  100% { transform: translateY(0); }
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
 @media (max-width: 768px) {
   .bloc {
-    flex-direction: column;
+    flex-direction: column !important;
+    text-align: left;
   }
 
-  main {
-    padding: 40px 20px;
-  }
-
-  header h1 {
+  .bloc p::before {
+    display: none;
+  h1 {
     font-size: 28px;
   }
 
+  .imatges-conte img {
+    max-width: 100%;
   .frase-final {
     font-size: 20px;
   }
 }
+/* ======================= */
+/* Footer */
+/* ======================= */
+footer {
+  text-align: center;
+  padding: 2rem;
+  background-color: #4BC6B9;
+  color: #FFFFFF;
+}
+
+footer button {
+  background-color: #FFFFFF;
+  color: #4BC6B9;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+footer button:hover {
+  background-color: #4BC6B9;
+  color: #FFFFFF;
+}
+
+footer button:hover {
+  background-color: #4BC6B9;
+  color: #FFFFFF;
+}
+
+.imatges-logo img {
+  width: 100%;
+  max-width: 100px;
+  display: block;
+  margin: 0 auto 0rem auto;
+  border-radius: 0px;
