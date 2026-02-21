@@ -1,63 +1,90 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/png" href="Favi.png">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kidora - Conte</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-    <div class="imatges-logo">
-      <img src='Logo kidòria.png' alt="logotip">
-    </div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pàgina Web d'Exemple</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* Estils per al banner verd */
+        .banner {
+            background-color: #8bc34a; /* Verd */
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        /* Estils per als botons rosa */
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .button {
+            background-color: #f06292; /* Rosa */
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .button:hover {
+            background-color: #ec407a;
+        }
+        /* Estils per a les caixes de text groc */
+        .article-text {
+            color: #f06292; /* Rosa per al text */
+            margin: 10px;
+            font-size: 18px;
+        }
+        /* Estils per a les imatges blaves */
+        .image-box {
+            background-color: #03a9f4; /* Blau */
+            width: 100%;
+            height: 200px;
+            margin: 10px 0;
+        }
+        /* Contenidor per articles i imatges */
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1 id="titol-conte">🌳L'arbre que contava històries📖</h1>
-  </header>
-<div class="controls">
-  <button>🎵 Música</button>
-  <button>🌐 Tradur</button>
-  <button>🎤 Narració</button>
-</div>
-
-  <div class="bloc">
-    <p>
-     Al mig del parc, més alt que tots els altres, hi havia un arbre molt antic. Es deia Brancaforta i tenia el costum de contar històries cada tarda. Les arrels li sortien del terra com mans obertes, i el tronc era ple de marques, com si molts nins hi haguessin pujat. Brancaforta sabia històries de princeses, de naus pirates i d’animals parlants. Quan el sol començava a baixar, els ocells es quedaven callats per sentir la seva veu. Un dia, però, Brancaforta es va quedar en silenci. No va contar cap història. Nora, la nina més observadora del grup, va veure com les fulles de l’arbre perdien el seu color verd i queien a terra. —Què passa? —va preguntar. Biel, el nin tímid que sempre escoltava les històries, va posar una mà al tronc. Sentia una tristesa estranya que no sabia explicar. Laia, la nina valenta, va agafar una de les fulles caigudes i va veure que estava apagada, sense vida. —Els adults ja no cuiden el parc —va dir Nora—. —Hi ha papers i plàstics per terra —va afegir Biel—. I els bancs estan trencats. —I quasi ningú ja no ve a escoltar Brancaforta —va dir Laia. Nora va mirar al seu voltant com si fos la primera vegada. Va veure ampolles de plàstic als camins, el llac brut i les flors Biel ides. —Potser l’arbre està trist perquè no cuidam la natura —va dir Biel amb veu suau. Laia va posar la mà al tronc. —Encara hi som a temps —va dir decidida. —Què podem fer? —va demanar Nora.
-    <div class="imatges-conte">
-      <img src="Arbre2.jpg" alt="Arbre antic">
-    </p>
+    <!-- Banner verd -->
+    <div class="banner">
+        <h1>bosc de contes</h1>
     </div>
-  </div>
 
-  <div class="bloc">
-    <p>
-      Els tres amics es van mirar i Nora va tenir una idea: —Podem netejar el parc! Recollir els papers, plantar flors i cuidar el llac! —Sí! —va dir Biel—. I també podem dir als altres nins que ens ajudin. —I prometre que escoltarem amb el cor —va afegir Laia. Aleshores es van posar a treballar. Van recollir totes les ampolles i plàstics. Van separar el fems per reciclar. Biel va arrencar les herbes seques. Laia va netejar el llac amb molt de compte per no fer mal als peixos. Nora va plantar llavors noves i les va regar amb aigua fresca. A mesura que treballaven, el parc semblava despertar. Els ocells tornaven a cantar. Les papallones volaven entre les flors. El llac brillava sota el sol. Quan van acabar, es van asseure al peu de Brancaforta. De sobte, les seves branques es van moure suaument. —I gràcies per cuidar aquest lloc —va dir l’arbre amb veu profunda—. La natura ens dona ombra, aire net i alegria. Però necessita que la cuidem cada dia. Els tres amics van somriure.
-    <div class="imatges-conte">
-      <img src="Arbre2.jpg" alt="Fulles caigudes">
-    </p>
+    <!-- Botons rosa -->
+    <div class="buttons">
+        <button class="button">Botó 1</button>
+        <button class="button">Botó 2</button>
+        <button class="button">Botó 3</button>
     </div>
-  </div>
 
-  <div class="bloc">
-    <p>
-      —Hem après que el parc és casa nostra —va dir Nora. —I que si el cuidam, ell ens cuida a nosaltres —va afegir Biel. Laia va abraçar el tronc. —I mai més l’oblidarem. Aquella tarda, Brancaforta va tornar a contar històries. Però aquesta vegada, la història parlava d’uns nins que van entendre que estimar la natura és cuidar-la. I el parc va tornar a ser un lloc ple de vida, rialles i colors.
-     <div class="imatges-conte">
-      <img src="Arbre3.jpg" alt="Nins cuidant el parc">
-    </p>
+    <!-- Article amb text groc i imatges blaves -->
+    <div class="content">
+        <div class="article-text">
+            <p>text</p>
+        </div>
+        <div class="image-box"></div>
+
+        <div class="article-text">
+            <p>text</p>
+        </div>
+        <div class="image-box"></div>
+
+        <div class="article-text">
+            <p>text</p>
+        </div>
+        <div class="image-box"></div>
     </div>
-  </div>
-
-  <div class="frase-final">
-    🌿 Estimar la natura és cuidar-la cada dia 🌿
-  </div>
-</main>
-
-  <footer>
-    <button onclick="window.location.href='activitat1.html'">Anar a activitats</button>
-  </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>
