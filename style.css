@@ -81,45 +81,6 @@ main {
   transform: translateY(-3px); /* efecto sin mover el layout */
 }
 
-
-/* ===== FOOTER ===== */
-
-/* Animació */
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-footer {
-  text-align: center;
-  padding: 20px;
-  background: linear-gradient(90deg, var(--groc), var(--turquesa), var(--lila));
-  color: white;
-  font-weight: bold;
-  margin-top: 60px;
-}
-
-/* Responsive */
-/* ===== RESPONSIVE ===== */
-
-@media (max-width: 768px) {
-  .bloc {
-    flex-direction: column !important;
-    text-align: left;
-  }
-
-  .bloc p::before {
-    display: none;
-  h1 {
-    font-size: 28px;
-  }
-
-  .imatges-conte img {
-    max-width: 100%;
-  .frase-final {
-    font-size: 20px;
-  }
-}
 /* ======================= */
 /* Footer */
 /* ======================= */
@@ -152,7 +113,7 @@ footer button:hover {
 
 .imatges-logo img {
   width: 100%;
-  max-width: 100px;
+  max-width: 60px;
   display: block;
   margin: 0 auto 0rem auto;
   border-radius: 0px;
