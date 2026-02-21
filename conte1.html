@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bosc de històries - kidòria</title>
+    <title>Bosc de històries - Kidòria</title>
     <style>
         body {
             font-family: Poppins, sans-serif;
@@ -43,16 +43,25 @@
         }
         /* Estils per a les imatges blaves */
         .image-box {
-            background-color: #ffffff
+            background-color: #ffffff; /* Corregit: afegir punt i coma */
             width: 100%;
-            height: 80px;
-            margin: 20px 10;
+            height: 200px; /* Mida ajustada per les imatges */
+            margin: 20px 0;
+            text-align: center;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         /* Contenidor per articles i imatges */
         .content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
+            padding: 20px;
         }
     </style>
 </head>
@@ -64,28 +73,31 @@
 
     <!-- Botons rosa -->
     <div class="buttons">
-      <button id="musica-btn">🔊 Música</button>
-      <button id="tradueix-btn">🌐 Traduir</button>
-      <button id="narracio-btn">🎤 Narració</button>
+        <button class="button" id="musica-btn">🔊 Música</button>
+        <button class="button" id="tradueix-btn">🌐 Traduir</button>
+        <button class="button" id="narracio-btn">🎤 Narració</button>
     </div>
 
     <!-- Article amb text groc i imatges blaves -->
     <div class="content">
         <div class="article-text">
-            <p>branca forta era...</p>
+            <p>Branca forta era...</p>
         </div>
-        <div class="image-box"></div>
+        <div class="image-box">
             <img src="Arbre1.jpg" alt="Imatge del conte">
-        <div class="article-text">
-            <p>text</p>
         </div>
-        <div class="image-box"></div>
-             <img src="Arbre2.jpg" alt="Imatge del conte">
         <div class="article-text">
-            <p>text</p>
+            <p>Text</p>
         </div>
-        <div class="image-box"></div>
-             <img src="Arbre3.jpg" alt="Imatge del conte">
+        <div class="image-box">
+            <img src="Arbre2.jpg" alt="Imatge del conte">
+        </div>
+        <div class="article-text">
+            <p>Text</p>
+        </div>
+        <div class="image-box">
+            <img src="Arbre3.jpg" alt="Imatge del conte">
+        </div>
     </div>
 </body>
 </html>
