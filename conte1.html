@@ -25,24 +25,29 @@
 
   h1, h2 {
     color: #4DB6AC;
+    align-items: center;
   }
 
   /* ===== Botones ===== */
-  .boton-magico, button {
-    background: #F7C325; /* amarillo */
-    color: #000; /* texto negro */
-    border: none;
-    padding: 12px 24px;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: 0.3s;
-    box-shadow: 0 0 15px #F7C325;
-  }
+.bot {
+  text-align: center;
+}
 
-  .boton-magico:hover, button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px #F7C325;
-  }
+.bot button {
+  background-color: #ef4e4e;
+  color: #FFFFFF;
+  padding: 2rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.bot button:hover {
+  transform: scale(1.05);
+  background-color: #FFA64D;
+}
 
   /* ===== Bloques de contenido ===== */
   .bloque {
@@ -66,13 +71,21 @@
 
   .magico:hover {
     transform: translateY(-10px);
-    box-shadow: 0 0 30px #F7C325;
+    box-shadow: 0 0 30px #4caf50;
   }
 
   /* ===== Centrado botón actividad ===== */
   .centrar {
     text-align: center;
-    margin: 40px 0;
+    margin: 40px 0;  
+    background-color: #FFFFFF;
+    color: #4DB6AC;
+    padding: 2rem;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.2s, background-color 0.2s;
   }
 
   /* ===== Sección cuento (opcional) ===== */
@@ -90,6 +103,7 @@
       width: 100%;
     }
   }
+
 </style>
 </head>
 <body>
@@ -99,31 +113,31 @@
 </header>
 
 <section class="cuento">
-  <h1 id="titulo">El Viaje de Nuba</h1>
+  <h1 id="titulo">L'arbre que contava històries</h1>
 
-  <div class="controles">
+  <div class="bot">
     <button onclick="toggleMusica()">🎵 Música</button>
     <button onclick="traducir()">🌍 Traducir</button>
     <button onclick="toggleNarrador()">🎙️ Narrador</button>
   </div>
 
   <div class="bloque">
-    <img src="https://picsum.photos/500/300" class="magico">
+    <img src="Arbre1.jpg" class="magico">
     <p id="p1">Nuba soñaba con cruzar el gran valle dorado.</p>
   </div>
 
   <div class="bloque alternado">
     <p id="p2">Todos decían que era demasiado pequeño para intentarlo.</p>
-    <img src="https://picsum.photos/501/300" class="magico">
+    <img src="Arbre2.jpg" class="magico">
   </div>
 
   <div class="bloque alternado">
-    <img src="https://picsum.photos/502/300" class="magico">
+    <img src="Arbre3.jpg" class="magico">
     <p id="p3">Pero escuchó su corazón y dio el primer paso hacia la aventura.</p>
   </div>
 
   <div class="centrar">
-    <a href="actividad.html" class="boton-magico">Ir a la actividad infantil</a>
+    <a href="laberint.html" class="boton-magico">Ir a la actividad infantil</a>
   </div>
 
 </section>
@@ -138,8 +152,5 @@
 
 <script src="script.js"></script>
 
-  <footer>
-    <button onclick="window.location.href='Esquiva.html'">Anar a activitats</button>
-  </footer>
 </body>
 </html>
