@@ -7,13 +7,7 @@
   <title>Kidora - Laberint</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header>
-    <h1 id="titol-conte">RACÓ DE BITS: Hakejant el futur</h1>
-    <p>Ajuda a n'Ona i en Carlea a aconseguir presentar la seva aplicació al concurs!</p>
-  </header>
-<style>
+  <style>
     body {
         text-align: center;
         font-family: "Poppins", sans-serif;
@@ -54,7 +48,7 @@
         font-size: 16px;
         border: none;
         border-radius: 20px;
-        background: 4BC6B9;
+        background: #4BC6B9;
         color: white;
         cursor: pointer;
     }
@@ -62,185 +56,224 @@
     button:hover {
         opacity: 0.85;
     }
-</style>
+  </style>
 </head>
 <body>
 
-<div id="timer">Temps: 0 s</div>
-<canvas id="mazeCanvas"></canvas>
-<br>
-<button onclick="init()">Nou laberint</button>
+  <header>
+    <h1 id="titol-conte">RACÓ DE BITS: Hakejant el futur</h1>
+    <p>Ajuda a n'Ona i en Carlea a aconseguir presentar la seva aplicació al concurs!</p>
+  </header>
 
-<script>
-const cols = 20;
-const rows = 20;
-const cellSize = 25;
+  <div id="timer">Temps: 0 s</div>
+  <canvas id="mazeCanvas"></canvas>
+  <br>
+  <button onclick="init()">Nou laberint</button>
 
-let grid = [];
-let stack = [];
-let player = { x: 0, y: 0 };
-let startTime;
-let timerInterval;
+  <!-- Contenedor para el reproductor de YouTube (oculto) -->
+  <div id="player"></div>
 
-const canvas = document.getElementById("mazeCanvas");
-const ctx = canvas.getContext("2d");
-canvas.width = cols * cellSize;
-canvas.height = rows * cellSize;
+  <script>
+  // ------------------- MÚSICA DE YOUTUBE -------------------
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  document.body.appendChild(tag);
 
-class Cell {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.walls = [true, true, true, true];
-        this.visited = false;
-    }
+  var player;
+  var autoplayIniciado = false;
 
-    draw() {
-        const x = this.x * cellSize;
-        const y = this.y * cellSize;
+  function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+          height: '0',
+          width: '0',
+          videoId: 'gWtLkRdfXb0', // ID de "Superestrella" de AITANA
+          playerVars: {
+              controls: 0,
+              loop: 1,
+              playlist: 'gWtLkRdfXb0',
+              modestbranding: 1
+          }
+      });
 
-        ctx.strokeStyle = "#00b3b3";
-        ctx.lineWidth = 2;
+      // Reproducir al primer clic en cualquier parte de la página
+      document.body.addEventListener('click', () => {
+          if (!autoplayIniciado) {
+              player.playVideo();
+              autoplayIniciado = true;
+          }
+      }, { once: true });
+  }
+  // ---------------------------------------------------------
 
-        if (this.walls[0]) drawLine(x, y, x + cellSize, y);
-        if (this.walls[1]) drawLine(x + cellSize, y, x + cellSize, y + cellSize);
-        if (this.walls[2]) drawLine(x + cellSize, y + cellSize, x, y + cellSize);
-        if (this.walls[3]) drawLine(x, y + cellSize, x, y);
-    }
-}
+  // ------------------- LABERINT -------------------
+  const cols = 20;
+  const rows = 20;
+  const cellSize = 25;
 
-function drawLine(x1, y1, x2, y2) {
-    ctx.beginPath();
-    ctx.moveTo(x1, y1);
-    ctx.lineTo(x2, y2);
-    ctx.stroke();
-}
+  let grid = [];
+  let stack = [];
+  let playerPos = { x: 0, y: 0 };
+  let startTime;
+  let timerInterval;
 
-function index(x, y) {
-    if (x < 0 || y < 0 || x >= cols || y >= rows) return -1;
-    return x + y * cols;
-}
+  const canvas = document.getElementById("mazeCanvas");
+  const ctx = canvas.getContext("2d");
+  canvas.width = cols * cellSize;
+  canvas.height = rows * cellSize;
 
-function removeWalls(a, b) {
-    const dx = a.x - b.x;
-    const dy = a.y - b.y;
+  class Cell {
+      constructor(x, y) {
+          this.x = x;
+          this.y = y;
+          this.walls = [true, true, true, true];
+          this.visited = false;
+      }
+      draw() {
+          const x = this.x * cellSize;
+          const y = this.y * cellSize;
 
-    if (dx === 1) { a.walls[3] = false; b.walls[1] = false; }
-    if (dx === -1) { a.walls[1] = false; b.walls[3] = false; }
-    if (dy === 1) { a.walls[0] = false; b.walls[2] = false; }
-    if (dy === -1) { a.walls[2] = false; b.walls[0] = false; }
-}
+          ctx.strokeStyle = "#00b3b3";
+          ctx.lineWidth = 2;
 
-function generateMaze() {
-    let current = grid[0];
-    current.visited = true;
+          if (this.walls[0]) drawLine(x, y, x + cellSize, y);
+          if (this.walls[1]) drawLine(x + cellSize, y, x + cellSize, y + cellSize);
+          if (this.walls[2]) drawLine(x + cellSize, y + cellSize, x, y + cellSize);
+          if (this.walls[3]) drawLine(x, y + cellSize, x, y);
+      }
+  }
 
-    while (true) {
-        const neighbors = [];
-        const top = grid[index(current.x, current.y - 1)];
-        const right = grid[index(current.x + 1, current.y)];
-        const bottom = grid[index(current.x, current.y + 1)];
-        const left = grid[index(current.x - 1, current.y)];
+  function drawLine(x1, y1, x2, y2) {
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
+  }
 
-        if (top && !top.visited) neighbors.push(top);
-        if (right && !right.visited) neighbors.push(right);
-        if (bottom && !bottom.visited) neighbors.push(bottom);
-        if (left && !left.visited) neighbors.push(left);
+  function index(x, y) {
+      if (x < 0 || y < 0 || x >= cols || y >= rows) return -1;
+      return x + y * cols;
+  }
 
-        if (neighbors.length > 0) {
-            const next = neighbors[Math.floor(Math.random() * neighbors.length)];
-            next.visited = true;
-            stack.push(current);
-            removeWalls(current, next);
-            current = next;
-        } else if (stack.length > 0) {
-            current = stack.pop();
-        } else {
-            break;
-        }
-    }
-}
+  function removeWalls(a, b) {
+      const dx = a.x - b.x;
+      const dy = a.y - b.y;
 
-function drawMaze() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    grid.forEach(cell => cell.draw());
+      if (dx === 1) { a.walls[3] = false; b.walls[1] = false; }
+      if (dx === -1) { a.walls[1] = false; b.walls[3] = false; }
+      if (dy === 1) { a.walls[0] = false; b.walls[2] = false; }
+      if (dy === -1) { a.walls[2] = false; b.walls[0] = false; }
+  }
 
-    // Final
-    ctx.fillStyle = "#8e2de2";
-    ctx.fillRect((cols-1)*cellSize+5, (rows-1)*cellSize+5, cellSize-10, cellSize-10);
+  function generateMaze() {
+      let current = grid[0];
+      current.visited = true;
 
-    // Jugador
-    ctx.fillStyle = "#ff5733";
-    ctx.beginPath();
-    ctx.arc(
-        player.x * cellSize + cellSize/2,
-        player.y * cellSize + cellSize/2,
-        cellSize/4,
-        0,
-        Math.PI * 2
-    );
-    ctx.fill();
-}
+      while (true) {
+          const neighbors = [];
+          const top = grid[index(current.x, current.y - 1)];
+          const right = grid[index(current.x + 1, current.y)];
+          const bottom = grid[index(current.x, current.y + 1)];
+          const left = grid[index(current.x - 1, current.y)];
 
-function movePlayer(dx, dy) {
-    const current = grid[index(player.x, player.y)];
-    const newX = player.x + dx;
-    const newY = player.y + dy;
-    const next = grid[index(newX, newY)];
-    if (!next) return;
+          if (top && !top.visited) neighbors.push(top);
+          if (right && !right.visited) neighbors.push(right);
+          if (bottom && !bottom.visited) neighbors.push(bottom);
+          if (left && !left.visited) neighbors.push(left);
 
-    if (dx === 1 && !current.walls[1]) player.x++;
-    if (dx === -1 && !current.walls[3]) player.x--;
-    if (dy === 1 && !current.walls[2]) player.y++;
-    if (dy === -1 && !current.walls[0]) player.y--;
+          if (neighbors.length > 0) {
+              const next = neighbors[Math.floor(Math.random() * neighbors.length)];
+              next.visited = true;
+              stack.push(current);
+              removeWalls(current, next);
+              current = next;
+          } else if (stack.length > 0) {
+              current = stack.pop();
+          } else {
+              break;
+          }
+      }
+  }
 
-    drawMaze();
-    checkWin();
-}
+  function drawMaze() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      grid.forEach(cell => cell.draw());
 
-function checkWin() {
-    if (player.x === cols-1 && player.y === rows-1) {
-        clearInterval(timerInterval);
-        const totalTime = Math.floor((Date.now() - startTime)/1000);
-        setTimeout(() => alert("🎉 Has completat el laberint en " + totalTime + " segons!"), 100);
-    }
-}
+      // Final
+      ctx.fillStyle = "#8e2de2";
+      ctx.fillRect((cols-1)*cellSize+5, (rows-1)*cellSize+5, cellSize-10, cellSize-10);
 
-document.addEventListener("keydown", e => {
-    if (e.key === "ArrowUp") movePlayer(0, -1);
-    if (e.key === "ArrowDown") movePlayer(0, 1);
-    if (e.key === "ArrowLeft") movePlayer(-1, 0);
-    if (e.key === "ArrowRight") movePlayer(1, 0);
-});
+      // Jugador
+      ctx.fillStyle = "#ff5733";
+      ctx.beginPath();
+      ctx.arc(
+          playerPos.x * cellSize + cellSize/2,
+          playerPos.y * cellSize + cellSize/2,
+          cellSize/4,
+          0,
+          Math.PI * 2
+      );
+      ctx.fill();
+  }
 
-function startTimer() {
-    startTime = Date.now();
-    timerInterval = setInterval(() => {
-        const seconds = Math.floor((Date.now() - startTime)/1000);
-        document.getElementById("timer").textContent = "Temps: " + seconds + " s";
-    }, 1000);
-}
+  function movePlayer(dx, dy) {
+      const current = grid[index(playerPos.x, playerPos.y)];
+      const newX = playerPos.x + dx;
+      const newY = playerPos.y + dy;
+      const next = grid[index(newX, newY)];
+      if (!next) return;
 
-function init() {
-    grid = [];
-    stack = [];
-    player = { x: 0, y: 0 };
-    clearInterval(timerInterval);
-    document.getElementById("timer").textContent = "Temps: 0 s";
+      if (dx === 1 && !current.walls[1]) playerPos.x++;
+      if (dx === -1 && !current.walls[3]) playerPos.x--;
+      if (dy === 1 && !current.walls[2]) playerPos.y++;
+      if (dy === -1 && !current.walls[0]) playerPos.y--;
 
-    for (let y = 0; y < rows; y++) {
-        for (let x = 0; x < cols; x++) {
-            grid.push(new Cell(x, y));
-        }
-    }
+      drawMaze();
+      checkWin();
+  }
 
-    generateMaze();
-    drawMaze();
-    startTimer();
-}
+  function checkWin() {
+      if (playerPos.x === cols-1 && playerPos.y === rows-1) {
+          clearInterval(timerInterval);
+          const totalTime = Math.floor((Date.now() - startTime)/1000);
+          setTimeout(() => alert("🎉 Has completat el laberint en " + totalTime + " segons!"), 100);
+      }
+  }
 
-init();
-</script>
+  document.addEventListener("keydown", e => {
+      if (e.key === "ArrowUp") movePlayer(0, -1);
+      if (e.key === "ArrowDown") movePlayer(0, 1);
+      if (e.key === "ArrowLeft") movePlayer(-1, 0);
+      if (e.key === "ArrowRight") movePlayer(1, 0);
+  });
+
+  function startTimer() {
+      startTime = Date.now();
+      timerInterval = setInterval(() => {
+          const seconds = Math.floor((Date.now() - startTime)/1000);
+          document.getElementById("timer").textContent = "Temps: " + seconds + " s";
+      }, 1000);
+  }
+
+  function init() {
+      grid = [];
+      stack = [];
+      playerPos = { x: 0, y: 0 };
+      clearInterval(timerInterval);
+      document.getElementById("timer").textContent = "Temps: 0 s";
+
+      for (let y = 0; y < rows; y++) {
+          for (let x = 0; x < cols; x++) {
+              grid.push(new Cell(x, y));
+          }
+      }
+
+      generateMaze();
+      drawMaze();
+      startTimer();
+  }
+
+  init();
+  </script>
 
 </body>
 </html>
