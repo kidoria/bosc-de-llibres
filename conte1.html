@@ -46,7 +46,7 @@
 
 .bot button:hover {
   transform: scale(1.05);
-  background-color: #FFA64D;
+  background-color: #4caf50;
 }
 
   /* ===== Bloques de contenido ===== */
@@ -75,24 +75,31 @@
   }
 
   /* ===== Centrado botón actividad ===== */
-  .line-container {
-  position: center;         /* Para posicionar el botón relativo a la línea */
-  height: none;                /* Grosor de la línea */
-  background-color: #4db6ac;  /* Color de la línea */
-  margin: 20px 0;             /* Espacio arriba y abajo */
+footer {
+  text-align: center;
+  padding: 2rem;
+  background-color: #4BC6B9;
+  color: #FFFFFF;
 }
 
-.inside-button {
-  position: center;         /* Posiciona el botón sobre la línea */
-  top: 50%;                   /* Centrar verticalmente */
-  left: 50%;                  /* Centrar horizontalmente */
-  transform: translate(-50%, -50%); /* Ajuste perfecto al centro */
-  padding: 5px 10px;
+footer button {
+  background-color: #FFFFFF;
+  color: #4BC6B9;
   border: none;
-  background-color: #ffffff; /* Color del botón */
-  color: 4db6ac;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
   cursor: pointer;
-  border-radius: 5px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+footer button:hover {
+  background-color: #4BC6B9;
+  color: #FFFFFF;
+}
+
+footer button:hover {
+  background-color: #4BC6B9;
+  color: #FFFFFF;
 }
   /* ===== Sección cuento (opcional) ===== */
   .cuento {
@@ -115,7 +122,9 @@
 <body>
 
 <header>
-  <div class="logo">img src="Logo kidòria.png"</div>
+  <div class="logo">
+    <img src="Logo kidòria.png">
+  </div>
 </header>
 
 <section class="cuento">
@@ -141,17 +150,18 @@
     <p id="p3">Pero escuchó su corazón y dio el primer paso hacia la aventura.</p>
   </div>
 
- <div class="line-container">
-  <div class="inside-button">
+
+<footer>
+  <div class="footer button">
     <a href="laberint.html" class="boton-magico">Ir a la actividad infantil</a>
     Kidòria - Bosc d'històries
   </div>
-
+</footer>
 
 </section>
 
 <audio id="musica" loop>
-  <source src="musica.mp3" type="audio/mpeg">
+  <source src="arbre.mp3" type="audio/mpeg">
 </audio>
 
 <audio id="narrador">
