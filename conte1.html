@@ -23,10 +23,12 @@
     align-items: center;
   }
 
-  h1, h2 {
-    color: #4DB6AC;
-    justify-content: center; /* centra horizontalmente */
-    align-items: center;
+ h1 {
+  text-align: center;
+  font-size: 2em;      /* opcional: tamaño */
+  margin-top: 20px;    /* opcional: espacio */
+  margin-bottom: 20px; /* opcional */
+}
   }
 
   /* ===== Botones ===== */
@@ -76,31 +78,31 @@
   }
 
   /* ===== Centrado botón actividad ===== */
+/* Contenedor del footer */
 footer {
-  text-align: center;
-  padding: 2rem;
-  background-color: #4BC6B9;
-  color: #FFFFFF;
+  background-color: #f2f2f2; /* color de fondo similar a conte2.html */
+  padding: 20px 0;
+  text-align: center; /* centra todo dentro del footer */
+  margin-top: 40px; /* separación del contenido */
 }
 
-footer button {
-  background-color: #FFFFFF;
-  color: #4BC6B9;
-  border: none;
-  padding: 0.7rem 1.5rem;
+/* Botón del footer */
+.footer-button {
+  display: inline-block;
+  background-color: #3498db; /* color azul */
+  color: white;
+  padding: 12px 24px;
   border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
   cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
+  transition: background-color 0.3s;
 }
 
-footer button:hover {
-  background-color: #4BC6B9;
-  color: #FFFFFF;
-}
-
-footer button:hover {
-  background-color: #4BC6B9;
-  color: #FFFFFF;
+.footer-button:hover {
+  background-color: #2a80b9; /* cambio de color al pasar el mouse */
 }
   /* ===== Sección cuento (opcional) ===== */
   .cuento {
@@ -161,9 +163,8 @@ footer button:hover {
 
 
 <footer>
-  <div class="footer button">
-    <a href="laberint.html" class="footer button">Racó de BITS</a> <br>
-    Kidòria - Bosc d'històries
+  <div class="footer-container">
+    <a href="laberint.html" class="footer-button">RACÓ DE BITS</a>
   </div>
 </footer>
 
