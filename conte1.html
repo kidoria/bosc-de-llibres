@@ -130,10 +130,10 @@ footer button:hover {
 <section class="cuento">
   <h1 id="titulo">L'arbre que contava històries</h1>
 
-  <div class="bot">
-    <button onclick="toggleMusica()">🎵 Música</button>
-    <button onclick="toggleNarrador()">🎙️ Narrador</button>
-  </div>
+    <div class="bot">
+      <button id="musica-btn">🔊 Música</button>
+      <button id="narracio-btn">🎤 Narració</button>
+    </div>
 
   <div class="bloque">
     <img src="Arbre1.jpg" class="magico">
@@ -159,14 +159,6 @@ footer button:hover {
 </footer>
 
 </section>
-
-<audio id="musica" loop>
-  <source src="arbre.mp3" type="audio/mpeg">
-</audio>
-
-<audio id="narrador">
-  <source src="narrador.mp3" type="audio/mpeg">
-</audio>
 
 <script src="script.js"></script>
 
