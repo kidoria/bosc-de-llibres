@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>El Viaje de Nuba</title>
+<title>KIDÒRIA - L'arbre que contava històries</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <style>
   /* ===== Estilos globales ===== */
@@ -75,19 +75,25 @@
   }
 
   /* ===== Centrado botón actividad ===== */
-  .centrar {
-    text-align: center;
-    margin: 40px 0;  
-    background-color: #FFFFFF;
-    color: #4DB6AC;
-    padding: 2rem;
-    border-radius: 12px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    transition: transform 0.2s, background-color 0.2s;
-  }
+  .line-container {
+  position: center;         /* Para posicionar el botón relativo a la línea */
+  height: none;                /* Grosor de la línea */
+  background-color: #4db6ac;  /* Color de la línea */
+  margin: 20px 0;             /* Espacio arriba y abajo */
+}
 
+.inside-button {
+  position: center;         /* Posiciona el botón sobre la línea */
+  top: 50%;                   /* Centrar verticalmente */
+  left: 50%;                  /* Centrar horizontalmente */
+  transform: translate(-50%, -50%); /* Ajuste perfecto al centro */
+  padding: 5px 10px;
+  border: none;
+  background-color: #ffffff; /* Color del botón */
+  color: 4db6ac;
+  cursor: pointer;
+  border-radius: 5px;
+}
   /* ===== Sección cuento (opcional) ===== */
   .cuento {
     padding: 20px;
@@ -109,7 +115,7 @@
 <body>
 
 <header>
-  <div class="logo">Kidoria ✨</div>
+  <div class="logo">img src="Logo kidòria.png"</div>
 </header>
 
 <section class="cuento">
@@ -117,7 +123,6 @@
 
   <div class="bot">
     <button onclick="toggleMusica()">🎵 Música</button>
-    <button onclick="traducir()">🌍 Traducir</button>
     <button onclick="toggleNarrador()">🎙️ Narrador</button>
   </div>
 
@@ -136,9 +141,12 @@
     <p id="p3">Pero escuchó su corazón y dio el primer paso hacia la aventura.</p>
   </div>
 
-  <div class="centrar">
+ <div class="line-container">
+  <div class="inside-button">
     <a href="laberint.html" class="boton-magico">Ir a la actividad infantil</a>
+    Kidòria - Bosc d'històries
   </div>
+
 
 </section>
 
