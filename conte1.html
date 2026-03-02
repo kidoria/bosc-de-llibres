@@ -5,7 +5,92 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>El Viaje de Nuba</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<style>
+  /* ===== Estilos globales ===== */
+  body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background: #FFFFFF;
+    color: #000000;
+  }
+
+  header {
+    background: #4DB6AC;
+    color: white;
+    padding: 20px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  h1, h2 {
+    color: #4DB6AC;
+  }
+
+  /* ===== Botones ===== */
+  .boton-magico, button {
+    background: #F7C325; /* amarillo */
+    color: #000; /* texto negro */
+    border: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 0 15px #F7C325;
+  }
+
+  .boton-magico:hover, button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #F7C325;
+  }
+
+  /* ===== Bloques de contenido ===== */
+  .bloque {
+    max-width: 1000px;
+    margin: 60px auto;
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    padding: 0 80px;
+  }
+
+  .alternado {
+    flex-direction: row;
+  }
+
+  .bloque img {
+    width: 50%;
+    border-radius: 15px;
+    transition: 0.4s;
+  }
+
+  .magico:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 30px #F7C325;
+  }
+
+  /* ===== Centrado botón actividad ===== */
+  .centrar {
+    text-align: center;
+    margin: 40px 0;
+  }
+
+  /* ===== Sección cuento (opcional) ===== */
+  .cuento {
+    padding: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .bloque {
+      flex-direction: column;
+      padding: 0 20px;
+    }
+
+    .bloque img {
+      width: 100%;
+    }
+  }
+</style>
 </head>
 <body>
 
@@ -16,7 +101,7 @@
 <section class="cuento">
   <h1 id="titulo">El Viaje de Nuba</h1>
 
-  <div class="boton-magico">
+  <div class="controles">
     <button onclick="toggleMusica()">🎵 Música</button>
     <button onclick="traducir()">🌍 Traducir</button>
     <button onclick="toggleNarrador()">🎙️ Narrador</button>
