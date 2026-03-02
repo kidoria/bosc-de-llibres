@@ -1,104 +1,56 @@
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bosc de històries - Kidòria</title>
-    <style>
-        body {
-            font-family: Poppins, sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        /* Estils per al banner verd */
-        .banner {
-          text-align: center;
-          padding: 2rem;
-          background-color: #4BC6B9;
-          color: #FFFFFF;
-}
-        }
-        /* Estils per als botons rosa */
-        .controls {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .controls {
-            background-color: #f06292; /* Rosa */
-            color: white;
-            padding: 10px 20px;
-            margin: 5px;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .controls:hover {
-            background-color: #ec407a;
-        }
-        /* Estils per a les caixes de text groc */
-        .article-text {
-            color: #000000;
-            margin: 60px;
-            font-size: 18px;
-        }
-        /* Estils per a les imatges blaves */
-        .image-box {
-            background-color: #ffffff; /* Corregit: afegir punt i coma */
-            width: 90px;
-            height: 90px; /* Mida ajustada per les imatges */
-            margin: 15px 0;
-            text-align: right;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        .image-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        /* Contenidor per articles i imatges */
-        .content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            padding: 20px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Viaje de Nuba</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Banner verd -->
-    <div class="banner">
-        <h1>L'arbre que contava històries</h1>
-    </div>
 
-    <!-- Botons rosa -->
-    <div class="controls">
-        <button class="musica-btn" id="musica-btn">🔊 Música</button>
-        <button class="tradueix-btn" id="tradueix-btn">🌐 Traduir</button>
-        <button class="narració-btn" id="narracio-btn">🎤 Narració</button>
-    </div>
+<header>
+  <div class="logo">Kidoria ✨</div>
+</header>
 
-    <!-- Article amb text groc i imatges blaves -->
-    <div class="content">
-        <div class="article-text">
-            <p>Branca forta era...</p>
-        </div>
-        <div class="image-box">
-            <img src="Arbre1.jpg" alt="Imatge del conte">
-        </div>
-        <div class="article-text">
-            <p>Text</p>
-        </div>
-        <div class="image-box">
-            <img src="Arbre2.jpg" alt="Imatge del conte">
-        </div>
-        <div class="article-text">
-            <p>Text</p>
-        </div>
-        <div class="image-box">
-            <img src="Arbre3.jpg" alt="Imatge del conte">
-        </div>
-    </div>
+<section class="cuento">
+  <h1 id="titulo">El Viaje de Nuba</h1>
+
+  <div class="controles">
+    <button onclick="toggleMusica()">🎵 Música</button>
+    <button onclick="traducir()">🌍 Traducir</button>
+    <button onclick="toggleNarrador()">🎙️ Narrador</button>
+  </div>
+
+  <div class="bloque">
+    <img src="https://picsum.photos/500/300" class="magico">
+    <p id="p1">Nuba soñaba con cruzar el gran valle dorado.</p>
+  </div>
+
+  <div class="bloque alternado">
+    <p id="p2">Todos decían que era demasiado pequeño para intentarlo.</p>
+    <img src="https://picsum.photos/501/300" class="magico">
+  </div>
+
+  <div class="bloque alternado">
+    <img src="https://picsum.photos/502/300" class="magico">
+    <p id="p3">Pero escuchó su corazón y dio el primer paso hacia la aventura.</p>
+  </div>
+
+  <div class="centrar">
+    <a href="actividad.html" class="boton-magico">Ir a la actividad infantil</a>
+  </div>
+
+</section>
+
+<audio id="musica" loop>
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="narrador">
+  <source src="narrador.mp3" type="audio/mpeg">
+</audio>
+
+<script src="script.js"></script>
 </body>
 </html>
