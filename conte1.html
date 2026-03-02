@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KIDÒRIA - L'arbre que contava històries</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-<script src="script.js"></script>
   
 <style>
   /* ===== Estilos globales ===== */
@@ -27,9 +26,9 @@
 
  h1 {
   text-align: center;
-  font-size: 2em;      /* opcional: tamaño */
-  margin-top: 20px;    /* opcional: espacio */
-  margin-bottom: 20px; /* opcional */
+  font-size: 2em;
+  margin-top: 20px;
+  margin-bottom: 20px;
   font-family: 'Poppins', sans-serif;
   color: #4DB6AC;
 }
@@ -83,18 +82,16 @@
   }
 
   /* ===== Centrado botón actividad ===== */
-/* Contenedor del footer */
 footer {
-  background-color: #f2f2f2; /* color de fondo similar a conte2.html */
+  background-color: #f2f2f2;
   padding: 20px 0;
-  text-align: center; /* centra todo dentro del footer */
-  margin-top: 40px; /* separación del contenido */
+  text-align: center;
+  margin-top: 40px;
 }
 
-/* Botón del footer */
 .footer-button {
   display: inline-block;
-  background-color: #4DB6AC; /* color azul */
+  background-color: #4DB6AC;
   color: white;
   padding: 12px 24px;
   border-radius: 8px;
@@ -107,31 +104,32 @@ footer {
 }
 
 .footer-button:hover {
-  background-color: #4DB6AC; /* cambio de color al pasar el mouse */
+  background-color: #4DB6AC;
 }
-  /* ===== Sección cuento (opcional) ===== */
-  .cuento {
-    padding: 20px;
+
+/* ===== Sección cuento ===== */
+.cuento {
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .bloque {
+    flex-direction: column;
+    padding: 0 20px;
   }
 
-  @media (max-width: 768px) {
-    .bloque {
-      flex-direction: column;
-      padding: 0 20px;
-    }
-
-    .bloque img {
-      width: 100%;
-    }
-  }
-
-
-      .imatges-logo img {
+  .bloque img {
     width: 100%;
-    max-width: 60px;
-    display: block;
-    margin: 0 auto 0rem auto;
-    border-radius: 0px;
+  }
+}
+
+.imatges-logo img {
+  width: 100%;
+  max-width: 60px;
+  display: block;
+  margin: 0 auto 0rem auto;
+  border-radius: 0px;
+}
 
 </style>
 </head>
@@ -146,10 +144,10 @@ footer {
 <section class="cuento">
   <h1>L'arbre que contava històries</h1>
 
-    <div class="bot">
-      <button id="musica-btn">🔊 Música</button>
-      <button id="narracio-btn">🎤 Narració</button>
-    </div>
+  <div class="bot">
+    <button id="musica-btn">🔊 Música</button>
+    <button id="narracio-btn">🎤 Narració</button>
+  </div>
 
   <div class="bloque">
     <img src="Arbre1.jpg" class="magico">
@@ -166,14 +164,16 @@ footer {
     <p id="p3">Pero escuchó su corazón y dio el primer paso hacia la aventura.</p>
   </div>
 
-
-<footer>
-  <div class="footer-container">
-    <a href="laberint.html" class="footer-button">RACÓ DE BITS</a>
-  </div>
-</footer>
+  <footer>
+    <div class="footer-container">
+      <a href="laberint.html" class="footer-button">RACÓ DE BITS</a>
+    </div>
+  </footer>
 
 </section>
+
+<!-- SCRIPT MOVIDO AL FINAL PARA QUE FUNCIONE -->
+<script src="script.js"></script>
 
 </body>
 </html>
