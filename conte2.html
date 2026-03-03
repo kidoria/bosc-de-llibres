@@ -1,106 +1,179 @@
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kidora - Conte</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bosc d'històtries - Kidòria</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  
+<style>
+  /* ===== Estilos globales ===== */
+  body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background: #FFFFFF;
+    color: #000000;
+  }
+
+  header {
+    background: #4DB6AC;
+    color: white;
+    padding: 20px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+ h1 {
+  text-align: center;
+  font-size: 2em;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-family: 'Poppins', sans-serif;
+  color: #4DB6AC;
+}
+  }
+
+  /* ===== Botones ===== */
+.bot {
+  text-align: center;
+}
+
+.bot button {
+  background-color: #ef4e4e;
+  color: #FFFFFF;
+  padding: 2rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: transform 0.2s, background-color 0.2s;
+  text-align: center;
+}
+
+.bot button:hover {
+  transform: scale(1.05);
+  background-color: #4db6ac;
+}
+
+  /* ===== Bloques de contenido ===== */
+  .bloque {
+    max-width: 1000px;
+    margin: 60px auto;
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    padding: 0 80px;
+  }
+
+  .alternado {
+    flex-direction: row;
+  }
+
+  .bloque img {
+    width: 50%;
+    border-radius: 15px;
+    transition: 0.4s;
+  }
+
+  .magico:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 30px #4db6ac;
+  }
+
+  /* ===== Centrado botón actividad ===== */
+footer {
+  background-color: #f2f2f2;
+  padding: 20px 0;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.footer-button {
+  display: inline-block;
+  background-color: #4DB6AC;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.footer-button:hover {
+  background-color: #4DB6AC;
+}
+
+/* ===== Sección cuento ===== */
+.cuento {
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .bloque {
+    flex-direction: column;
+    padding: 0 20px;
+  }
+
+  .bloque img {
+    width: 100%;
+  }
+}
+
+.imatges-logo img {
+  width: 100%;
+  max-width: 60px;
+  display: block;
+  margin: 0 auto 0rem auto;
+  border-radius: 0px;
+}
+
+</style>
 </head>
 <body>
-  <header>
-    <h1 id="titol-conte">🌤️ El dron que volia tocar el cel</h1>
-  </header>
 
-  <main>
-    <div class="imatges-conte">
-      <img src="https://via.placeholder.com/600x300.png?text=Imatge+del+conte" alt="Imatge del conte">
-    </div>
+<header>
+  <div class="imatges-logo img">
+    <img src="Logo kidòria.png">
+  </div>
+</header>
 
-    <div class="controls">
-      <button id="musica-btn">🔊 Música</button>
-      <button id="tradueix-btn">🌐 Traduir</button>
-      <button id="narracio-btn">🎤 Narració</button>
-    </div>
+<section class="cuento">
+  <h1>L'arbre que contava històries</h1>
 
-    <div class="text-conte" id="text-conte">
-      <p> En un parc ple d’arbres verds i flors de colors, cada tarda s’omplia el cel de petits drons que volaven amunt i avall.
-Volaven ràpid.
-Volaven alt.
-Feien voltes i piruetes com si ballessin amb els núvols.
-A sota, damunt d’un banc de fusta, hi havia en Dani, un dron petit amb hèlixs noves i brillants.
-Dani mirava el cel amb ulls il·lusionats.
-—Jo també vull tocar els núvols… —va dir fluixet.
-El seu creador, en Mec, li va fer una carícia suau.
-—Ho faràs, Dani. Però cada cosa al seu temps.
-Dani va encendre els motors.
-Bzzzzzz…
-Va pujar un metre.
-Dos metres.
-Tres metres.
-Però de sobte va mirar avall.
-El terra li va semblar molt lluny.
-Les hèlixs li van començar a tremolar.
-—I si caic? —va pensar espantat.
-Va baixar ràpidament i es va quedar en silenci.
-Aquella nit, Dani no estava trist… però sí decebut.
-Volia ser valent com els altres drons.
-L’endemà ho va tornar a intentar.
-Va pujar una mica més.
-Només una mica.
-El vent suau del parc, en Ventí, va bufar.
-—Uuuuuuu…
-Dani es va moure d’un costat a l’altre.
-—No puc! —va dir.
-Però en Mec el va animar:
-—Ahir no arribaves fins aquí.
-Dani va pensar-hi.
-Era veritat.
-Cada dia, Dani pujava una mica més.
-De vegades el vent el feia baixar.
-De vegades les hèlixs vibraven massa fort.
-Però cada vegada que tornava a terra, no es rendia.
-Practicava.
-Ajustava les hèlixs.
-Escoltava el vent.
-I ho tornava a provar.
-Un matí, el cel estava clar i blau.
-Dani va enlairar-se.
-Un metre.
-Dos metres.
-Cinc metres.
-Deu metres.
-El vent va bufar.
-—Uuuuuuu…
-Però aquesta vegada Dani no va tenir por.
-Va recordar tot el que havia practicat.
-Va inclinar-se una mica.
-Va estabilitzar les hèlixs.
-I va continuar pujant.
-Cada cop més alt.
-Cada cop més segur.
-Fins que… va tocar un núvol petit i suau.
-Era fresquet i lleuger.
-Dani va riure amb un brunzit alegre.
-—Ho he aconseguit!
-Des de baix, en Mec aplaudia orgullós.
-Però Dani va entendre una cosa molt important:
-No havia tocat el cel perquè fos el més ràpid.
-Ni perquè fos el més gran.
-Havia tocat el cel perquè cada dia havia intentat volar una mica més amunt.
-I des d’aquell dia, cada cop que algú li deia:
-—Dani, com has arribat tan alt?
-Ell responia:
-—Un metre cada dia.
-I el cel, que abans feia por, es va convertir en el seu lloc preferit.
-</p>
-    </div>
-  </main>
+  <div class="bot">
+    <button id="musica-btn">🔊 Música</button>
+    <button id="narracio-btn">🎤 Narració</button>
+  </div>
+
+  <div class="bloque">
+    <img src="Dron1.jpg" class="magico">
+    <p id="p1">Nuba soñaba con cruzar el gran valle dorado.</p>
+  </div>
+
+  <div class="bloque alternado">
+    <p id="p2">Todos decían que era demasiado pequeño para intentarlo.</p>
+    <img src="Dron2.jpg" class="magico">
+  </div>
+
+  <div class="bloque alternado">
+    <img src="Dron3.jpg" class="magico">
+    <p id="p3">Pero escuchó su corazón y dio el primer paso hacia la aventura.</p>
+  </div>
 
   <footer>
-    <button onclick="window.location.href='Esquiva.html'">Anar a activitats</button>
+    <div class="footer-container">
+      <a href="Esquiva.html" class="footer-button">RACÓ DE BITS</a>
+    </div>
   </footer>
 
-  <script src="script.js"></script>
+</section>
+
+<!-- SCRIPT MOVIDO AL FINAL PARA QUE FUNCIONE -->
+<script src="script.js"></script>
+
 </body>
 </html>
