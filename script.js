@@ -7,7 +7,7 @@ const conteSeleccionat = localStorage.getItem('conteSeleccionat') || 'conte1';
 // URLs de música por cuento
 const musicaURLs = {
   conte1: 'arbre.mp3',
-  conte2: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
+  conte2: 'DRON.mp3',
   conte3: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3'
 };
 
