@@ -63,10 +63,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (musica.paused) {
         musica.play();
-        btnMusica.textContent = "Silenciar música";
+        btnMusica.textContent = "🎶 Música";
       } else {
         musica.pause();
-        btnMusica.textContent = "Reproduir música";
+        btnMusica.textContent = "🎶 Música";
       }
 
     });
@@ -82,10 +82,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (narr.paused) {
         narr.play();
-        btnNarracio.textContent = "Pausar narració";
+        btnNarracio.textContent = "🎙️ Narració";
       } else {
         narr.pause();
-        btnNarracio.textContent = "Reproduir narració";
+        btnNarracio.textContent = "🎙️ Narració";
       }
 
     });
