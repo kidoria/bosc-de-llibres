@@ -1,76 +1,95 @@
 // -----------------------------
-// CONFIGURACIÓN DE CUENTOS
+// DETECTAR QUIN CONTE ÉS
 // -----------------------------
 
-const conteSeleccionat = localStorage.getItem('conteSeleccionat') || 'conte1';
+const paginaActual = window.location.pathname.split("/").pop(); 
+// exemple: "conte2.html"
 
-// URLs de música por cuento
+const match = paginaActual.match(/conte(\d+)\.html/);
+const conteId = match ? `conte${match[1]}` : null;
+
+// -----------------------------
+// CONFIGURACIÓ DE MÚSICA
+// -----------------------------
+
 const musicaURLs = {
-  conte1: 'arbre.mp3',
-  conte2: 'DRON.mp3',
-  conte3: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3'
+  conte1: "arbre.mp3",
+  conte2: "DRON.mp3",
+  conte3: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
 };
 
-// URLs de narración por cuento (pueden ser iguales o diferentes)
 const narracioURLs = {
-  conte1: 'arbre.mp3',
-  conte2: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
-  conte3: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3'
+  conte1: "..mp3",
+  conte2: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+  conte3: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
 };
 
 // -----------------------------
-// CONFIGURACIÓN DE AUDIO
+// CREAR ÀUDIO NOMÉS SI ÉS UN CONTE
 // -----------------------------
 
-const musica = new Audio(musicaURLs[conteSeleccionat]);
-musica.loop = true;
+let musica = null;
+let narr = null;
 
-const narr = new Audio(narracioURLs[conteSeleccionat]);
-narr.loop = false; // Normalmente narración no se repite
+if (conteId && musicaURLs[conteId]) {
 
-// Intentar reproducir la música (algunos navegadores requieren interacción)
-musica.play().catch(e => console.warn('No se pudo reproducir la música automáticamente:', e));
+  musica = new Audio(musicaURLs[conteId]);
+  musica.loop = true;
 
-// -----------------------------
-// BOTONES DE CONTROL
-// -----------------------------
+  narr = new Audio(narracioURLs[conteId]);
+  narr.loop = false;
 
-// Botón música
-const btnMusica = document.getElementById('musica-btn');
-btnMusica?.addEventListener('click', () => {
-  if (musica.paused) {
-    musica.play();
-    btnMusica.textContent = 'Silenciar música';
-  } else {
-    musica.pause();
-    btnMusica.textContent = 'Reproducir música';
-  }
-});
+  console.log("Conte detectat:", conteId);
+  console.log("Música:", musica.src);
+  console.log("Narració:", narr.src);
 
-// Botón narración
-const btnNarracio = document.getElementById('narracio-btn');
-btnNarracio?.addEventListener('click', () => {
-  if (narr.paused) {
-    narr.play();
-    btnNarracio.textContent = 'Pausar narración';
-  } else {
-    narr.pause();
-    btnNarracio.textContent = 'Reproducir narración';
-  }
-});
-
-// -----------------------------
-// FUNCIÓN PARA ABRIR CUENTO
-// -----------------------------
-
-function obrirConte(conte) {
-  localStorage.setItem('conteSeleccionat', conte);
-  window.location.href = 'conte.html';
 }
 
 // -----------------------------
-// OPCIONAL: Animación o log de prueba
+// ESPERAR QUE EL DOM CARREGUI
 // -----------------------------
-console.log('Cuento seleccionado:', conteSeleccionat);
-console.log('Música cargada:', musica.src);
-console.log('Narración cargada:', narr.src);
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const btnMusica = document.getElementById("musica-btn");
+  const btnNarracio = document.getElementById("narracio-btn");
+
+  // -----------------------------
+  // BOTÓ MÚSICA
+  // -----------------------------
+  if (btnMusica && musica) {
+
+    btnMusica.addEventListener("click", () => {
+
+      if (musica.paused) {
+        musica.play();
+        btnMusica.textContent = "Silenciar música";
+      } else {
+        musica.pause();
+        btnMusica.textContent = "Reproduir música";
+      }
+
+    });
+
+  }
+
+  // -----------------------------
+  // BOTÓ NARRACIÓ
+  // -----------------------------
+  if (btnNarracio && narr) {
+
+    btnNarracio.addEventListener("click", () => {
+
+      if (narr.paused) {
+        narr.play();
+        btnNarracio.textContent = "Pausar narració";
+      } else {
+        narr.pause();
+        btnNarracio.textContent = "Reproduir narració";
+      }
+
+    });
+
+  }
+
+});
