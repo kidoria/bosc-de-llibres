@@ -1,18 +1,43 @@
 /* ======================= */
-/* Tipografía y estilos generales */
+/* ESTILS GLOBALS */
 /* ======================= */
+
 body {
   font-family: 'Poppins', sans-serif;
   margin: 0;
   background-color: #FFFFFF;
   color: #333;
+  animation: aparicio 0.8s ease-out;
 }
+
+@keyframes aparicio {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ======================= */
+/* HEADER AMB VIDA SUAU */
+/* ======================= */
 
 header {
   text-align: center;
   padding: 2rem;
-  background-color: #4BC6B9;
   color: #FFFFFF;
+  background: linear-gradient(270deg, #4BC6B9, #57d1c5, #4BC6B9);
+  background-size: 400% 400%;
+  animation: gradientFlow 10s ease infinite;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 main {
@@ -20,19 +45,31 @@ main {
 }
 
 /* ======================= */
-/* Menú de contes */
+/* MENÚ DE CONTES */
 /* ======================= */
+
 .menu-contes {
   display: flex;
   justify-content: center;
   gap: 2rem;
   flex-wrap: wrap;
   margin-top: 2rem;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  padding: 2rem;
+  border-radius: 20px;
 }
+
+/* ======================= */
+/* ITEMS */
+/* ======================= */
 
 .item {
   text-align: center;
 }
+
+/* ======================= */
+/* BOTONS AMB EFECTE 3D */
+/* ======================= */
 
 .item button {
   background-color: #FFB347;
@@ -42,48 +79,56 @@ main {
   border: none;
   cursor: pointer;
   font-size: 16px;
-  transition: transform 0.2s, background-color 0.2s;
+  transition: all 0.2s ease;
+  box-shadow: 0 8px 0 #e6953b;
 }
 
 .item button:hover {
-  transform: scale(1.05);
+  transform: translateY(-5px);
+  box-shadow: 0 13px 0 #e6953b;
   background-color: #FFA64D;
 }
 
+.item button:active {
+  transform: translateY(4px);
+  box-shadow: 0 4px 0 #e6953b;
+}
+
+/* ======================= */
+/* DESCRIPCIÓ INTERACTIVA */
+/* ======================= */
+
 .descripcion {
-  max-height: 0;             /* Oculto por defecto */
+  max-height: 0;
   opacity: 0;
   overflow: hidden;
   transition: opacity 0.3s, max-height 0.3s, margin-top 0.3s;
-  color: gray;
+  color: white;
   font-size: 14px;
   margin-top: 0;
-   display: inline-flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   padding: 0 20px;
   border-radius: 30px;
   background-color: #4CAF50;
-  color: white;
   font-size: 16px;
   font-weight: 600;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  width: 200px;          /* MISMO ANCHO */
+  width: 200px;
 }
 
 .item:hover .descripcion {
-  max-height: 100px;         /* Ajusta según la altura del texto */
+  max-height: 100px;
   opacity: 1;
   margin-top: 8px;
   background-color: #388E3C;
-  transform: translateY(-3px); /* efecto sin mover el layout */
+  transform: translateY(-3px);
 }
 
 /* ======================= */
-/* Footer */
+/* FOOTER (COM CONTE 3) */
 /* ======================= */
+
 footer {
   text-align: center;
   padding: 2rem;
@@ -94,16 +139,6 @@ footer {
 footer button {
   background-color: #FFFFFF;
   color: #4BC6B9;
-  border: none;
-  padding: 0.7rem 1.5rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
-}
-
-footer button:hover {
-  background-color: #4BC6B9;
-  color: #FFFFFF;
 }
 
 footer button:hover {
@@ -115,5 +150,5 @@ footer button:hover {
   width: 100%;
   max-width: 60px;
   display: block;
-  margin: 0 auto 0rem auto;
-  border-radius: 0px;
+  margin: 0 auto;
+}
