@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RACÓ DE BITS</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* =====================
+VARIABLES
+===================== */
+
+:root{
+--principal:#4db6ac;
+--secundari:#f7c325;
+--botons:#ef4e4e;
+--destacat:#8e44ad;
+--hoverdesc:#4caf50;
+--fons:#ffffff;
+--text:#000000;
+--vermelljoc:#ff3b3b;
+}
+
+body.dark{
+--fons:#050505;
+--text:#eaffff;
+--principal:#00fff7;
+--botons:#ff3cac;
+--destacat:#7b2cff;
+--vermelljoc:#ff2b2b;
+}
+
+/* =====================
+CURSOR MÀGIC
+===================== */
+
+body{
+cursor:none;
+}
+
+.cursor{
+position:fixed;
+width:16px;
+height:16px;
+border-radius:50%;
+background:var(--principal);
+pointer-events:none;
+transform:translate(-50%,-50%);
+box-shadow:
+0 0 10px var(--principal),
+0 0 20px var(--principal),
+0 0 40px var(--principal);
+z-index:9999;
+}
+
+.particle{
+position:fixed;
+width:6px;
+height:6px;
+border-radius:50%;
+background:var(--principal);
+pointer-events:none;
+animation:magic 0.6s linear forwards;
+}
+
+@keyframes magic{
+0%{
+opacity:1;
+transform:scale(1);
+}
+100%{
+opacity:0;
+transform:scale(3) translateY(-10px);
+}
+}
+
+/* =====================
+ESTIL GENERAL
+===================== */
+
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background:var(--fons);
+color:var(--text);
+transition:0.4s ease;
+overflow-x:hidden;
+}
+
+h1,h2,h3{
+margin:0;
+}
+
+/* =====================
+LOADER
+===================== */
+
+#loader{
+position:fixed;
+width:100%;
+height:100%;
+background:var(--fons);
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:9999;
+}
+
+.bit{
+width:12px;
+height:12px;
+background:var(--principal);
+margin:5px;
+border-radius:3px;
+animation:float 1.5s infinite alternate;
+}
+
+@keyframes float{
+from{transform:translateY(0);}
+to{transform:translateY(-15px);}
+}
+
+/* =====================
+HEADER
+===================== */
+
+header{
+text-align:center;
+padding:60px 20px 30px;
+}
+
+header h1{
+font-size:2.8rem;
+color:var(--principal);
+}
+
+body.dark header h1{
+text-shadow:
+0 0 5px var(--principal),
+0 0 10px var(--principal),
+0 0 20px var(--principal);
+}
+
+header p{
+opacity:0.8;
+margin-top:10px;
+}
+
+/* =====================
+TOGGLE
+===================== */
+
+.toggle-container{
+position:absolute;
+top:20px;
+right:20px;
+}
+
+.toggle{
+background:var(--principal);
+width:60px;
+height:30px;
+border-radius:20px;
+position:relative;
+cursor:pointer;
+}
+
+.toggle-circle{
+width:26px;
+height:26px;
+background:white;
+border-radius:50%;
+position:absolute;
+top:2px;
+left:2px;
+transition:0.3s;
+}
+
+body.dark .toggle-circle{
+transform:translateX(30px);
+}
+
+/* =====================
+ACTIVITAT DESTACADA
+===================== */
+
+.destacada{
+width:85%;
+margin:30px auto;
+padding:30px;
+border-radius:20px;
+background:var(--destacat);
+color:white;
+text-align:center;
+cursor:pointer;
+transition:0.3s;
+}
+
+.destacada:hover{
+transform:scale(1.03);
+}
+
+.destacada button{
+margin-top:15px;
+padding:10px 25px;
+border:none;
+background:var(--botons);
+color:white;
+border-radius:25px;
+cursor:pointer;
+font-weight:600;
+}
+
+/* =====================
+GRID ACTIVITATS
+===================== */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+width:85%;
+margin:40px auto;
+}
+
+.card{
+border:2px solid var(--principal);
+border-radius:15px;
+padding:20px;
+text-align:center;
+transition:0.3s;
+cursor:pointer;
+}
+
+.card:hover{
+background:var(--principal);
+color:white;
+}
+
+/* =====================
+JOCS 123
+===================== */
+
+.jocs{
+width:85%;
+margin:40px auto;
+text-align:center;
+}
+
+.jocs h2{
+margin-bottom:20px;
+color:var(--vermelljoc);
+}
+
+.jocs-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:20px;
+}
+
+.joc{
+border:2px solid var(--vermelljoc);
+border-radius:15px;
+padding:20px;
+cursor:pointer;
+transition:0.3s;
+color:var(--vermelljoc);
+font-weight:600;
+}
+
+.joc:hover{
+background:var(--vermelljoc);
+color:white;
+box-shadow:
+0 0 10px var(--vermelljoc),
+0 0 20px var(--vermelljoc);
+}
+
+/* =====================
+TORNAR
+===================== */
+
+.tornar{
+text-align:center;
+margin:50px 0;
+}
+
+.tornar a{
+text-decoration:none;
+background:var(--botons);
+color:white;
+padding:12px 30px;
+border-radius:25px;
+font-weight:600;
+}
+
+/* =====================
+FOOTER
+===================== */
+
+footer{
+text-align:center;
+padding:20px;
+font-size:0.8rem;
+opacity:0.7;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="cursor"></div>
+
+<div id="loader">
+<div style="display:flex;">
+<div class="bit"></div>
+<div class="bit"></div>
+<div class="bit"></div>
+</div>
+<p>Carregant bits màgics...</p>
+</div>
+
+<div class="toggle-container">
+<div class="toggle" onclick="toggleMode()">
+<div class="toggle-circle"></div>
+</div>
+</div>
+
+<header>
+<h1>RACÓ DE BITS</h1>
+<p>Un espai digital on el bosc es transforma en tecnologia ✨</p>
+</header>
+
+<section class="destacada">
+<h2>🌟 Decideix la història d’avui amb BRANCAFORTA</h2>
+<p>L’arbre narrador del parc et necessita!</p>
+<button>Entrar a l'activitat</button>
+  <button onclick="tria.html">Entrar a l'activitat</button>
+</section>
+
+<section class="grid">
+
+<div class="card">
+<h3>🌿 Ajuda a netejar el parc</h3>
+<p>Protegeix l’espai natural.</p>
+  <button onclick="Salva.html">Veure joc!</button>
+</div>
+
+<div class="card">
+<h3>🚁 El dron i els núvols</h3>
+<p>Programa el moviment del dron.</p>
+  <button onclick="Esquiva.html">Veure joc!</button>
+</div>
+
+  <div class="card">
+<h3>Salva l'oceà</h3>
+<p>Programa el moviment del dron.</p>
+  <button onclick="Esquiva.html">Veure joc!</button>
+</div>
+
+<div class="card">
+<h3>🧩 Laberint digital</h3>
+<p>Troba la sortida.</p>
+  <button onclick="laberint.html">Veure joc!</button>
+</div>
+
+</section>
+/* =====================
+<!-- JOCS -->
+
+<section class="jocs">
+
+<h2>🎮 JOCS 123</h2>
+
+<div class="jocs-grid">
+
+<div class="joc">Joc 1</div>
+
+<div class="joc">Joc 2</div>
+
+<div class="joc">Joc 3</div>
+
+</div>
+===================== */
+</section>
+
+<div class="tornar">
+<a href="index.html">← Tornar al Bosc d'històries</a>
+</div>
+
+<footer>
+© 2026 Kidoria · RACÓ DE BITS
+</footer>
+
+<script>
+
+/* Loader */
+
+window.addEventListener("load",function(){
+document.getElementById("loader").style.display="none";
+});
+
+/* Mode fosc */
+
+function toggleMode(){
+document.body.classList.toggle("dark");
+}
+
+/* Cursor màgic */
+
+const cursor=document.querySelector(".cursor");
+
+document.addEventListener("mousemove",e=>{
+
+cursor.style.left=e.clientX+"px";
+cursor.style.top=e.clientY+"px";
+
+let particle=document.createElement("div");
+particle.className="particle";
+particle.style.left=e.clientX+"px";
+particle.style.top=e.clientY+"px";
+
+document.body.appendChild(particle);
+
+setTimeout(()=>{
+particle.remove();
+},600);
+
+});
+
+</script>
+
+</body>
+</html>
