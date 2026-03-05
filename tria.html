@@ -1,0 +1,225 @@
+```html
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>La història de Brancaforta</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+font-family:'Poppins',sans-serif;
+background:#ffffff;
+color:#000000;
+text-align:center;
+margin:0;
+padding:40px;
+}
+
+h1{
+color:#4db6ac;
+}
+
+.story-box{
+max-width:700px;
+margin:auto;
+padding:30px;
+border-radius:14px;
+background:#f7c325;
+margin-top:30px;
+}
+
+.choices{
+margin-top:25px;
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+button{
+background:#ef4e4e;
+border:none;
+color:white;
+padding:15px;
+font-size:16px;
+border-radius:10px;
+cursor:pointer;
+font-family:'Poppins',sans-serif;
+transition:0.3s;
+}
+
+button:hover{
+background:#4caf50;
+transform:scale(1.05);
+}
+
+.highlight{
+color:#8e44ad;
+font-weight:600;
+}
+
+.restart{
+margin-top:25px;
+background:#4db6ac;
+}
+
+.restart:hover{
+background:#8e44ad;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>🌳 Quina història conta Brancaforta?</h1>
+
+<div class="story-box" id="story">
+
+<p>El vent mou les branques i <span class="highlight">Brancaforta</span> comença a contar una història.</p>
+
+<p>Un dia, tres nins van sentir un soroll misteriós dins el parc...</p>
+
+<p>Què creus que haurien de fer?</p>
+
+<div class="choices">
+
+<button onclick="exploreForest()">🌲 Entrar al bosc</button>
+
+<button onclick="followNoise()">🔍 Seguir el soroll</button>
+
+</div>
+
+</div>
+
+<script>
+
+function exploreForest(){
+
+document.getElementById("story").innerHTML = `
+
+<p>Els nins entren dins el <span class="highlight">bosc del parc</span>.</p>
+
+<p>Entre els arbres veuen una petita llum brillant.</p>
+
+<p>Què fan ara?</p>
+
+<div class="choices">
+
+<button onclick="talkFairy()">🧚 Parlar amb la llum</button>
+
+<button onclick="hideTree()">🌳 Amagar-se darrere un arbre</button>
+
+</div>
+
+`
+
+}
+
+function followNoise(){
+
+document.getElementById("story").innerHTML = `
+
+<p>Segueixen el soroll fins arribar al llac del parc.</p>
+
+<p>Allà troben una <span class="highlight">guineu que parla</span>!</p>
+
+<p>La guineu els mira i diu: "Necessit ajuda..."</p>
+
+<div class="choices">
+
+<button onclick="helpFox()">🦊 Ajudar la guineu</button>
+
+<button onclick="runAway()">🏃 Tornar corrent al parc</button>
+
+</div>
+
+`
+
+}
+
+function talkFairy(){
+
+document.getElementById("story").innerHTML = `
+
+<p>La llum era una <span class="highlight">fada del bosc</span>!</p>
+
+<p>Ella els dona una llavor màgica per cuidar el parc.</p>
+
+<p>Gràcies a ells, el parc torna a ser ple de flors.</p>
+
+<h3>✨ Final feliç!</h3>
+
+<button class="restart" onclick="restart()">Escoltar una altra història</button>
+
+`
+
+}
+
+function hideTree(){
+
+document.getElementById("story").innerHTML = `
+
+<p>Quan s'amaguen, veuen un petit drac verd sortir d'un forat.</p>
+
+<p>El drac només volia jugar amb els nins.</p>
+
+<p>Tots es fan amics i el parc s'omple de rialles.</p>
+
+<h3>🐉 Final divertit!</h3>
+
+<button class="restart" onclick="restart()">Escoltar una altra història</button>
+
+`
+
+}
+
+function helpFox(){
+
+document.getElementById("story").innerHTML = `
+
+<p>La guineu els explica que el parc necessita ajuda.</p>
+
+<p>Tots junts netegen el parc i planten flors noves.</p>
+
+<p>Brancaforta torna a contar històries cada tarda.</p>
+
+<h3>🌿 Final del parc feliç!</h3>
+
+<button class="restart" onclick="restart()">Escoltar una altra història</button>
+
+`
+
+}
+
+function runAway(){
+
+document.getElementById("story").innerHTML = `
+
+<p>Els nins tornen corrent al parc.</p>
+
+<p>Però després pensen que potser haurien d'haver ajudat.</p>
+
+<p>L'endemà decideixen tornar i cuidar el parc.</p>
+
+<h3>🌳 Final d'aprenentatge!</h3>
+
+<button class="restart" onclick="restart()">Escoltar una altra història</button>
+
+`
+
+}
+
+function restart(){
+location.reload()
+}
+
+</script>
+
+</body>
+</html>
+```
