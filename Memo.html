@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
-<meta charset="UTF-8">
-<title>Racó de bits - kidòria</title>
+  <link rel="icon" type="image/png" href="Favi.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Racó de bits - Kidòria</title>
 <style>
+   header {
+  text-align: center;
+  padding: 2rem;
+  background-color: #4BC6B9;
+  color: #FFFFFF;
+  }
 body {
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(#00cfff, #004f7f);
@@ -52,17 +60,21 @@ h1 { font-size: 2em; margin-bottom: 10px; text-shadow: 2px 2px 5px #000; }
 }
 </style>
 </head>
+
+  <header>
+    <h1>🌊 Memòria Oceànica 🌊</h1>
+    <p>Troba les parelles i deixa que l’oceà cobreixi de màgia!</p>
+    <div id="game"></div>
+    <p id="score">Punts: 0 | Nivell: 1</p>
+  </header>
 <body>
 
-<h1>🌊 Memòria Oceànica 🌊</h1>
-<p>Troba les parelles i deixa que l’oceà cobreixi de màgia!</p>
-<div id="game"></div>
-<p id="score">Punts: 0 | Nivell: 1</p>
+
 <div id="effects"></div>
 
 <!-- Sons -->
-<audio id="sound-correct" src="https://freesound.org/data/previews/331/331912_3248244-lq.mp3"></audio>
-<audio id="sound-wrong" src="https://freesound.org/data/previews/66/66717_931655-lq.mp3"></audio>
+<audio id="sound-wrong" src="https://freesound.org/data/previews/331/331912_3248244-lq.mp3"></audio>
+<audio id="sound-correct" src="https://freesound.org/data/previews/66/66717_931655-lq.mp3"></audio>
 <audio id="music" src="missio.mp3" loop autoplay></audio>
 
 <script>
