@@ -4,22 +4,21 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🌳 Salva el Parc - Kidòria</title>
+<title>Racó de bits - Kidòria</title>
 
 <style>
-
+header {
+  text-align: center;
+  padding: 2rem;
+  background-color: #4BC6B9;
+  color: #FFFFFF;
+  }
+  
 body{
 margin:0;
 font-family:Poppins, sans-serif;
 text-align:center;
 background:linear-gradient(to bottom,#c8e6c9,#ffffff);
-}
-
-header{
-text-align:center;
-padding:2rem;
-background-color:#4BC6B9;
-color:white;
 }
 
 h1{color:#2E7D32;}
@@ -55,29 +54,29 @@ z-index:10;
 margin:20px auto;
 width:600px;
 height:400px;
-background:url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=60');
-background-size:cover;
-background-position:center;
 border-radius:15px;
 border:4px solid #4CAF50;
 position:relative;
 overflow:hidden;
+background:
+linear-gradient(rgba(0,120,0,0.25),rgba(0,120,0,0.25)),
+url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=60");
+background-size:cover;
+background-position:center;
 }
 
 .item{
 position:absolute;
-font-size:50px;
+font-size:60px;
 cursor:pointer;
-transition:transform .2s;
+user-select:none;
 }
 
-.item:hover{transform:scale(1.2);}
-
-.pop{animation:pop .3s forwards;}
+.pop{animation:pop .25s forwards;}
 
 @keyframes pop{
 0%{transform:scale(1)}
-50%{transform:scale(1.6)}
+50%{transform:scale(1.5)}
 100%{transform:scale(0)}
 }
 
@@ -100,6 +99,7 @@ transition:width .3s;
 #score,#timer{
 font-weight:bold;
 margin:5px;
+font-size:18px;
 }
 
 #message{
@@ -111,12 +111,13 @@ color:#2E7D32;
 
 </style>
 </head>
-
+<header>
+  <h1>🌳 Salva el Parc!</h1>
+  <p>Clica només els residus per netejar el parc.</p>
+</header>
 <body>
 
 <div id="startScreen">
-<h1>🌳 Salva el Parc!</h1>
-<p>Clica només els residus per netejar el parc.</p>
 <button onclick="startGame()">Comença el joc ▶</button>
 </div>
 
@@ -143,6 +144,16 @@ color:#2E7D32;
 <button onclick="restartGame()">Tornar a jugar</button>
 </div>
 
+<!-- Música ambient -->
+<audio id="music" loop>
+<source src="arbre.mp3">
+</audio>
+
+<!-- So clic -->
+<audio id="clickSound">
+<source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_c8631b9b3a.mp3">
+</audio>
+
 <script>
 
 let health
@@ -158,10 +169,16 @@ const message=document.getElementById("message")
 const scoreDisplay=document.getElementById("score")
 const timerDisplay=document.getElementById("timer")
 
+const music=document.getElementById("music")
+const clickSound=document.getElementById("clickSound")
+
 function startGame(){
 
 document.getElementById("startScreen").style.display="none"
 document.getElementById("gameUI").style.display="block"
+
+music.volume=0.4
+music.play()
 
 health=0
 score=0
@@ -173,7 +190,7 @@ scoreDisplay.innerText="Punts: 0"
 timerDisplay.innerText="Temps: 60"
 message.innerText=""
 
-spawnInterval=setInterval(createItem,1000)
+spawnInterval=setInterval(createItem,900)
 
 timerInterval=setInterval(()=>{
 
@@ -220,7 +237,10 @@ item.remove()
 
 },30)
 
-item.onclick=()=>{
+item.addEventListener("click",()=>{
+
+clickSound.currentTime=0
+clickSound.play()
 
 item.classList.add("pop")
 
@@ -246,7 +266,7 @@ if(health>=100){
 endGame()
 }
 
-}
+})
 
 }
 
@@ -256,6 +276,8 @@ gameRunning=false
 
 clearInterval(spawnInterval)
 clearInterval(timerInterval)
+
+music.pause()
 
 document.getElementById("gameUI").style.display="none"
 document.getElementById("endScreen").style.display="flex"
