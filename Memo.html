@@ -1,299 +1,184 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Racó de bits - Kidòria</title>
-
+<title>Racó de bits - kidòria</title>
 <style>
-header {
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(#00cfff, #004f7f);
+  color: white;
   text-align: center;
-  padding: 2rem;
-  background-color: #4BC6B9;
-  color: #FFFFFF;
-  }
-  
-body{
-margin:0;
-font-family:Poppins, sans-serif;
-text-align:center;
-background:linear-gradient(to bottom,#c8e6c9,#ffffff);
+  padding: 20px;
+  overflow: hidden;
+}
+h1 { font-size: 2em; margin-bottom: 10px; text-shadow: 2px 2px 5px #000; }
+#game { display: flex; flex-wrap: wrap; justify-content: center; max-width: 900px; margin: 20px auto; }
+.card {
+  width: 100px; height: 100px; margin: 8px;
+  background: #0077b6;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex; justify-content: center; align-items: center;
+  font-size: 50px; color: white;
+  transform: rotateY(0deg);
+  transition: transform 0.6s;
+  perspective: 1000px;
+  position: relative;
+}
+.card.flipped { transform: rotateY(180deg); background: #00bfff; }
+#score { font-size: 20px; margin-top: 20px; }
+#effects { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; overflow: hidden; z-index: 9999; }
+
+/* Partícules màgiques */
+.particle {
+  position: absolute; width: 20px; height: 20px; background: yellow; border-radius: 50%;
+  animation: floatUp 1s ease-out forwards;
+}
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(1); opacity:1; }
+  100% { transform: translateY(-100px) scale(0.5); opacity:0; }
 }
 
-h1{color:#2E7D32;}
-
-button{
-padding:15px 30px;
-font-size:18px;
-border:none;
-border-radius:10px;
-background:#4CAF50;
-color:white;
-cursor:pointer;
+/* Bombolles */
+.bubble {
+  position: absolute; width: 15px; height: 15px; background: rgba(255,255,255,0.7); border-radius: 50%;
+  animation: rise 4s linear forwards;
 }
-
-button:hover{background:#43a047;}
-
-#startScreen,#endScreen{
-position:absolute;
-width:100%;
-height:100%;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-background:linear-gradient(to bottom,#c8e6c9,#ffffff);
-z-index:10;
+@keyframes rise {
+  0% { transform: translateY(0) scale(0.5); opacity:0.8; }
+  50% { opacity:1; }
+  100% { transform: translateY(-400px) scale(1); opacity:0; }
 }
-
-#endScreen{display:none;}
-#gameUI{display:none;}
-
-.game-wrapper{
-margin:20px auto;
-width:600px;
-height:400px;
-border-radius:15px;
-border:4px solid #4CAF50;
-position:relative;
-overflow:hidden;
-background:
-linear-gradient(rgba(0,120,0,0.25),rgba(0,120,0,0.25)),
-url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=60");
-background-size:cover;
-background-position:center;
-}
-
-.item{
-position:absolute;
-font-size:60px;
-cursor:pointer;
-user-select:none;
-}
-
-.pop{animation:pop .25s forwards;}
-
-@keyframes pop{
-0%{transform:scale(1)}
-50%{transform:scale(1.5)}
-100%{transform:scale(0)}
-}
-
-#healthContainer{
-width:600px;
-margin:15px auto;
-background:#ddd;
-border-radius:10px;
-height:20px;
-}
-
-#healthBar{
-height:20px;
-width:0%;
-background:#4CAF50;
-border-radius:10px;
-transition:width .3s;
-}
-
-#score,#timer{
-font-weight:bold;
-margin:5px;
-font-size:18px;
-}
-
-#message{
-font-weight:bold;
-margin-top:10px;
-font-size:18px;
-color:#2E7D32;
-}
-
 </style>
 </head>
-<header>
-  <h1>🌳 Salva el Parc!</h1>
-  <p>Clica només els residus per netejar el parc.</p>
-</header>
 <body>
 
-<div id="startScreen">
-<button onclick="startGame()">Comença el joc ▶</button>
-</div>
+<h1>🌊 Memòria Oceànica 🌊</h1>
+<p>Troba les parelles i deixa que l’oceà cobreixi de màgia!</p>
+<div id="game"></div>
+<p id="score">Punts: 0 | Nivell: 1</p>
+<div id="effects"></div>
 
-<div id="gameUI">
-
-<h1>🌳 Salva el Parc!</h1>
-
-<div id="score">Punts: 0</div>
-<div id="timer">Temps: 60</div>
-
-<div class="game-wrapper" id="gameArea"></div>
-
-<div id="healthContainer">
-<div id="healthBar"></div>
-</div>
-
-<div id="message"></div>
-
-</div>
-
-<div id="endScreen">
-<h1>🎉 Joc acabat!</h1>
-<p id="finalScore"></p>
-<button onclick="restartGame()">Tornar a jugar</button>
-</div>
-
-<!-- Música ambient -->
-<audio id="music" loop>
-<source src="arbre.mp3">
-</audio>
-
-<!-- So clic -->
-<audio id="clickSound">
-<source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_c8631b9b3a.mp3">
-</audio>
+<!-- Sons -->
+<audio id="sound-correct" src="https://freesound.org/data/previews/331/331912_3248244-lq.mp3"></audio>
+<audio id="sound-wrong" src="https://freesound.org/data/previews/66/66717_931655-lq.mp3"></audio>
+<audio id="music" src="missio.mp3" loop autoplay></audio>
 
 <script>
+// Nivells amb més cartes progressivament
+let levels = [
+  ['🐠','🐬','🦀','🐙'],
+  ['🐠','🐬','🦀','🐙','🦑','🐡'],
+  ['🐠','🐬','🦀','🐙','🦑','🐡','🐟','🦐']
+];
+let currentLevel = 0;
+let symbols = levels[currentLevel];
+let cardsArray = [...symbols, ...symbols];
+cardsArray.sort(() => 0.5 - Math.random());
 
-let health
-let score
-let time
-let gameRunning=false
-let spawnInterval
-let timerInterval
+const gameDiv = document.getElementById('game');
+const scoreEl = document.getElementById('score');
+const effectsDiv = document.getElementById('effects');
 
-const gameArea=document.getElementById("gameArea")
-const healthBar=document.getElementById("healthBar")
-const message=document.getElementById("message")
-const scoreDisplay=document.getElementById("score")
-const timerDisplay=document.getElementById("timer")
+let flipped = [];
+let matchedPairs = 0;
+let score = 0;
 
-const music=document.getElementById("music")
-const clickSound=document.getElementById("clickSound")
+// Creació de cartes
+function createCards() {
+  gameDiv.innerHTML = '';
+  cardsArray.forEach(symbol => {
+      const card = document.createElement('div');
+      card.classList.add('card');
+      card.dataset.symbol = symbol;
+      card.addEventListener('click', flipCard);
+      gameDiv.appendChild(card);
+  });
+}
+createCards();
 
-function startGame(){
+function flipCard(e){
+    const card = e.target;
+    if(card.classList.contains('flipped') || flipped.length === 2) return;
 
-document.getElementById("startScreen").style.display="none"
-document.getElementById("gameUI").style.display="block"
+    card.textContent = card.dataset.symbol;
+    card.classList.add('flipped');
+    flipped.push(card);
 
-music.volume=0.4
-music.play()
-
-health=0
-score=0
-time=60
-gameRunning=true
-
-healthBar.style.width="0%"
-scoreDisplay.innerText="Punts: 0"
-timerDisplay.innerText="Temps: 60"
-message.innerText=""
-
-spawnInterval=setInterval(createItem,900)
-
-timerInterval=setInterval(()=>{
-
-if(!gameRunning) return
-
-time--
-timerDisplay.innerText="Temps: "+time
-
-if(time<=0){
-endGame()
+    if(flipped.length === 2){
+        setTimeout(checkMatch, 600);
+    }
 }
 
-},1000)
-
+function checkMatch(){
+    const [card1, card2] = flipped;
+    if(card1.dataset.symbol === card2.dataset.symbol){
+        score += 10;
+        matchedPairs++;
+        playEffect(card1);
+        document.getElementById('sound-correct').play();
+        card1.style.background = '#00ff7f';
+        card2.style.background = '#00ff7f';
+    } else {
+        setTimeout(() => {
+          card1.classList.remove('flipped');
+          card2.classList.remove('flipped');
+          card1.textContent = '';
+          card2.textContent = '';
+        }, 400);
+        document.getElementById('sound-wrong').play();
+    }
+    flipped = [];
+    updateScore();
+    if(matchedPairs === symbols.length){
+        setTimeout(nextLevel, 1000);
+    }
 }
 
-function createItem(){
-
-if(!gameRunning) return
-
-const item=document.createElement("div")
-const isTrash=Math.random()>0.4
-
-item.innerHTML=isTrash?"🗑️""🥫""🧃""🛍️""🌯":"🌸""🌷""🌻""🪻""🐝"
-item.classList.add("item")
-
-item.style.left=Math.random()*540+"px"
-item.style.top="0px"
-
-item.dataset.type=isTrash?"trash":"flower"
-
-gameArea.appendChild(item)
-
-let speed=2+Math.random()*2
-
-let fall=setInterval(()=>{
-
-item.style.top=(item.offsetTop+speed)+"px"
-
-if(item.offsetTop>360){
-clearInterval(fall)
-item.remove()
+function updateScore(){
+    scoreEl.textContent = `Punts: ${score} | Nivell: ${currentLevel+1}`;
 }
 
-},30)
-
-item.addEventListener("click",()=>{
-
-clickSound.currentTime=0
-clickSound.play()
-
-item.classList.add("pop")
-
-if(item.dataset.type==="trash"){
-health+=10
-score+=5
-message.innerText="Molt bé! 🌿"
-}else{
-health-=5
-score-=2
-message.innerText="Les flors no es toquen! 🌸"
+function nextLevel(){
+    currentLevel++;
+    if(currentLevel >= levels.length){
+        alert(`🎉 Felicitats! Has completat tots els nivells amb ${score} punts! 🌊`);
+        return;
+    }
+    symbols = levels[currentLevel];
+    cardsArray = [...symbols, ...symbols];
+    cardsArray.sort(() => 0.5 - Math.random());
+    flipped = [];
+    matchedPairs = 0;
+    createCards();
+    updateScore();
 }
 
-if(health<0) health=0
-if(health>100) health=100
-
-healthBar.style.width=health+"%"
-scoreDisplay.innerText="Punts: "+score
-
-setTimeout(()=>{item.remove()},200)
-
-if(health>=100){
-endGame()
+// Partícules màgiques
+function playEffect(card){
+    for(let i=0; i<5; i++){
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        particle.style.left = (card.offsetLeft + 30 + Math.random()*40) + 'px';
+        particle.style.top = (card.offsetTop + 30 + Math.random()*40) + 'px';
+        effectsDiv.appendChild(particle);
+        setTimeout(() => particle.remove(), 1000);
+    }
 }
 
-})
-
+// Bombolles contínues
+function createBubble(){
+    const bubble = document.createElement('div');
+    bubble.classList.add('bubble');
+    bubble.style.left = Math.random() * window.innerWidth + 'px';
+    bubble.style.width = (10 + Math.random()*20) + 'px';
+    bubble.style.height = bubble.style.width;
+    effectsDiv.appendChild(bubble);
+    setTimeout(() => bubble.remove(), 4000);
 }
-
-function endGame(){
-
-gameRunning=false
-
-clearInterval(spawnInterval)
-clearInterval(timerInterval)
-
-music.pause()
-
-document.getElementById("gameUI").style.display="none"
-document.getElementById("endScreen").style.display="flex"
-
-document.getElementById("finalScore").innerText="Puntuació final: "+score
-
-}
-
-function restartGame(){
-
-document.getElementById("endScreen").style.display="none"
-document.getElementById("startScreen").style.display="flex"
-
-}
+setInterval(createBubble, 300);
 
 </script>
-
 </body>
 </html>
