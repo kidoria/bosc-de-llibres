@@ -6,7 +6,7 @@ const conteActual = document.body.dataset.conte;
 // --- CONFIGURACIÓ DELS ARXIUS (POSA ELS TEUS NOMS REALS) ---
 const arxius = {
   conte1: {
-    musica: "musica-conte1.mp3",
+    musica: "arbre.mp3",
     narracio: "ArbreN.mp3"
   },
   conte2: {
