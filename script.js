@@ -66,3 +66,30 @@ narracioBtn.addEventListener("click", () => {
 
 // --- ICONES AL CARREGAR ---
 actualitzaIcones();
+
+function generarFitxa(){
+
+document.getElementById("fitxaConte").style.display="block";
+
+document.getElementById("fitxaConte").innerHTML = `
+
+<h3 style="color:#8e44ad;">🌳 Fitxa del conte</h3>
+
+<p><b>Títol:</b> L'arbre que contava històries</p>
+
+<p><b>Personatge principal:</b> Brancaforta, l'arbre del parc.</p>
+
+<p><b>Lloc:</b> un parc ple d'arbres i natura.</p>
+
+<p><b>Tema:</b> escoltar el cor i cuidar la natura.</p>
+
+<p><b>Missatge:</b> tots podem ajudar a cuidar el parc.</p>
+
+<p style="color:#4caf50;"><b>Resum:</b>  
+Brancaforta és un arbre especial que conta històries als nins del parc.  
+A través dels seus relats, els infants aprenen a escoltar el seu cor  
+i a respectar la natura que els envolta.</p>
+
+`;
+
+}
