@@ -1,225 +1,474 @@
-```html
 <!DOCTYPE html>
 <html lang="ca">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>La història de Brancaforta</title>
-
+<title>Ajuda a BRANCAFORTA a contar la història d’avui</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-
-body{
-font-family:'Poppins',sans-serif;
-background:#ffffff;
-color:#000000;
-text-align:center;
-margin:0;
-padding:40px;
+    header {
+  text-align: center;
+  padding: 2rem;
+  background-color: #4BC6B9;
+  color: #FFFFFF;
+  }
+/* Fons animat */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  color: white;
+  text-align: center;
+  background: linear-gradient(135deg, #ffcc00, #ff5733, #00b3b3, #8e2de2);
+  background-size: 300% 300%;
+  animation: gradientMove 10s ease infinite;
 }
 
-h1{
-color:#4db6ac;
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-.story-box{
-max-width:700px;
-margin:auto;
-padding:30px;
-border-radius:14px;
-background:#f7c325;
-margin-top:30px;
+/* Títol */
+h1 {
+  margin-top: 30px;
+  font-size: 30px;
+  text-shadow: 0 0 10px rgba(255,255,255,0.6);
 }
 
-.choices{
-margin-top:25px;
-display:flex;
-flex-direction:column;
-gap:15px;
+/* Caixa de la història */
+.story-box {
+  max-width: 850px;
+  margin: 25px auto;
+  background: rgba(255,255,255,0.15);
+  padding: 25px;
+  border-radius: 20px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 20px rgba(0,0,0,0.25);
+  font-size: 18px;
+  line-height: 1.6;
+  animation: fadeIn 0.8s ease;
 }
 
-button{
-background:#ef4e4e;
-border:none;
-color:white;
-padding:15px;
-font-size:16px;
-border-radius:10px;
-cursor:pointer;
-font-family:'Poppins',sans-serif;
-transition:0.3s;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-button:hover{
-background:#4caf50;
-transform:scale(1.05);
+/* Botons */
+button {
+  padding: 12px 26px;
+  font-size: 17px;
+  border: none;
+  border-radius: 25px;
+  background: #4BC6B9;
+  color: white;
+  cursor: pointer;
+  margin: 10px;
+  transition: 0.25s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-.highlight{
-color:#8e44ad;
-font-weight:600;
+button:hover {
+  transform: scale(1.07);
+  opacity: 0.9;
 }
 
-.restart{
-margin-top:25px;
-background:#4db6ac;
+/* Botó música */
+#musicButton {
+  margin-bottom: 10px;
 }
 
-.restart:hover{
-background:#8e44ad;
+/* Efectes màgics */
+.sparkle {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: sparkleAnim 1s linear forwards;
 }
 
+@keyframes sparkleAnim {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(2); }
+}
+
+/* Contenidor de botons de decisió */
+#choices {
+  margin-bottom: 30px;
+}
 </style>
 </head>
 
 <body>
 
-<h1>🌳 Quina història conta Brancaforta?</h1>
+<h1>Ajuda a BRANCAFORTA a contar la història d’avui</h1>
 
-<div class="story-box" id="story">
+<button id="musicButton">🎵 Música</button>
 
-<p>El vent mou les branques i <span class="highlight">Brancaforta</span> comença a contar una història.</p>
+<audio id="bgMusic" loop>
+  <source src="Arbre.mp3" type="audio/mpeg">
+</audio>
 
-<p>Un dia, tres nins van sentir un soroll misteriós dins el parc...</p>
+<div id="story" class="story-box"></div>
 
-<p>Què creus que haurien de fer?</p>
-
-<div class="choices">
-
-<button onclick="exploreForest()">🌲 Entrar al bosc</button>
-
-<button onclick="followNoise()">🔍 Seguir el soroll</button>
-
-</div>
-
-</div>
+<div id="choices"></div>
 
 <script>
+/* ——— MÚSICA AMB FADE-IN / OUT ——— */
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicButton");
+let isPlaying = false;
+let fadeInterval = null;
 
-function exploreForest(){
-
-document.getElementById("story").innerHTML = `
-
-<p>Els nins entren dins el <span class="highlight">bosc del parc</span>.</p>
-
-<p>Entre els arbres veuen una petita llum brillant.</p>
-
-<p>Què fan ara?</p>
-
-<div class="choices">
-
-<button onclick="talkFairy()">🧚 Parlar amb la llum</button>
-
-<button onclick="hideTree()">🌳 Amagar-se darrere un arbre</button>
-
-</div>
-
-`
-
+function fadeIn(audio) {
+  clearInterval(fadeInterval);
+  audio.volume = 0;
+  audio.play();
+  fadeInterval = setInterval(() => {
+    if (audio.volume < 0.9) audio.volume += 0.05;
+    else { audio.volume = 1; clearInterval(fadeInterval); }
+  }, 120);
 }
 
-function followNoise(){
-
-document.getElementById("story").innerHTML = `
-
-<p>Segueixen el soroll fins arribar al llac del parc.</p>
-
-<p>Allà troben una <span class="highlight">guineu que parla</span>!</p>
-
-<p>La guineu els mira i diu: "Necessit ajuda..."</p>
-
-<div class="choices">
-
-<button onclick="helpFox()">🦊 Ajudar la guineu</button>
-
-<button onclick="runAway()">🏃 Tornar corrent al parc</button>
-
-</div>
-
-`
-
+function fadeOut(audio) {
+  clearInterval(fadeInterval);
+  fadeInterval = setInterval(() => {
+    if (audio.volume > 0.05) audio.volume -= 0.05;
+    else { audio.volume = 0; audio.pause(); clearInterval(fadeInterval); }
+  }, 120);
 }
 
-function talkFairy(){
+musicBtn.addEventListener("click", () => {
+  if (!isPlaying) {
+    fadeIn(music);
+    musicBtn.textContent = "🔇 Silenciar";
+    isPlaying = true;
+  } else {
+    fadeOut(music);
+    musicBtn.textContent = "🎵 Música";
+    isPlaying = false;
+  }
+});
 
-document.getElementById("story").innerHTML = `
+/* ——— EFECTE MÀGIC DE BRILLANTS ——— */
+document.addEventListener("mousemove", e => {
+  const sparkle = document.createElement("div");
+  sparkle.classList.add("sparkle");
+  sparkle.style.left = e.pageX + "px";
+  sparkle.style.top = e.pageY + "px";
+  document.body.appendChild(sparkle);
+  setTimeout(() => sparkle.remove(), 1000);
+});
 
-<p>La llum era una <span class="highlight">fada del bosc</span>!</p>
+/* ——— HISTÒRIA RAMIFICADA ——— */
+/*
+ Model A: arbre de decisions.
+ Cada node té:
+ - text: paràgraf(s) de la història
+ - choices: array d’opcions { text, next }
+*/
 
-<p>Ella els dona una llavor màgica per cuidar el parc.</p>
+const storyData = {
+  start: {
+    text: `
+      <p><strong>Brancaforta</strong>, l’arbre més vell del Bosc de les Veus, es desperta amb un sospir llarg i profund. Les seves branques cruixen suaument i algunes fulles daurades cauen com estrelles lentes.</p>
+      <p><em>“Avui hi ha un conte que vol ser contat…”</em> diu amb veu càlida, <em>“però les paraules s’han amagat entre les meves arrels. Em vols ajudar a trobar-les?”</em></p>
+      <p>De sobte, tres llums apareixen entre les seves branques: una <strong>blava</strong>, una <strong>verda</strong> i una <strong>vermella</strong>. Cada llum vibra com si fos un camí diferent dins la història.</p>
+      <p><em>“Tria per on començam, petit narrador.”</em></p>
+    `,
+    choices: [
+      { text: "🔵 Començam amb una història plena de saviesa", next: "saviesa1" },
+      { text: "🟢 Començam amb una història de natura i animals", next: "natura1" },
+      { text: "🔴 Començam amb una història de coratge", next: "coratge1" }
+    ]
+  },
 
-<p>Gràcies a ells, el parc torna a ser ple de flors.</p>
+  /* CAMÍ SAVIESA */
+  saviesa1: {
+    text: `
+      <p>La llum blava s’encén amb més força i cau suaument sobre un llibre antic que apareix entre les arrels de Brancaforta.</p>
+      <p><em>“Fa molt de temps,”</em> comença, <em>“hi havia una nena que estimava tant les preguntes que omplia el cel de punts d’interrogació.”</em></p>
+      <p>La nena es deia <strong>Llum</strong>, i cada vespre pujava a escoltar les històries de Brancaforta. Però aquell dia, una de les preguntes va escapar volant i es va perdre entre les estrelles.</p>
+      <p>Brancaforta et mira: <em>“Com podem continuar aquest conte?”</em></p>
+    `,
+    choices: [
+      { text: "Llum decideix seguir la pregunta fins al cel", next: "saviesa2_cel" },
+      { text: "Llum demana ajuda als animals del bosc", next: "saviesa2_bosc" }
+    ]
+  },
 
-<h3>✨ Final feliç!</h3>
+  saviesa2_cel: {
+    text: `
+      <p>Llum tanca els ulls i imagina una escala feta de llum. Pas a pas, puja cap al cel, on les preguntes brillen com estrelles.</p>
+      <p>Allà troba una pregunta molt gran que diu: <em>“Què és ser valent?”</em></p>
+      <p>Brancaforta somriu: <em>“Què creus que respon Llum?”</em></p>
+    `,
+    choices: [
+      { text: "Ser valent és tenir por però seguir endavant", next: "saviesa3_valent" },
+      { text: "Ser valent és no tenir mai por", next: "saviesa3_sensepor" }
+    ]
+  },
 
-<button class="restart" onclick="restart()">Escoltar una altra història</button>
+  saviesa2_bosc: {
+    text: `
+      <p>Llum baixa corrents del tronc i demana ajuda al mussol, a la guineu i a l’eriçó.</p>
+      <p>Cadascun li explica una història diferent sobre una pregunta que no tenia resposta.</p>
+      <p>Brancaforta et mira: <em>“Quina història vols que Llum escolti primer?”</em></p>
+    `,
+    choices: [
+      { text: "La història del mussol, plena de misteris", next: "saviesa3_mussol" },
+      { text: "La història de la guineu, plena de trucs", next: "saviesa3_guineu" }
+    ]
+  },
 
-`
+  saviesa3_valent: {
+    text: `
+      <p>Llum respon: <em>“Ser valent és tenir por però seguir endavant igualment.”</em></p>
+      <p>Les estrelles brillen més fort i la pregunta es transforma en una petita llavor de llum que cau suaument fins a les arrels de Brancaforta.</p>
+      <p><strong>Brancaforta riu:</strong> <em>“Has ajudat la Llum a trobar una resposta molt sàvia. Avui el conte acaba amb un cor ple de llum.”</em></p>
+      <p><em>Has completat el camí de la Saviesa.</em></p>
+    `,
+    choices: [
+      { text: "Tornar a començar una altra història", next: "start" }
+    ]
+  },
 
+  saviesa3_sensepor: {
+    text: `
+      <p>Llum diu: <em>“Ser valent és no tenir mai por.”</em></p>
+      <p>Les estrelles es queden en silenci un moment. Una d’elles baixa i li xiuxiueja: <em>“Tots tenim por, fins i tot les estrelles quan s’apaguen.”</em></p>
+      <p>Llum somriu i rectifica: <em>“Potser ser valent és tenir por… però seguir endavant.”</em></p>
+      <p>Brancaforta t’assenyala amb una branca: <em>“Gràcies per ajudar-la a entendre-ho.”</em></p>
+      <p><em>Has completat el camí de la Saviesa, després d’aprendre una mica més.</em></p>
+    `,
+    choices: [
+      { text: "Tornar a començar una altra història", next: "start" }
+    ]
+  },
+
+  saviesa3_mussol: {
+    text: `
+      <p>El mussol explica que hi ha preguntes que no es responen amb paraules, sinó amb silencis i abraçades.</p>
+      <p>Llum escolta i entén que no totes les respostes viuen als llibres.</p>
+      <p>Brancaforta et mira: <em>“Avui has ajudat la Llum a escoltar el silenci.”</em></p>
+      <p><em>Has completat un final tranquil del camí de la Saviesa.</em></p>
+    `,
+    choices: [
+      { text: "Tornar a començar una altra història", next: "start" }
+    ]
+  },
+
+  saviesa3_guineu: {
+    text: `
+      <p>La guineu explica una història plena de trucs i rialles, on una pregunta es disfressa de resposta i tothom es confon.</p>
+      <p>Llum riu tant que gairebé oblida la pregunta que buscava.</p>
+      <p>Brancaforta riu amb tu: <em>“De vegades, riure també és una bona resposta.”</em></p>
+      <p><em>Has completat un final juganer del camí de la Saviesa.</em></p>
+    `,
+    choices: [
+      { text: "Tornar a començar una altra història", next: "start" }
+    ]
+  },
+
+  /* CAMÍ NATURA */
+  natura1: {
+    text: `
+      <p>La llum verda baixa fins al terra i fa créixer una catifa de molsa suau als teus peus.</p>
+      <p><em>“Aquesta és la història d’un rierol que va deixar de cantar,”</em> diu Brancaforta.</p>
+      <p>El rierol, que sempre feia música entre les pedres, s’havia quedat en silenci. Els animals del bosc estaven preocupats.</p>
+      <p><em>“Per on començam a ajudar-lo?”</em> et demana Brancaforta.</p>
+    `,
+    choices: [
+      { text: "Anam a parlar amb el rierol", next: "natura2_rierol" },
+      { text: "Preguntam als animals què ha passat", next: "natura2_animals" }
+    ]
+  },
+
+  natura2_rierol: {
+    text: `
+      <p>T’asseus a la vora del rierol i poses la mà dins l’aigua freda.</p>
+      <p>Una veueta suau et diu: <em>“Estic cansat. Ningú m’escolta quan canto.”</em></p>
+      <p>Brancaforta et xiuxiueja: <em>“Què li proposes?”</em></p>
+    `,
+    choices: [
+      { text: "Organitzar un concert al bosc", next: "natura3_concert" },
+      { text: "Donar-li temps i companyia en silenci", next: "natura3_silenci" }
+    ]
+  },
+
+  natura2_animals: {
+    text: `
+      <p>El cérvol, l’esquirol i el picot t’expliquen que han estat tan enfeinats que ja no s’aturen a escoltar el rierol.</p>
+      <p>Brancaforta sospira: <em>“El bosc també necessita oients.”</em></p>
+      <p><em>“Què els proposes?”</em> et demana.</p>
+    `,
+    choices: [
+      { text: "Fer una festa d’escoltar el rierol", next: "natura3_festa" },
+      { text: "Fer torns perquè sempre hi hagi algú escoltant", next: "natura3_torns" }
+    ]
+  },
+
+  natura3_concert: {
+    text: `
+      <p>Organitzes un concert: els ocells canten, el vent xiula entre les fulles i el rierol torna a fer música entre les pedres.</p>
+      <p>El bosc s’omple de sons i Brancaforta riu: <em>“Has retornat la veu al rierol.”</em></p>
+      <p><em>Has completat el camí de la Natura amb un gran concert.</em></p>
+    `,
+    choices: [
+      { text: "Tornar a començar una altra història", next: "start" }
+    ]
+  },
+
+  natura3_silenci: {
+    text: `
+      <p>Decideixes seure a la vora del rierol en silenci. No li demanes res, només hi ets.</p>
+      <p>A poc a poc, l’aigua torna a fer petits sons, com si et donàs les gràcies per no exigir-li res.</p>
+      <p>Brancaforta et mira amb orgull: <em>“Has entès que la natura també necessita calma.”</em></p>
+      <p><em>Has completat el camí de la Natura amb un final serè.</em></p>
+    `,
+    choices: [
+      { text: "Tornar a començar una altra història", next: "start" }
+    ]
+  },
+
+  natura3_festa: {
+    text: `
+      <p>Organitzes una festa on tothom ha de venir només a escoltar el rierol.</p>
+      <p>Els animals s’asseuen, tanquen els ulls i escolten. El rierol, feliç, torna a cantar amb força.</p>
+      <p>Brancaforta somriu: <em>“Has ensenyat al bosc a escoltar.”</em></p>
+      <p><em>Has completat el camí de la Natura amb una festa d’escolta.</em></p>
+    `,
+    choices: [
+      { text: "Tornar a començar una altra història", next: "start" }
+    ]
+  },
+
+  natura3_torns: {
+    text: `
+      <p>Proposes fer torns: cada dia, un animal diferent s’asseurà a escoltar el rierol.</p>
+      <p>Així, el rierol mai no se sent sol, i el bosc aprèn a cuidar la seva música.</p>
+      <p>Brancaforta et diu: <em>“Has creat un costum nou al bosc.”</em></p>
+      <p><em>Has completat el camí de la Natura amb un pacte d’amistat.</em></p>
+    `,
+    choices: [
+      { text: "Tornar a començar una altra història", next: "start" }
+    ]
+  },
+
+  /* CAMÍ CORATGE */
+  coratge1: {
+    text: `
+      <p>La llum vermella baixa com una espurna i es transforma en una petita flama que balla davant teu.</p>
+      <p><em>“Aquesta és la història d’un infant que tenia por de la foscor,”</em> diu Brancaforta.</p>
+      <p>Quan arribava la nit, les ombres semblaven gegants i els sorolls del bosc feien tremolar el seu cor.</p>
+      <p><em>“Com vols que comenci aquest conte de coratge?”</em> et demana.</p>
+    `,
+    choices: [
+      { text: "L’infant encén una llanterna màgica", next: "coratge2_llanterna" },
+      { text: "L’infant demana a un amic que es quedi amb ell", next: "coratge2_amic" }
+    ]
+  },
+
+  coratge2_llanterna: {
+    text: `
+      <p>L’infant troba una llanterna antiga sota el llit. Quan l’encén, no només il·lumina l’habitació, sinó que mostra petites criatures de llum que ballen a les parets.</p>
+      <p>Les ombres ja no semblen monstres, sinó personatges d’un teatre secret.</p>
+      <p>Brancaforta et pregunta: <em>“Què fa ara l’infant?”</em></p>
+    `,
+    choices: [
+      { text: "Juga amb les ombres i els dóna noms divertits", next: "coratge3_joc" },
+      { text: "Dibuixa les criatures de llum en un quadern", next: "coratge3_dibuix" }
+    ]
+  },
+
+  coratge2_amic: {
+    text: `
+      <p>L’infant truca a un amic i li explica que té por de la foscor.</p>
+      <p>L’amic li diu: <em>“Jo també en tenc a vegades. Podem tenir por junts.”</em></p>
+      <p>Brancaforta et mira: <em>“Què decideixen fer?”</em></p>
+    `,
+    choices: [
+      { text: "Contar històries amb una llanterna sota el llençol", next: "coratge3_histories" },
+      { text: "Mirar per la finestra i inventar constel·lacions", next: "coratge3_constel" }
+    ]
+  },
+
+  coratge3_joc: {
+    text: `
+      <p>L’infant comença a fer formes amb les mans davant la llanterna: un drac, un conill, un ocell.</p>
+      <p>Les ombres, abans terrorífiques, ara són amigues de joc.</p>
+      <p>Brancaforta riu: <em>“Has transformat la por en joc. Això sí que és coratge.”</em></p>
+      <p><em>Has completat el camí del Coratge jugant amb la foscor.</em></p>
+    `,
+    choices: [
+      { text: "Tornar a començar una altra història", next: "start" }
+    ]
+  },
+
+  coratge3_dibuix: {
+    text: `
+      <p>L’infant dibuixa totes les criatures de llum en un quadern: algunes són divertides, altres misterioses.</p>
+      <p>Quan apaga la llanterna, sap que les criatures continuen vivint dins els seus dibuixos.</p>
+      <p>Brancaforta et diu: <em>“Has convertit la por en art.”</em></p>
+      <p><em>Has completat el camí del Coratge amb un quadern ple de llum.</em></p>
+    `,
+    choices: [
+      { text: "Tornar a començar una altra història", next: "start" }
+    ]
+  },
+
+  coratge3_histories: {
+    text: `
+      <p>Sota el llençol, amb la llanterna encesa, inventen històries on ells són herois que caminen per boscos foscos però mai estan sols.</p>
+      <p>La foscor ja no és un enemic, sinó un escenari per a aventures.</p>
+      <p>Brancaforta somriu: <em>“Has descobert que compartir la por la fa més petita.”</em></p>
+      <p><em>Has completat el camí del Coratge amb amistat.</em></p>
+    `,
+    choices: [
+      { text: "Tornar a començar una altra història", next: "start" }
+    ]
+  },
+
+  coratge3_constel: {
+    text: `
+      <p>Mirant per la finestra, inventen constel·lacions noves: el Drac Valent, la Lluna Somrient, el Cor Brillant.</p>
+      <p>La nit ja no és només foscor, sinó un cel ple d’històries.</p>
+      <p>Brancaforta et diu: <em>“Has omplert la foscor de significat.”</em></p>
+      <p><em>Has completat el camí del Coratge mirant el cel amb ulls nous.</em></p>
+    `,
+    choices: [
+      { text: "Tornar a començar una altra història", next: "start" }
+    ]
+  }
+};
+
+/* ——— MOTOR DE LA HISTÒRIA ——— */
+const storyEl = document.getElementById("story");
+const choicesEl = document.getElementById("choices");
+
+function renderNode(nodeKey) {
+  const node = storyData[nodeKey];
+  if (!node) return;
+
+  storyEl.innerHTML = node.text;
+  choicesEl.innerHTML = "";
+
+  node.choices.forEach(choice => {
+    const btn = document.createElement("button");
+    btn.textContent = choice.text;
+    btn.addEventListener("click", () => renderNode(choice.next));
+    choicesEl.appendChild(btn);
+  });
 }
 
-function hideTree(){
-
-document.getElementById("story").innerHTML = `
-
-<p>Quan s'amaguen, veuen un petit drac verd sortir d'un forat.</p>
-
-<p>El drac només volia jugar amb els nins.</p>
-
-<p>Tots es fan amics i el parc s'omple de rialles.</p>
-
-<h3>🐉 Final divertit!</h3>
-
-<button class="restart" onclick="restart()">Escoltar una altra història</button>
-
-`
-
-}
-
-function helpFox(){
-
-document.getElementById("story").innerHTML = `
-
-<p>La guineu els explica que el parc necessita ajuda.</p>
-
-<p>Tots junts netegen el parc i planten flors noves.</p>
-
-<p>Brancaforta torna a contar històries cada tarda.</p>
-
-<h3>🌿 Final del parc feliç!</h3>
-
-<button class="restart" onclick="restart()">Escoltar una altra història</button>
-
-`
-
-}
-
-function runAway(){
-
-document.getElementById("story").innerHTML = `
-
-<p>Els nins tornen corrent al parc.</p>
-
-<p>Però després pensen que potser haurien d'haver ajudat.</p>
-
-<p>L'endemà decideixen tornar i cuidar el parc.</p>
-
-<h3>🌳 Final d'aprenentatge!</h3>
-
-<button class="restart" onclick="restart()">Escoltar una altra història</button>
-
-`
-
-}
-
-function restart(){
-location.reload()
-}
-
+/* Inici de la història */
+renderNode("start");
 </script>
 
 </body>
 </html>
-```
