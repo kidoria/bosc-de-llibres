@@ -1,268 +1,336 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Racó de bits - Kidòria</title>
+  <link rel="icon" type="image/png" href="Favi.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Racó de bits - Kidòria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
 <style>
-/* Header i estil general */
-header {
+
+  header {
   text-align: center;
   padding: 2rem;
   background-color: #4BC6B9;
   color: #FFFFFF;
-}
-body {
-  margin: 0;
-  font-family: Poppins, sans-serif;
-  text-align: center;
-  background: linear-gradient(to bottom, #c8e6c9, #ffffff);
-}
-h1 {color:#2E7D32;}
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to bottom, #87ceeb, #f0f8ff);
+    overflow: hidden;
+  }
 
-/* Botons */
-button {
-  padding: 15px 30px;
-  font-size: 18px;
-  border: none;
-  border-radius: 10px;
-  background: #4CAF50;
-  color: white;
-  cursor: pointer;
-}
-button:hover {background: #43a047;}
 
-/* Pantalles d’inici i final */
-#startScreen, #endScreen {
-  position: absolute;
+
+  #highScore {
+    position: absolute;
+    top: 145px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 700;
+    font-size: 20px;
+    color: #ff9800;
+  }
+
+  #newRecord {
+    position: absolute;
+    top: 160px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+    font-size: 18px;
+    color: #4caf50;
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  canvas {
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(to bottom, #c8e6c9, #ffffff);
-  z-index: 10;
+  height: auto;
+  max-width: 800px; /* o el que tingui el teu joc original */
+  display: block;
+  margin: 0 auto;
+  border-radius: 20px;      /* fa els cantons arrodonits */
+  border: 4px solid #4BC6B9; /* línia de color turquesa */
+  box-shadow: 0 0 15px rgba(0,0,0,0.25); /* opcional: ombra suau */
 }
-#endScreen {display: none;}
-#gameUI {display: none;}
-
-/* Àrea del joc */
-.game-wrapper {
-  margin: 20px auto;
-  width: 600px;
-  height: 400px;
-  border-radius: 15px;
-  border: 4px solid #4CAF50;
-  position: relative;
-  overflow: hidden;
-  background:
-    linear-gradient(rgba(0,120,0,0.25), rgba(0,120,0,0.25)),
-    url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=60");
-  background-size: cover;
-  background-position: center;
 }
 
-/* Elements que cauen */
-.item {
-  position: absolute;
-  font-size: 60px;
+
+  #btnReiniciar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transform: none;
+}
+
+  #btnReiniciar:hover {
+    background-color: #4caf50;
+  }
+
+.music-btn {
+  margin-top: 15px;
+  background-color: #ffffff;
+  color: #4BC6B9;
+  border: 3px solid #ffffff;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
   cursor: pointer;
-  user-select: none;
-}
-.pop {animation: pop .25s forwards;}
-@keyframes pop {
-  0% {transform: scale(1);}
-  50% {transform: scale(1.5);}
-  100% {transform: scale(0);}
+  transition: 0.25s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
-/* Barra de vida */
-#healthContainer {
-  width: 600px;
-  margin: 15px auto;
-  background: #ddd;
-  border-radius: 10px;
-  height: 20px;
-}
-#healthBar {
-  height: 20px;
-  width: 0%;
-  background: #4CAF50;
-  border-radius: 10px;
-  transition: width .3s;
+.music-btn:hover {
+  background-color: #4BC6B9;
+  color: white;
+  transform: scale(1.05);
 }
 
-/* Informació */
-#score, #timer {
-  font-weight: bold;
-  margin: 5px;
-  font-size: 18px;
 }
-#message {
-  font-weight: bold;
-  margin-top: 10px;
-  font-size: 18px;
-  color: #2E7D32;
+
+.music-btn:hover {
+  background-color: #3aaea2;
+  transform: scale(1.07);
 }
+
 </style>
 </head>
+
 <body>
 
 <header>
-  <h1>🌳 Salva el Parc!</h1>
-  <p>Clica només els residus per netejar el parc.</p>
+  <h1>RACÓ DE BITS: El dron que volia tocar el cel</h1>
+  <p>Ajuda al dron a volar alt i no xocar-se amb cap núvol!</p>
+
+  <button id="musicButton" class="music-btn">🎵 Música</button>
+
+<audio id="bgMusic" loop>
+  <source src="DRON.mp3" type="audio/mpeg">
+</audio>
+  
 </header>
 
-<!-- Pantalles -->
-<div id="startScreen">
-  <button onclick="startGame()">Comença el joc ▶</button>
-</div>
+<div id="score">Puntuació: 0</div>
+<div id="highScore">⭐ Rècord: 0</div>
+<div id="newRecord">🏆 Nou rècord!</div>
 
-<div id="gameUI">
-  <h1>🌳 Salva el Parc!</h1>
-  <div id="score">Punts: 0</div>
-  <div id="timer">Temps: 60</div>
-  <div class="game-wrapper" id="gameArea"></div>
-  <div id="healthContainer">
-    <div id="healthBar"></div>
-  </div>
-  <div id="message"></div>
-</div>
-
-<div id="endScreen">
-  <h1>🎉 Joc acabat!</h1>
-  <p id="finalScore"></p>
-  <button onclick="restartGame()">Tornar a jugar</button>
-</div>
-
-<!-- Música i sons -->
-<audio id="music" loop>
-  <source src="arbre.mp3" type="audio/mpeg">
-</audio>
-<audio id="clickSound">
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_c8631b9b3a.mp3" type="audio/mpeg">
-</audio>
+<canvas id="gameCanvas" width="800" height="450"></canvas>
+<button id="btnReiniciar" onclick="reiniciarJoc()">Reiniciar joc</button>
 
 <script>
-/* Variables del joc */
-let health, score, time;
-let gameRunning = false;
-let spawnInterval, timerInterval;
+  const canvas = document.getElementById('gameCanvas');
+  const ctx = canvas.getContext('2d');
 
-const gameArea = document.getElementById("gameArea");
-const healthBar = document.getElementById("healthBar");
-const message = document.getElementById("message");
-const scoreDisplay = document.getElementById("score");
-const timerDisplay = document.getElementById("timer");
-const music = document.getElementById("music");
-const clickSound = document.getElementById("clickSound");
+  const droneImg = new Image();
+  droneImg.src = 'dronjoc.png';
 
-/* Arrays d’emojis */
-const trashEmojis = ["🗑️","🥫","🧃","🛍️","🌯"];
-const flowerEmojis = ["🌸","🌷","🌻","🪻","🐝"];
+  const cloudImg = new Image();
+  cloudImg.src = 'cloud.png';
 
-/* Iniciar joc */
-function startGame() {
-  document.getElementById("startScreen").style.display = "none";
-  document.getElementById("gameUI").style.display = "block";
+  const drone = {
+    x: 100,
+    y: 200,
+    width: 70,
+    height: 50,
+    dy: 0,
+    gravity: 0.5,
+    lift: -10,
+    imgLoaded: false
+  };
 
-  music.volume = 0.4;
-  music.play();
+  droneImg.onload = () => {
+    drone.imgLoaded = true;
+  };
 
-  health = 0;
-  score = 0;
-  time = 60;
-  gameRunning = true;
+  let clouds = [];
+  let cloudFrequency = 1400;
+  let lastCloudTime = Date.now();
 
-  healthBar.style.width = "0%";
-  scoreDisplay.innerText = "Punts: 0";
-  timerDisplay.innerText = "Temps: 60";
-  message.innerText = "";
+  let score = 0;
+  let gameOver = false;
 
-  spawnInterval = setInterval(createItem, 900);
+  let highScore = localStorage.getItem("highScore") || 0;
+  document.getElementById("highScore").innerText = "⭐ Rècord: " + highScore;
 
-  timerInterval = setInterval(() => {
-    if(!gameRunning) return;
-    time--;
-    timerDisplay.innerText = "Temps: " + time;
-    if(time <= 0) endGame();
-  }, 1000);
-}
-
-/* Crear elements que cauen */
-function createItem() {
-  if(!gameRunning) return;
-
-  const item = document.createElement("div");
-  item.classList.add("item");
-
-  const isTrash = Math.random() > 0.4;
-  if(isTrash){
-    item.innerHTML = trashEmojis[Math.floor(Math.random()*trashEmojis.length)];
-    item.dataset.type = "trash";
-  } else {
-    item.innerHTML = flowerEmojis[Math.floor(Math.random()*flowerEmojis.length)];
-    item.dataset.type = "flower";
+  function createCloud() {
+    const height = 50 + Math.random() * 40;
+    const y = Math.random() * (canvas.height - height);
+    clouds.push({
+      x: canvas.width,
+      y: y,
+      width: 100,
+      height: height,
+      speed: 3 + Math.random() * 2
+    });
   }
 
-  item.style.left = Math.random()*540 + "px";
-  item.style.top = "0px";
-  gameArea.appendChild(item);
-
-  let speed = 2 + Math.random()*2;
-  let fall = setInterval(() => {
-    item.style.top = (item.offsetTop + speed) + "px";
-    if(item.offsetTop > 360){
-      clearInterval(fall);
-      item.remove();
+  function drawDrone() {
+    if(drone.imgLoaded) {
+      ctx.drawImage(droneImg, drone.x, drone.y, drone.width, drone.height);
     }
-  }, 30);
+  }
 
-  item.addEventListener("click", () => {
-    clickSound.currentTime = 0;
-    clickSound.play();
-    item.classList.add("pop");
+  function drawClouds() {
+    clouds.forEach(cloud => {
+      if(cloudImg.complete) {
+        ctx.drawImage(cloudImg, cloud.x, cloud.y, cloud.width, cloud.height);
+      }
+    });
+  }
 
-    if(item.dataset.type === "trash"){
-      health += 10;
-      score += 5;
-      message.innerText = "Molt bé! 🌿";
-    } else {
-      health -= 5;
-      score -= 2;
-      message.innerText = "Les flors no es toquen! 🌸";
+  function moveClouds() {
+    clouds.forEach(cloud => cloud.x -= cloud.speed);
+    clouds = clouds.filter(cloud => cloud.x + cloud.width > 0);
+  }
+
+  function checkCollision() {
+    for(let cloud of clouds) {
+      if(drone.x < cloud.x + cloud.width &&
+         drone.x + drone.width > cloud.x &&
+         drone.y < cloud.y + cloud.height &&
+         drone.y + drone.height > cloud.y) {
+        gameOver = true;
+      }
+    }
+  }
+
+  function updateScore() {
+    score++;
+    document.getElementById('score').innerText = "Puntuació: " + score;
+
+    if(score > highScore) {
+      highScore = score;
+      localStorage.setItem("highScore", highScore);
+      document.getElementById("highScore").innerText = "⭐ Rècord: " + highScore;
+      document.getElementById("newRecord").style.display = "block";
+    }
+  }
+
+  function update() {
+
+    if(gameOver) {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '48px Poppins';
+      ctx.textAlign = 'center';
+      ctx.fillText('Game Over', canvas.width/2, canvas.height/2 - 20);
+
+      ctx.font = '28px Poppins';
+      ctx.fillText('Puntuació final: ' + score, canvas.width/2, canvas.height/2 + 30);
+
+      document.getElementById("btnReiniciar").style.display = "block";
+      return;
     }
 
-    if(health < 0) health = 0;
-    if(health > 100) health = 100;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    healthBar.style.width = health + "%";
-    scoreDisplay.innerText = "Punts: " + score;
+    drone.dy += drone.gravity;
+    drone.y += drone.dy;
 
-    setTimeout(() => { item.remove() }, 200);
+    if(drone.y + drone.height > canvas.height) {
+      drone.y = canvas.height - drone.height;
+      drone.dy = 0;
+    }
 
-    if(health >= 100) endGame();
+    if(drone.y < 0) {
+      drone.y = 0;
+      drone.dy = 0;
+    }
+
+    drawDrone();
+
+    if(Date.now() - lastCloudTime > cloudFrequency) {
+      createCloud();
+      lastCloudTime = Date.now();
+    }
+
+    moveClouds();
+    drawClouds();
+    checkCollision();
+    updateScore();
+
+    requestAnimationFrame(update);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if(e.code === 'ArrowUp' || e.code === 'Space') {
+      drone.dy = drone.lift;
+    }
   });
-}
 
-/* Acabar joc */
-function endGame() {
-  gameRunning = false;
-  clearInterval(spawnInterval);
-  clearInterval(timerInterval);
-  music.pause();
+  function reiniciarJoc() {
+    location.reload();
+  }
 
-  document.getElementById("gameUI").style.display = "none";
-  document.getElementById("endScreen").style.display = "flex";
-  document.getElementById("finalScore").innerText = "Puntuació final: " + score;
-}
+  function waitImagesLoaded() {
+    if(drone.imgLoaded && cloudImg.complete) {
+      update();
+    } else {
+      setTimeout(waitImagesLoaded, 100);
+    }
+  }
 
-/* Reiniciar joc */
-function restartGame() {
-  document.getElementById("endScreen").style.display = "none";
-  document.getElementById("startScreen").style.display = "flex";
-}
+  waitImagesLoaded();
 </script>
+  
+<script>
+  const music = document.getElementById("bgMusic");
+  const musicBtn = document.getElementById("musicButton");
+  let isPlaying = false;
+  let fadeInterval = null;
+
+  function fadeIn(audio) {
+    clearInterval(fadeInterval);
+    audio.volume = 0;
+    audio.play();
+    fadeInterval = setInterval(() => {
+      if (audio.volume < 0.9) {
+        audio.volume += 0.05;
+      } else {
+        audio.volume = 1;
+        clearInterval(fadeInterval);
+      }
+    }, 120);
+  }
+
+  function fadeOut(audio) {
+    clearInterval(fadeInterval);
+    fadeInterval = setInterval(() => {
+      if (audio.volume > 0.05) {
+        audio.volume -= 0.05;
+      } else {
+        audio.volume = 0;
+        audio.pause();
+        clearInterval(fadeInterval);
+      }
+    }, 120);
+  }
+
+  musicBtn.addEventListener("click", () => {
+    if (!isPlaying) {
+      fadeIn(music);
+      musicBtn.textContent = "🔇 Silenciar";
+      isPlaying = true;
+    } else {
+      fadeOut(music);
+      musicBtn.textContent = "🎵 Música";
+      isPlaying = false;
+    }
+  });
+</script>
+
 </body>
 </html>
