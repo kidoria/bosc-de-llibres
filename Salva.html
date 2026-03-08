@@ -1,299 +1,268 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Racó de bits - Kidòria</title>
-
 <style>
+/* Header i estil general */
 header {
   text-align: center;
   padding: 2rem;
   background-color: #4BC6B9;
   color: #FFFFFF;
-  }
-  
-body{
-margin:0;
-font-family:Poppins, sans-serif;
-text-align:center;
-background:linear-gradient(to bottom,#c8e6c9,#ffffff);
+}
+body {
+  margin: 0;
+  font-family: Poppins, sans-serif;
+  text-align: center;
+  background: linear-gradient(to bottom, #c8e6c9, #ffffff);
+}
+h1 {color:#2E7D32;}
+
+/* Botons */
+button {
+  padding: 15px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  background: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+button:hover {background: #43a047;}
+
+/* Pantalles d’inici i final */
+#startScreen, #endScreen {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #c8e6c9, #ffffff);
+  z-index: 10;
+}
+#endScreen {display: none;}
+#gameUI {display: none;}
+
+/* Àrea del joc */
+.game-wrapper {
+  margin: 20px auto;
+  width: 600px;
+  height: 400px;
+  border-radius: 15px;
+  border: 4px solid #4CAF50;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(0,120,0,0.25), rgba(0,120,0,0.25)),
+    url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=60");
+  background-size: cover;
+  background-position: center;
 }
 
-h1{color:#2E7D32;}
-
-button{
-padding:15px 30px;
-font-size:18px;
-border:none;
-border-radius:10px;
-background:#4CAF50;
-color:white;
-cursor:pointer;
+/* Elements que cauen */
+.item {
+  position: absolute;
+  font-size: 60px;
+  cursor: pointer;
+  user-select: none;
+}
+.pop {animation: pop .25s forwards;}
+@keyframes pop {
+  0% {transform: scale(1);}
+  50% {transform: scale(1.5);}
+  100% {transform: scale(0);}
 }
 
-button:hover{background:#43a047;}
-
-#startScreen,#endScreen{
-position:absolute;
-width:100%;
-height:100%;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-background:linear-gradient(to bottom,#c8e6c9,#ffffff);
-z-index:10;
+/* Barra de vida */
+#healthContainer {
+  width: 600px;
+  margin: 15px auto;
+  background: #ddd;
+  border-radius: 10px;
+  height: 20px;
+}
+#healthBar {
+  height: 20px;
+  width: 0%;
+  background: #4CAF50;
+  border-radius: 10px;
+  transition: width .3s;
 }
 
-#endScreen{display:none;}
-#gameUI{display:none;}
-
-.game-wrapper{
-margin:20px auto;
-width:600px;
-height:400px;
-border-radius:15px;
-border:4px solid #4CAF50;
-position:relative;
-overflow:hidden;
-background:
-linear-gradient(rgba(0,120,0,0.25),rgba(0,120,0,0.25)),
-url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=60");
-background-size:cover;
-background-position:center;
+/* Informació */
+#score, #timer {
+  font-weight: bold;
+  margin: 5px;
+  font-size: 18px;
 }
-
-.item{
-position:absolute;
-font-size:60px;
-cursor:pointer;
-user-select:none;
+#message {
+  font-weight: bold;
+  margin-top: 10px;
+  font-size: 18px;
+  color: #2E7D32;
 }
-
-.pop{animation:pop .25s forwards;}
-
-@keyframes pop{
-0%{transform:scale(1)}
-50%{transform:scale(1.5)}
-100%{transform:scale(0)}
-}
-
-#healthContainer{
-width:600px;
-margin:15px auto;
-background:#ddd;
-border-radius:10px;
-height:20px;
-}
-
-#healthBar{
-height:20px;
-width:0%;
-background:#4CAF50;
-border-radius:10px;
-transition:width .3s;
-}
-
-#score,#timer{
-font-weight:bold;
-margin:5px;
-font-size:18px;
-}
-
-#message{
-font-weight:bold;
-margin-top:10px;
-font-size:18px;
-color:#2E7D32;
-}
-
 </style>
 </head>
+<body>
+
 <header>
   <h1>🌳 Salva el Parc!</h1>
   <p>Clica només els residus per netejar el parc.</p>
 </header>
-<body>
 
+<!-- Pantalles -->
 <div id="startScreen">
-<button onclick="startGame()">Comença el joc ▶</button>
+  <button onclick="startGame()">Comença el joc ▶</button>
 </div>
 
 <div id="gameUI">
-
-<h1>🌳 Salva el Parc!</h1>
-
-<div id="score">Punts: 0</div>
-<div id="timer">Temps: 60</div>
-
-<div class="game-wrapper" id="gameArea"></div>
-
-<div id="healthContainer">
-<div id="healthBar"></div>
-</div>
-
-<div id="message"></div>
-
+  <h1>🌳 Salva el Parc!</h1>
+  <div id="score">Punts: 0</div>
+  <div id="timer">Temps: 60</div>
+  <div class="game-wrapper" id="gameArea"></div>
+  <div id="healthContainer">
+    <div id="healthBar"></div>
+  </div>
+  <div id="message"></div>
 </div>
 
 <div id="endScreen">
-<h1>🎉 Joc acabat!</h1>
-<p id="finalScore"></p>
-<button onclick="restartGame()">Tornar a jugar</button>
+  <h1>🎉 Joc acabat!</h1>
+  <p id="finalScore"></p>
+  <button onclick="restartGame()">Tornar a jugar</button>
 </div>
 
-<!-- Música ambient -->
+<!-- Música i sons -->
 <audio id="music" loop>
-<source src="arbre.mp3">
+  <source src="arbre.mp3" type="audio/mpeg">
 </audio>
-
-<!-- So clic -->
 <audio id="clickSound">
-<source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_c8631b9b3a.mp3">
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_c8631b9b3a.mp3" type="audio/mpeg">
 </audio>
 
 <script>
+/* Variables del joc */
+let health, score, time;
+let gameRunning = false;
+let spawnInterval, timerInterval;
 
-let health
-let score
-let time
-let gameRunning=false
-let spawnInterval
-let timerInterval
+const gameArea = document.getElementById("gameArea");
+const healthBar = document.getElementById("healthBar");
+const message = document.getElementById("message");
+const scoreDisplay = document.getElementById("score");
+const timerDisplay = document.getElementById("timer");
+const music = document.getElementById("music");
+const clickSound = document.getElementById("clickSound");
 
-const gameArea=document.getElementById("gameArea")
-const healthBar=document.getElementById("healthBar")
-const message=document.getElementById("message")
-const scoreDisplay=document.getElementById("score")
-const timerDisplay=document.getElementById("timer")
+/* Arrays d’emojis */
+const trashEmojis = ["🗑️","🥫","🧃","🛍️","🌯"];
+const flowerEmojis = ["🌸","🌷","🌻","🪻","🐝"];
 
-const music=document.getElementById("music")
-const clickSound=document.getElementById("clickSound")
+/* Iniciar joc */
+function startGame() {
+  document.getElementById("startScreen").style.display = "none";
+  document.getElementById("gameUI").style.display = "block";
 
-function startGame(){
+  music.volume = 0.4;
+  music.play();
 
-document.getElementById("startScreen").style.display="none"
-document.getElementById("gameUI").style.display="block"
+  health = 0;
+  score = 0;
+  time = 60;
+  gameRunning = true;
 
-music.volume=0.4
-music.play()
+  healthBar.style.width = "0%";
+  scoreDisplay.innerText = "Punts: 0";
+  timerDisplay.innerText = "Temps: 60";
+  message.innerText = "";
 
-health=0
-score=0
-time=60
-gameRunning=true
+  spawnInterval = setInterval(createItem, 900);
 
-healthBar.style.width="0%"
-scoreDisplay.innerText="Punts: 0"
-timerDisplay.innerText="Temps: 60"
-message.innerText=""
-
-spawnInterval=setInterval(createItem,900)
-
-timerInterval=setInterval(()=>{
-
-if(!gameRunning) return
-
-time--
-timerDisplay.innerText="Temps: "+time
-
-if(time<=0){
-endGame()
+  timerInterval = setInterval(() => {
+    if(!gameRunning) return;
+    time--;
+    timerDisplay.innerText = "Temps: " + time;
+    if(time <= 0) endGame();
+  }, 1000);
 }
 
-},1000)
+/* Crear elements que cauen */
+function createItem() {
+  if(!gameRunning) return;
 
+  const item = document.createElement("div");
+  item.classList.add("item");
+
+  const isTrash = Math.random() > 0.4;
+  if(isTrash){
+    item.innerHTML = trashEmojis[Math.floor(Math.random()*trashEmojis.length)];
+    item.dataset.type = "trash";
+  } else {
+    item.innerHTML = flowerEmojis[Math.floor(Math.random()*flowerEmojis.length)];
+    item.dataset.type = "flower";
+  }
+
+  item.style.left = Math.random()*540 + "px";
+  item.style.top = "0px";
+  gameArea.appendChild(item);
+
+  let speed = 2 + Math.random()*2;
+  let fall = setInterval(() => {
+    item.style.top = (item.offsetTop + speed) + "px";
+    if(item.offsetTop > 360){
+      clearInterval(fall);
+      item.remove();
+    }
+  }, 30);
+
+  item.addEventListener("click", () => {
+    clickSound.currentTime = 0;
+    clickSound.play();
+    item.classList.add("pop");
+
+    if(item.dataset.type === "trash"){
+      health += 10;
+      score += 5;
+      message.innerText = "Molt bé! 🌿";
+    } else {
+      health -= 5;
+      score -= 2;
+      message.innerText = "Les flors no es toquen! 🌸";
+    }
+
+    if(health < 0) health = 0;
+    if(health > 100) health = 100;
+
+    healthBar.style.width = health + "%";
+    scoreDisplay.innerText = "Punts: " + score;
+
+    setTimeout(() => { item.remove() }, 200);
+
+    if(health >= 100) endGame();
+  });
 }
 
-function createItem(){
+/* Acabar joc */
+function endGame() {
+  gameRunning = false;
+  clearInterval(spawnInterval);
+  clearInterval(timerInterval);
+  music.pause();
 
-if(!gameRunning) return
-
-const item=document.createElement("div")
-const isTrash=Math.random()>0.4
-
-item.innerHTML=isTrash?"🗑️""🥫""🧃""🛍️""🌯":"🌸""🌷""🌻""🪻""🐝"
-item.classList.add("item")
-
-item.style.left=Math.random()*540+"px"
-item.style.top="0px"
-
-item.dataset.type=isTrash?"trash":"flower"
-
-gameArea.appendChild(item)
-
-let speed=2+Math.random()*2
-
-let fall=setInterval(()=>{
-
-item.style.top=(item.offsetTop+speed)+"px"
-
-if(item.offsetTop>360){
-clearInterval(fall)
-item.remove()
+  document.getElementById("gameUI").style.display = "none";
+  document.getElementById("endScreen").style.display = "flex";
+  document.getElementById("finalScore").innerText = "Puntuació final: " + score;
 }
 
-},30)
-
-item.addEventListener("click",()=>{
-
-clickSound.currentTime=0
-clickSound.play()
-
-item.classList.add("pop")
-
-if(item.dataset.type==="trash"){
-health+=10
-score+=5
-message.innerText="Molt bé! 🌿"
-}else{
-health-=5
-score-=2
-message.innerText="Les flors no es toquen! 🌸"
+/* Reiniciar joc */
+function restartGame() {
+  document.getElementById("endScreen").style.display = "none";
+  document.getElementById("startScreen").style.display = "flex";
 }
-
-if(health<0) health=0
-if(health>100) health=100
-
-healthBar.style.width=health+"%"
-scoreDisplay.innerText="Punts: "+score
-
-setTimeout(()=>{item.remove()},200)
-
-if(health>=100){
-endGame()
-}
-
-})
-
-}
-
-function endGame(){
-
-gameRunning=false
-
-clearInterval(spawnInterval)
-clearInterval(timerInterval)
-
-music.pause()
-
-document.getElementById("gameUI").style.display="none"
-document.getElementById("endScreen").style.display="flex"
-
-document.getElementById("finalScore").innerText="Puntuació final: "+score
-
-}
-
-function restartGame(){
-
-document.getElementById("endScreen").style.display="none"
-document.getElementById("startScreen").style.display="flex"
-
-}
-
 </script>
-
 </body>
 </html>
