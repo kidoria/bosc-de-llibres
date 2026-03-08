@@ -18,6 +18,50 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
+  /* =====================
+CURSOR MÀGIC
+===================== */
+
+body{
+cursor:none;
+}
+
+.cursor{
+position:fixed;
+width:16px;
+height:16px;
+border-radius:50%;
+background:var(--principal);
+pointer-events:none;
+transform:translate(-50%,-50%);
+box-shadow:
+0 0 10px var(--principal),
+0 0 20px var(--principal),
+0 0 40px var(--principal);
+z-index:9999;
+}
+
+.particle{
+position:fixed;
+width:6px;
+height:6px;
+border-radius:50%;
+background:var(--principal);
+pointer-events:none;
+animation:magic 0.6s linear forwards;
+}
+
+@keyframes magic{
+0%{
+opacity:1;
+transform:scale(1);
+}
+100%{
+opacity:0;
+transform:scale(3) translateY(-10px);
+}
+}
+
 /* ===== GLOBAL ===== */
 body {
   font-family: 'Poppins', sans-serif;
