@@ -1,97 +1,46 @@
-// -----------------------------
-// DETECTAR QUIN CONTE ÉS
-// -----------------------------
+console.log("Script carregat correctament!");
 
-const paginaActual = window.location.pathname.split("/").pop(); 
-// exemple: "conte2.html"
+// --- DETECTAR QUIN CONTE ÉS ---
+const pagina = window.location.pathname.split("/").pop(); 
+const nomConte = pagina.replace(".html", ""); // conte1, conte2, conte3...
 
-const match = paginaActual.match(/conte(\d+)\.html/);
-const conteId = match ? `conte${match[1]}` : null;
+// --- ARXIUS D'AUDIO ---
+const audioMusica = new Audio(`musica-${nomConte}.mp3`);
+audioMusica.loop = true;
 
-// -----------------------------
-// CONFIGURACIÓ DE MÚSICA
-// -----------------------------
+const audioNarracio = new Audio(`narracio-${nomConte}.mp3`);
 
-const musicaURLs = {
-  conte1: "arbre.mp3",
-  conte2: "DRON.mp3",
-  conte3: "missio.mp3"
-  conte4: "hakejant.mp3"
-};
+// --- BOTONS ---
+const musicaBtn = document.getElementById("musica-btn");
+const narracioBtn = document.getElementById("narracio-btn");
 
-const narracioURLs = {
-  conte1: "ArbreN.mp3",
-  conte2: "DronN.mp3",
-  conte3: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
-  conte4: "HakejaN.mp3"
-};
-
-// -----------------------------
-// CREAR ÀUDIO NOMÉS SI ÉS UN CONTE
-// -----------------------------
-
-let musica = null;
-let narr = null;
-
-if (conteId && musicaURLs[conteId]) {
-
-  musica = new Audio(musicaURLs[conteId]);
-  musica.loop = true;
-
-  narr = new Audio(narracioURLs[conteId]);
-  narr.loop = false;
-
-  console.log("Conte detectat:", conteId);
-  console.log("Música:", musica.src);
-  console.log("Narració:", narr.src);
-
+// --- ICONES ---
+function actualitzaIcones() {
+  musicaBtn.textContent = audioMusica.paused ? "🔊 Música" : "🔇 Silencia";
+  narracioBtn.textContent = audioNarracio.paused ? "🎤 Narració" : "⏸️ Pausa narració";
 }
 
-// -----------------------------
-// ESPERAR QUE EL DOM CARREGUI
-// -----------------------------
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  const btnMusica = document.getElementById("musica-btn");
-  const btnNarracio = document.getElementById("narracio-btn");
-
-  // -----------------------------
-  // BOTÓ MÚSICA
-  // -----------------------------
-  if (btnMusica && musica) {
-
-    btnMusica.addEventListener("click", () => {
-
-      if (musica.paused) {
-        musica.play();
-        btnMusica.textContent = "🔊 Música";
-      } else {
-        musica.pause();
-        btnMusica.textContent = "🎶 Música";
-      }
-
-    });
-
+// --- MÚSICA ---
+musicaBtn.addEventListener("click", () => {
+  if (audioMusica.paused) {
+    audioMusica.play();
+  } else {
+    audioMusica.pause();
   }
-
-  // -----------------------------
-  // BOTÓ NARRACIÓ
-  // -----------------------------
-  if (btnNarracio && narr) {
-
-    btnNarracio.addEventListener("click", () => {
-
-      if (narr.paused) {
-        narr.play();
-        btnNarracio.textContent = "🎤 Narració";
-      } else {
-        narr.pause();
-        btnNarracio.textContent = "🎙️ Narració";
-      }
-
-    });
-
-  }
-
+  actualitzaIcones();
 });
+
+// --- NARRACIÓ ---
+narracioBtn.addEventListener("click", () => {
+  if (audioNarracio.paused) {
+    // Si la narració comença, la música també
+    if (audioMusica.paused) audioMusica.play();
+    audioNarracio.play();
+  } else {
+    audioNarracio.pause();
+  }
+  actualitzaIcones();
+});
+
+// --- ACTUALITZAR ICONES AL CARREGAR ---
+actualitzaIcones();
