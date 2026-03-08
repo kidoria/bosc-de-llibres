@@ -1,48 +1,182 @@
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="es">
 <head>
-  <link rel="icon" type="image/png" href="Favi.png">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hakejant el futur</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Kidoria - Bosc de històries</title>
+<link rel="icon" type="image/png" href="Favi.png">
+<div class="imatges-logo">
+<img src='Logo kidòria.png' alt="logotip">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  
+<style>
+  /* ===== Estilos globales ===== */
+  body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background: #FFFFFF;
+    color: #000000;
+  }
+
+  header {
+    background: #4DB6AC;
+    color: white;
+    padding: 20px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+ h1 {
+  text-align: center;
+  font-size: 2em;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-family: 'Poppins', sans-serif;
+  color: #4DB6AC;
+}
+  }
+
+  /* ===== Botones ===== */
+.bot {
+  text-align: center;
+}
+
+.bot button {
+  background-color: #ef4e4e;
+  color: #FFFFFF;
+  padding: 2rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: transform 0.2s, background-color 0.2s;
+  text-align: center;
+}
+
+.bot button:hover {
+  transform: scale(1.05);
+  background-color: #4caf50;
+}
+
+  /* ===== Bloques de contenido ===== */
+  .bloque {
+    max-width: 1000px;
+    margin: 60px auto;
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    padding: 0 80px;
+  }
+
+  .alternado {
+    flex-direction: row;
+  }
+
+  .bloque img {
+    width: 50%;
+    border-radius: 15px;
+    transition: 0.4s;
+  }
+
+  .magico:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 30px #4caf50;
+  }
+
+  /* ===== Centrado botón actividad ===== */
+footer {
+  background-color: #f2f2f2;
+  padding: 20px 0;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.footer-button {
+  display: inline-block;
+  background-color: #4DB6AC;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.footer-button:hover {
+  background-color: #4DB6AC;
+}
+
+/* ===== Sección cuento ===== */
+.cuento {
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .bloque {
+    flex-direction: column;
+    padding: 0 20px;
+  }
+
+  .bloque img {
+    width: 100%;
+  }
+}
+
+.imatges-logo img {
+  width: 100%;
+  max-width: 60px;
+  display: block;
+  margin: 0 auto 0rem auto;
+  border-radius: 0px;
+}
+
+</style>
 </head>
 <body>
-  <header>
-    <h1 id="titol-conte">Hackejant el futur</h1>
-  </header>
 
-  <main>
-    <div class="imatges-conte">
-      <img src="https://via.placeholder.com/600x300.png?text=Imatge+del+conte" alt="Imatge del conte">
-    </div>
+<header>
+  <div class="imatges-logo img">
+    <img src="Logo kidòria.png">
+  </div>
+</header>
 
-    <div class="controls">
-      <button id="musica-btn">🔊 Música</button>
-      <button id="tradueix-btn">🌐 Traduir</button>
-      <button id="narracio-btn">🎤 Narració</button>
-    </div>
+<section class="cuento">
+  <h1>Hakejant el futur</h1>
 
-    <div class="text-conte" id="text-conte">
-      <p>En Carles i n’Ona tenen 15 anys i una passió compartida: programar. Des de fa mesos, passen tardes junts creant codis, dibuixant esquemes i provant noves idees. Somien amb fer alguna cosa que ajudi als estudiants a organitzar-se i aconseguir objectius.
-Quan el seu institut anuncia un concurs tecnològic, saben que és l’oportunitat perfecta. Sense dubtar-ho, decideixen unir forces i desenvolupar una app innovadora. Tots dos treballen amb entusiasme: en Carles escriu el codi principal, i n’Ona dissenya la interfície perquè sigui fàcil d’utilitzar.
-Programar no és fàcil. Algunes funcions no funcionen a la primera, els errors apareixen i el cansament es nota. Però mai es rendeixen. Quan alguna cosa falla, riuen, s’ajuden i tornen a provar. Cada línia de codi superada els fa sentir que estan més a prop del seu objectiu. L’esforç es torna divertit perquè el comparteixen.
-Finalment arriba el dia del concurs. Presenten la seva app amb orgull. Funciona bé i el jurat està impressionat, però no guanyen el primer premi. Al principi senten una mica de decepció, però ràpidament recorden tot el que han aconseguit: han creat alguna cosa junts, ajudant-se i aprenent l’un de l’altre.
-En Carles mira n’Ona i somriu:
-—Saps què? Crec que hem hackejat el futur.
-—Com? —pregunta ella.
-—No amb premis ni reconeixements… sinó amb esforç i amistat —diu ell.
-I és cert. L’amistat i la passió compartida els han permès hackejar el futur junts, demostrant que l’esforç val la pena quan es comparteix. No necessiten medalles per saber que han aconseguit el més important: treballar junts i créixer com a equip.
-I mentre surten del gimnàs del concurs, cansats però contents, en Carles i n’Ona saben que aquest projecte és només el principi. El futur està ple de possibilitats, i ara ja saben que el millor camí és compartir la passió amb els amics i mai deixar d’aprendre.
-</p>
-    </div>
-  </main>
+  <div class="bot">
+    <button id="musica-btn">🔊 Música</button>
+    <button id="narracio-btn">🎤 Narració</button>
+  </div>
+
+  <div class="bloque">
+    <img src="Hak1.jpg" class="magico">
+    <p id="p1">Nuba soñaba con cruzar el gran valle dorado.</p>
+  </div>
+
+  <div class="bloque alternado">
+    <p id="p2">Todos decían que era demasiado pequeño para intentarlo.</p>
+    <img src="Hak2.jpg" class="magico">
+  </div>
+
+  <div class="bloque alternado">
+    <img src="Hak3.jpg" class="magico">
+    <p id="p3">Pero escuchó su corazón y dio el primer paso hacia la aventura.</p>
+  </div>
 
   <footer>
-    <button onclick="window.location.href='laberint.html'">Anar a activitats</button>
+    <div class="footer-container">
+      <a href="Laberint.html" class="footer-button">RACÓ DE BITS</a>
+    </div>
   </footer>
 
-  <script src="script.js"></script>
+</section>
+
+<!-- SCRIPT MOVIDO AL FINAL PARA QUE FUNCIONE -->
+<script src="script.js"></script>
+
 </body>
 </html>
