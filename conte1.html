@@ -144,10 +144,13 @@ footer {
 <section class="cuento">
   <h1>L'arbre que contava històries</h1>
 
-  <div class="bot">
-    <button id="musica-btn">🔊 Música</button>
-    <button id="narracio-btn">🎤 Narració</button>
-  </div>
+<div class="bot">
+  <button id="musica-btn">🔊 Música</button>
+  <button id="narracio-btn">🎤 Narració</button>
+  <button onclick="generarFitxa()">📖 Fitxa del conte</button>
+</div>
+
+<div id="fitxaConte" style="display:none; margin-top:20px; padding:20px; border-radius:12px; background:#f7c325; max-width:700px; margin-left:auto; margin-right:auto;"></div>
 
   <div class="bloque">
     <img src="Arbre1.jpg" class="magico">
