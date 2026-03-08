@@ -18,50 +18,6 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
-  /* =====================
-CURSOR MÀGIC
-===================== */
-
-body{
-cursor:none;
-}
-
-.cursor{
-position:fixed;
-width:16px;
-height:16px;
-border-radius:50%;
-background:var(--principal);
-pointer-events:none;
-transform:translate(-50%,-50%);
-box-shadow:
-0 0 10px var(--principal),
-0 0 20px var(--principal),
-0 0 40px var(--principal);
-z-index:9999;
-}
-
-.particle{
-position:fixed;
-width:6px;
-height:6px;
-border-radius:50%;
-background:var(--principal);
-pointer-events:none;
-animation:magic 0.6s linear forwards;
-}
-
-@keyframes magic{
-0%{
-opacity:1;
-transform:scale(1);
-}
-100%{
-opacity:0;
-transform:scale(3) translateY(-10px);
-}
-}
-
 /* ===== GLOBAL ===== */
 body {
   font-family: 'Poppins', sans-serif;
@@ -308,11 +264,11 @@ main {
 <!-- BENTO GRID -->
 <section class="bento">
   <div class="card grid1">
-    Benvingut al Bosc de Llibres
+🪄 EL MOMENT MÀGIC 🪄
   </div>
-  <a href="conte1.html" class="card grid4">Llegir el conte ara</a>
-  <a href="Salva.html" class="card grid14">Salva el parc</a>
-  <a href="tria.html" class="card grid24">Quina història conte avui brancaforta?</a>
+  <a href="conte1.html" class="card grid4"> 📖 Llegir el conte ara 📖 </a>
+  <a href="Salva.html" class="card grid14"> 🌈☀️ Salva el parc ☀️🌈</a>
+  <a href="tria.html" class="card grid24">🌳 Quina història conte avui brancaforta? 🌳</a>
   <div class="image-card grid6">
     <img src="Arbre1.jpg" alt="Bosc de llibres">
   </div>
@@ -322,15 +278,16 @@ main {
 <section class="info">
   <h2>Què és Bosc de Llibres?</h2>
   <p>
-A KIDÒRIA els contes estàn disenyats per al futur: mesclen el respecte pel medi ambient i l'ús de la tecnologia.<br>
+A KIDÒRIA els contes estàn disenyats per al futur: mesclen el respecte pel medi ambient🌳 i l'ús de la tecnologia 📱.<br>
 
-Aquí, els arbres conen històries, els drons tenen sentiments i donam visibilitat a la programació.<br>
+Aquí, els arbres conen històries📚, els drons tenen sentiments i donam visibilitat a la programació💻.<br>
 
 Kidoria no és només una web de contes.<br>
-És un espai innovador i entretingut on el futur es converteix en una aventura.<br>
+És un espai innovador i entretingut on el futur es converteix en una aventura🗺️.<br>
 
 ✨ Perque el futur necessita a persones curioses, creatives i conscients.<br>
 TOTA GRAN IDEA COMENÇA D'UNA HISTÒRIA.
+    <img src='Logo kidòria.png' alt="logotip">
   </p>
 </section>
 
