@@ -1,14 +1,37 @@
 console.log("Script carregat correctament!");
 
-// --- DETECTAR QUIN CONTE ÉS ---
-const pagina = window.location.pathname.split("/").pop(); 
-const nomConte = pagina.replace(".html", ""); // conte1, conte2, conte3...
+// --- IDENTIFICAR EL CONTE ---
+const conteActual = document.body.dataset.conte;
 
-// --- ARXIUS D'AUDIO ---
-const audioMusica = new Audio(`musica-${nomConte}.mp3`);
+// --- CONFIGURACIÓ DELS ARXIUS (POSA ELS TEUS NOMS REALS) ---
+const arxius = {
+  conte1: {
+    musica: "musica-conte1.mp3",
+    narracio: "ArbreN.mp3"
+  },
+  conte2: {
+    musica: "DRON.mp3",
+    narracio: "DronN.mp3"
+  },
+  conte3: {
+    musica: "missio.mp3",
+    narracio: "narracio3.mp3"
+  },
+  conte4: {
+    musica: "hakejant.mp3",
+    narracio: "HakejaN.mp3"
+  }
+};
+
+// --- OBTENIR ELS ARXIUS DEL CONTE ACTUAL ---
+const musicaFitxer = arxius[conteActual].musica;
+const narracioFitxer = arxius[conteActual].narracio;
+
+// --- CREAR ELS ÀUDIOS ---
+const audioMusica = new Audio(musicaFitxer);
 audioMusica.loop = true;
 
-const audioNarracio = new Audio(`narracio-${nomConte}.mp3`);
+const audioNarracio = new Audio(narracioFitxer);
 
 // --- BOTONS ---
 const musicaBtn = document.getElementById("musica-btn");
@@ -33,8 +56,7 @@ musicaBtn.addEventListener("click", () => {
 // --- NARRACIÓ ---
 narracioBtn.addEventListener("click", () => {
   if (audioNarracio.paused) {
-    // Si la narració comença, la música també
-    if (audioMusica.paused) audioMusica.play();
+    if (audioMusica.paused) audioMusica.play(); // Música automàtica
     audioNarracio.play();
   } else {
     audioNarracio.pause();
@@ -42,5 +64,5 @@ narracioBtn.addEventListener("click", () => {
   actualitzaIcones();
 });
 
-// --- ACTUALITZAR ICONES AL CARREGAR ---
+// --- ICONES AL CARREGAR ---
 actualitzaIcones();
