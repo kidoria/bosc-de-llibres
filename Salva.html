@@ -1,141 +1,524 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Racó de bits - Kidòria</title>
+  <link rel="icon" type="image/png" href="Favi.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Racó de bits - Kidòria</title>
 
 <style>
-body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    text-align: center;
-    background: linear-gradient(to bottom, #c8e6c9, #ffffff);
+
+header {
+text-align: center;
+padding: 2rem;
+background-color: #4BC6B9;
+color: #FFFFFF;
+  }
+  
+
+body{
+
+margin:0;
+
+font-family:Poppins, sans-serif;
+
+text-align:center;
+
+background:linear-gradient(to bottom,#c8e6c9,#ffffff);
+
 }
 
-h1 {
-    margin-top: 30px;
-    color: #2E7D32;
+
+
+h1{color:#2E7D32;}
+
+
+
+button{
+
+padding:15px 30px;
+
+font-size:18px;
+
+border:none;
+
+border-radius:10px;
+
+background:#4CAF50;
+
+color:white;
+
+cursor:pointer;
+
 }
 
-p {
-    color: #444;
+
+
+button:hover{background:#43a047;}
+
+
+
+\#startScreen,#endScreen{
+
+position:absolute;
+
+width:100%;
+
+height:100%;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+background:linear-gradient(to bottom,#c8e6c9,#ffffff);
+
+z-index:10;
+
 }
 
-.game-wrapper {
-    margin: 30px auto;
-    width: 600px;
-    height: 400px;
-    background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=60');
-    background-size: cover;
-    background-position: center;
-    border-radius: 15px;
-    border: 4px solid #4CAF50;
-    position: relative;
-    overflow: hidden;
+
+
+\#endScreen{display:none;}
+
+
+
+\#gameUI{display:none;}
+
+
+
+.game-wrapper{
+
+margin:20px auto;
+
+width:600px;
+
+height:400px;
+
+background:url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format\&fit=crop\&w=800\&q=60');
+
+background-size:cover;
+
+background-position:center;
+
+border-radius:15px;
+
+border:4px solid #4CAF50;
+
+position:relative;
+
+overflow:hidden;
+
+filter:brightness(0.9) blur(1px);
+
 }
 
-#healthContainer {
-    width: 600px;
-    margin: 15px auto;
-    background: #ddd;
-    border-radius: 10px;
-    height: 20px;
+
+
+.item{
+
+position:absolute;
+
+font-size:50px;
+
+cursor:pointer;
+
+transition:transform .2s;
+
 }
 
-#healthBar {
-    height: 20px;
-    width: 0%;
-    background: #4CAF50;
-    border-radius: 10px;
-    transition: width 0.3s;
+
+
+.item:hover{transform:scale(1.2);}
+
+
+
+.pop{animation:pop .3s forwards;}
+
+
+
+@keyframes pop{
+
+0%{transform:scale(1)}
+
+50%{transform:scale(1.6)}
+
+100%{transform:scale(0)}
+
 }
 
-#message {
-    font-weight: bold;
-    margin-top: 10px;
-    font-size: 18px;
-    color: #2E7D32;
+
+
+\#healthContainer{
+
+width:600px;
+
+margin:15px auto;
+
+background:#ddd;
+
+border-radius:10px;
+
+height:20px;
+
 }
 
-.item {
-    position: absolute;
-    font-size: 32px;
-    cursor: pointer;
+
+
+\#healthBar{
+
+height:20px;
+
+width:0%;
+
+background:#4CAF50;
+
+border-radius:10px;
+
+transition:width .3s;
+
 }
-</style>
+
+
+
+\#score,#timer{
+
+font-weight:bold;
+
+margin:5px;
+
+}
+
+
+
+\#message{
+
+font-weight:bold;
+
+margin-top:10px;
+
+font-size:18px;
+
+color:#2E7D32;
+
+}
+
+
+
 </head>
 
 <body>
 
+<div id="startScreen">
 <h1>🌳 Salva el Parc!</h1>
-<p>Clica només els residus per netejar el parc!</p>
+<p>Clica només els residus per netejar el parc.</p>
+<button onclick="startGame()">Comença el joc ▶</button>
+</div>
 
-<!-- Música YouTube invisible -->
-<iframe width="0" height="0" 
-src="https://www.youtube.com/embed/lC0n0vB_9C0?autoplay=1&loop=1&playlist=lC0n0vB_9C0" 
-frameborder="0" allow="autoplay">
-</iframe>
+<div id="gameUI">
+
+<h1>🌳 Salva el Parc!</h1>
+
+<div id="score">Punts: 0</div>
+<div id="timer">Temps: 60</div>
 
 <div class="game-wrapper" id="gameArea"></div>
 
 <div id="healthContainer">
-    <div id="healthBar"></div>
+<div id="healthBar"></div>
 </div>
 
 <div id="message"></div>
 
+</div>
+
+<div id="endScreen">
+<h1>🎉 Joc acabat!</h1>
+<p id="finalScore"></p>
+<button onclick="restartGame()">Tornar a jugar</button>
+</div>
+
+<audio id="music" loop>
+<source src="arbre.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-let health = 0;
-const gameArea = document.getElementById("gameArea");
-const healthBar = document.getElementById("healthBar");
-const message = document.getElementById("message");
 
-function createItem() {
-    if (health >= 100) return;
 
-    const item = document.createElement("div");
-    const isTrash = Math.random() > 0.4;
 
-    item.innerHTML = isTrash ? "🗑️" : "🌸";
-    item.classList.add("item");
-    item.style.left = Math.random() * 560 + "px";
-    item.style.top = "0px";
-    item.dataset.type = isTrash ? "trash" : "flower";
+let health
 
-    gameArea.appendChild(item);
+let score
 
-    let fall = setInterval(() => {
-        item.style.top = (item.offsetTop + 3) + "px";
-        if (item.offsetTop > 360) {
-            clearInterval(fall);
-            item.remove();
-        }
-    }, 30);
+let time
 
-    item.onclick = () => {
-        if (item.dataset.type === "trash") {
-            health += 10;
-            message.innerText = "Molt bé! 🌿";
-        } else {
-            health -= 5;
-            message.innerText = "Oh! Les flors no es toquen! 🌸";
-        }
+let gameRunning=false
 
-        if (health < 0) health = 0;
-        if (health > 100) health = 100;
+let spawnInterval
 
-        healthBar.style.width = health + "%";
-        item.remove();
+let timerInterval
 
-        if (health >= 100) {
-            message.innerText = "🎉 Brancaforta torna a contar històries! 🌳";
-        }
-    };
+
+
+const gameArea=document.getElementById("gameArea")
+
+const healthBar=document.getElementById("healthBar")
+
+const message=document.getElementById("message")
+
+const scoreDisplay=document.getElementById("score")
+
+const timerDisplay=document.getElementById("timer")
+
+const music=document.getElementById("music")
+
+
+
+function startGame(){
+
+
+
+document.getElementById("startScreen").style.display="none"
+
+document.getElementById("gameUI").style.display="block"
+
+
+
+health=0
+
+score=0
+
+time=60
+
+gameRunning=true
+
+
+
+healthBar.style.width="0%"
+
+scoreDisplay.innerText="Punts: 0"
+
+timerDisplay.innerText="Temps: 60"
+
+message.innerText=""
+
+
+
+music.play()
+
+
+
+spawnInterval=setInterval(createItem,1000)
+
+
+
+timerInterval=setInterval(()=>{
+
+
+
+if(!gameRunning) return
+
+
+
+time--
+
+timerDisplay.innerText="Temps: "+time
+
+
+
+if(time<=0){
+
+endGame()
+
 }
 
-setInterval(createItem, 1200);
-</script>
+
+
+},1000)
+
+
+
+}
+
+
+
+function createItem(){
+
+
+
+if(!gameRunning) return
+
+
+
+const item=document.createElement("div")
+
+const isTrash=Math.random()>0.4
+
+
+
+item.innerHTML=isTrash?"🗑️":"🌸"
+
+item.classList.add("item")
+
+
+
+item.style.left=Math.random()\*540+"px"
+
+item.style.top="0px"
+
+
+
+item.dataset.type=isTrash?"trash":"flower"
+
+
+
+gameArea.appendChild(item)
+
+
+
+let speed=2+Math.random()\*2
+
+
+
+let fall=setInterval(()=>{
+
+
+
+item.style.top=(item.offsetTop+speed)+"px"
+
+
+
+if(item.offsetTop>360){
+
+clearInterval(fall)
+
+item.remove()
+
+}
+
+
+
+},30)
+
+
+
+item.onclick=()=>{
+
+
+
+item.classList.add("pop")
+
+
+
+if(item.dataset.type==="trash"){
+
+
+
+health+=10
+
+score+=5
+
+message.innerText="Molt bé! 🌿"
+
+
+
+}else{
+
+
+
+health-=5
+
+score-=2
+
+message.innerText="Les flors no es toquen! 🌸"
+
+
+
+}
+
+
+
+if(health<0) health=0
+
+if(health>100) health=100
+
+
+
+healthBar.style.width=health+"%"
+
+scoreDisplay.innerText="Punts: "+score
+
+
+
+setTimeout(()=>{item.remove()},200)
+
+
+
+if(health>=100){
+
+endGame()
+
+}
+
+
+
+}
+
+
+
+}
+
+
+
+function endGame(){
+
+
+
+gameRunning=false
+
+
+
+clearInterval(spawnInterval)
+
+clearInterval(timerInterval)
+
+
+
+document.getElementById("gameUI").style.display="none"
+
+document.getElementById("endScreen").style.display="flex"
+
+
+
+document.getElementById("finalScore").innerText="Puntuació final: "+score
+
+
+
+}
+
+
+
+function restartGame(){
+
+
+
+document.getElementById("endScreen").style.display="none"
+
+document.getElementById("gameUI").style.display="block"
+
+
+
+startGame()
+
+
+
+}
+
+
+
 
 </body>
 </html>
