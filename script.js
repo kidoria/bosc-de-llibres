@@ -15,13 +15,15 @@ const conteId = match ? `conte${match[1]}` : null;
 const musicaURLs = {
   conte1: "arbre.mp3",
   conte2: "DRON.mp3",
-  conte3: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+  conte3: "missio.mp3"
+  conte4: "hakejant.mp3"
 };
 
 const narracioURLs = {
-  conte1: "..mp3",
-  conte2: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+  conte1: "ArbreN.mp3",
+  conte2: "DronN.mp3",
   conte3: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+  conte4: "HakejaN.mp3"
 };
 
 // -----------------------------
@@ -63,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (musica.paused) {
         musica.play();
-        btnMusica.textContent = "🎶 Música";
+        btnMusica.textContent = "🔊 Música";
       } else {
         musica.pause();
         btnMusica.textContent = "🎶 Música";
@@ -82,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (narr.paused) {
         narr.play();
-        btnNarracio.textContent = "🎙️ Narració";
+        btnNarracio.textContent = "🎤 Narració";
       } else {
         narr.pause();
         btnNarracio.textContent = "🎙️ Narració";
